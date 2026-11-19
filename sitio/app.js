@@ -141,7 +141,7 @@
   function pintarCatalogo() {
     var est = T.estructura || {};
     $app.innerHTML =
-      (T.demo && !PREVIEW ? '<div class="demo-aviso">Tienda de demostración. Los pedidos van a un número de prueba. <a href="/">Crea la tuya con PedidoListo</a></div>' : '') +
+      (T.demo && !PREVIEW ? '<div class="demo-aviso">Tienda de demostración: los pedidos llegan al WhatsApp de PedidoListo. <a href="/">Crea la tuya con PedidoListo</a></div>' : '') +
       '<div class="barra" id="barra"></div>' +
       '<header class="portada ' + (est.portada || 'dividido') + '" id="portada"></header>' +
       '<div class="filtros" id="filtros"></div>' +

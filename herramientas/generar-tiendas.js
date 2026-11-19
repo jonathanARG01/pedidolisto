@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const RAIZ = path.join(__dirname, '..', 'sitio', 'tiendas');
-const WA_PRUEBA = '56912345678';
+const WA_PRUEBA = '56941497083'; // WhatsApp de Brote Digital: los pedidos de las demos llegan aquí
 
 const logos = {
   'vivero-raiz': (bg, fg) => `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="${bg}"/><circle cx="32" cy="32" r="21" fill="none" stroke="${fg}" stroke-width="2"/><path d="M32 47c0-12 0-18 0-24" stroke="${fg}" stroke-width="2" stroke-linecap="round"/><path d="M32 30c-8-1-12-6-12-12 7 0 12 5 12 12z M32 26c7-1 11-5 11-11-6 0-11 4-11 11z" fill="${fg}"/><path d="M22 44c6-4 14-4 20 0" stroke="${fg}" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
