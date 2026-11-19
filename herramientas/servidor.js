@@ -7,6 +7,7 @@ http.createServer((req, res) => {
   if (p === '/') p = '/index.html';
   let f = path.join(RAIZ, p);
   if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, 'index.html');
+  if (!fs.existsSync(f) && fs.existsSync(f + '.html')) f += '.html';
   if (!fs.existsSync(f)) {
     if (/^\/[a-z0-9-]+\/?$/.test(p)) f = path.join(RAIZ, 'app.html');
     else { res.writeHead(404); return res.end('404'); }

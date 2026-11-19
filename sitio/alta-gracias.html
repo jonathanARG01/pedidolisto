@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Datos recibidos · PedidoListo</title>
+<meta name="description" content="Formulario de alta de PedidoListo: envíanos los datos de tu negocio, tu logo, horarios, despacho y productos, y armamos tu catálogo con pedidos por WhatsApp.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0c2620">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<script>try { var m = localStorage.getItem('modo:landing'); if (m) document.documentElement.dataset.modo = m; } catch (e) {}</script>
+<style>
+:root {
+  --bg: #0c2620; --surface: #12332b; --surface-2: #0f2c25; --ink: #f1eadb; --muted: #a9b8ae; --line: #24493f;
+  --oro: #d2a46a; --oro-ink: #10241e; --verde: #3ccf7a; --error: #ff8a7a; --oro-suave: rgba(210, 164, 106, .14); color-scheme: dark;
+}
+:root[data-modo="claro"] {
+  --bg: #f3efe6; --surface: #fffcf5; --surface-2: #f5efe2; --ink: #14302a; --muted: #5b6b63; --line: #ddd5c4;
+  --oro: #a8713a; --oro-ink: #fffaf0; --verde: #1f8f4e; --error: #b3261e; --oro-suave: rgba(168, 113, 58, .12); color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-modo="oscuro"]) {
+    --bg: #f3efe6; --surface: #fffcf5; --surface-2: #f5efe2; --ink: #14302a; --muted: #5b6b63; --line: #ddd5c4;
+    --oro: #a8713a; --oro-ink: #fffaf0; --verde: #1f8f4e; --error: #b3261e; --oro-suave: rgba(168, 113, 58, .12); color-scheme: light;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: Manrope, system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--oro); }
+:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left)); }
+h1, h2 { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: -.015em; margin: 0; text-wrap: balance; }
+nav { border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; align-items: center; min-height: 64px; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--ink); margin-right: auto; }
+.logo svg { width: 34px; height: 34px; }
+.logo b { font-size: 21px; font-weight: 800; letter-spacing: -.03em; }
+header { padding: 44px 0 8px; }
+header h1 { font-size: clamp(32px, 5.4vw, 48px); line-height: 1.05; }
+header p { color: var(--muted); font-size: 17px; margin: 14px 0 0; max-width: 60ch; }
+.pasos-alta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 18px 0 0; padding: 0; list-style: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+.pasos-alta li::before { content: "✓ "; color: var(--verde); }
+form { padding: 18px 0 70px; }
+fieldset { border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 22px 20px 24px; margin: 18px 0 0; min-width: 0; }
+legend { font-family: Fraunces, Georgia, serif; font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+.ayuda { color: var(--muted); font-size: 14px; margin: 2px 0 14px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.grid .full { grid-column: 1 / -1; }
+@media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+label { display: grid; gap: 6px; font-size: 14px; font-weight: 700; }
+label small { font-weight: 500; color: var(--muted); }
+input[type=text], input[type=email], input[type=tel], input[type=url], input[type=number], input:not([type]), textarea, select {
+  width: 100%; font: inherit; font-size: 16px; font-weight: 500; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; min-height: 46px;
+}
+textarea { min-height: 84px; resize: vertical; }
+input:focus, textarea:focus, select:focus { border-color: var(--oro); outline: none; }
+input[type=file] { font: inherit; font-size: 14px; color: var(--muted); }
+input[type=color] { width: 56px; height: 46px; padding: 3px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); cursor: pointer; }
+.color { display: flex; align-items: center; gap: 12px; }
+.color span { font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
+.planes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 680px) { .planes { grid-template-columns: 1fr; } }
+.plan { position: relative; display: block; border: 1px solid var(--line); background: var(--surface-2); border-radius: 16px; padding: 16px; cursor: pointer; font-weight: 500; }
+.plan input { position: absolute; opacity: 0; }
+.plan b { display: block; font-size: 16px; }
+.plan .p { font-family: Fraunces, serif; font-size: 26px; font-weight: 600; margin: 4px 0 2px; font-variant-numeric: tabular-nums; }
+.plan .p small { font-family: Manrope, sans-serif; font-size: 13px; color: var(--muted); }
+.plan .d { font-size: 13px; color: var(--muted); }
+.plan:has(input:checked) { border-color: var(--oro); box-shadow: 0 0 0 1px var(--oro); background: var(--oro-suave); }
+.plan:has(input:focus-visible) { outline: 2px solid var(--oro); outline-offset: 2px; }
+.check { display: flex; align-items: flex-start; gap: 10px; font-weight: 600; cursor: pointer; }
+.check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--oro); flex: none; }
+.slug { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); overflow: hidden; }
+.slug span { padding: 0 0 0 13px; color: var(--muted); font-weight: 600; white-space: nowrap; font-size: 15px; }
+.slug input { border: 0; background: transparent; padding-left: 2px; min-width: 0; }
+.filas { display: grid; gap: 10px; }
+.fila { display: grid; gap: 10px; align-items: end; border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--surface-2); }
+.fila input, .fila select, .fila textarea { background: var(--surface); }
+.fila-comuna { grid-template-columns: 1fr 150px 44px; }
+.fila-producto { grid-template-columns: 1fr 1fr 130px 44px; }
+.fila-producto .ancho { grid-column: 1 / 4; }
+@media (max-width: 620px) {
+  .fila-comuna { grid-template-columns: 1fr 110px 44px; }
+  .fila-producto { grid-template-columns: 1fr 44px; }
+  .fila-producto > label { grid-column: 1 / 2; }
+  .fila-producto .ancho { grid-column: 1 / 2; }
+  .fila-producto .quitar { grid-column: 2; grid-row: 1; }
+}
+.fila label { font-size: 12.5px; }
+.quitar { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 20px; cursor: pointer; }
+.quitar:hover { color: var(--error); border-color: var(--error); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font: inherit; font-weight: 700; font-size: 15px; border: 1px solid transparent; cursor: pointer; text-decoration: none; }
+.btn-oro { background: var(--oro); color: var(--oro-ink); }
+.btn-borde { border-color: var(--line); background: transparent; color: var(--ink); }
+.btn-borde:hover { border-color: var(--oro); }
+.agregar { margin-top: 12px; }
+.o { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin: 20px 0; }
+.o::before, .o::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
+.oculto { display: none !important; }
+.final { margin-top: 22px; display: grid; gap: 14px; }
+.final .btn { justify-self: start; min-width: 240px; }
+.error { color: var(--error); font-weight: 600; font-size: 14px; margin: 0; }
+.nota { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="logo" href="/" aria-label="PedidoListo, inicio">
+    <svg viewBox="0 0 68 68" aria-hidden="true"><path d="M14 22h40l-3 34a5 5 0 0 1-5 4.6H20L10 66l3-9.6z" fill="var(--verde)"/><path d="M24 24v-5a10 10 0 0 1 20 0v5" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/><path d="M23 41l8 8 15-16" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <b>pedido<span style="color:var(--verde)">listo</span></b>
+  </a>
+</div></nav>
+<main class="wrap"><header style="padding:70px 0">
+  <h1>¡Listo! Recibimos tus datos</h1>
+  <p>Te escribiremos por WhatsApp dentro de 1 día hábil para revisar la información y coordinar el pago. Si te faltó algo, como fotos o productos, puedes enviarlo directo al <a href="https://wa.me/56941497083">+56 9 4149 7083</a>.</p>
+  <p style="margin-top:28px"><a class="btn btn-oro" href="https://wa.me/56941497083?text=Hola%2C%20acabo%20de%20enviar%20el%20formulario%20de%20alta%20de%20PedidoListo">Escribir por WhatsApp</a> <a class="btn btn-borde" href="/">Volver al inicio</a></p>
+</header></main>
+</body>
+</html>
