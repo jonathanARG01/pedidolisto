@@ -1,0 +1,250 @@
+{
+  "slug": "cerro-alegre",
+  "plan": "basico",
+  "demo": true,
+  "negocio": {
+    "nombre": "Tostaduría Cerro Alegre",
+    "bajada": "Café de especialidad tostado cada semana en Valparaíso.",
+    "whatsapp": "56912345678",
+    "instagram": "@tostaduria.cerroalegre",
+    "horario": "Lun a sáb, 10:00 a 19:00",
+    "logo": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"64\" height=\"64\" fill=\"#1e1714\"/><path d=\"M10 46 L24 26 L32 36 L40 22 L54 46 Z\" fill=\"#d29a6c\"/><ellipse cx=\"32\" cy=\"18\" rx=\"5\" ry=\"7\" fill=\"#d29a6c\" transform=\"rotate(30 32 18)\"/><path d=\"M30 13c3 3 1 7 4 10\" stroke=\"#1e1714\" stroke-width=\"1.5\" fill=\"none\"/></svg>"
+  },
+  "tema": {
+    "fuenteTitulos": "Fraunces",
+    "fuenteTexto": "Inter",
+    "pesoTitulos": 600,
+    "radio": 22,
+    "modoInicial": "auto",
+    "claro": {
+      "bg": "#f1e9df",
+      "surface": "#fbf6ef",
+      "surface-2": "#e6dbcd",
+      "ink": "#2f2219",
+      "muted": "#75645a",
+      "line": "#dccfbf",
+      "accent": "#8b5a3c",
+      "accent-ink": "#fff8f0",
+      "wa": "#1f8f4e",
+      "wa-ink": "#ffffff"
+    },
+    "oscuro": {
+      "bg": "#1e1714",
+      "surface": "#2a201b",
+      "surface-2": "#241b17",
+      "ink": "#f3e8dc",
+      "muted": "#b9a796",
+      "line": "#3a2e27",
+      "accent": "#d29a6c",
+      "accent-ink": "#22160f",
+      "wa": "#25a35a",
+      "wa-ink": "#ffffff"
+    }
+  },
+  "estructura": {
+    "portada": "simple",
+    "tarjetas": "lista",
+    "columnas": {
+      "movil": 1,
+      "escritorio": 2
+    },
+    "descripcion": true
+  },
+  "banner": {
+    "titulo": "Tostaduría Cerro Alegre",
+    "texto": "Café de especialidad tostado cada semana en Valparaíso. Pide por WhatsApp y retira o recibe en casa."
+  },
+  "entrega": {
+    "retiro": {
+      "activo": true,
+      "lugar": "Cerro Alegre",
+      "direccion": "Templeman 412, Cerro Alegre, Valparaíso",
+      "horario": "Lun a sáb, 10:00 a 19:00"
+    },
+    "domicilio": {
+      "activo": true,
+      "gratisDesde": 40000,
+      "comunas": [
+        {
+          "nombre": "Valparaíso",
+          "costo": 2500
+        },
+        {
+          "nombre": "Viña del Mar",
+          "costo": 3000
+        },
+        {
+          "nombre": "Concón",
+          "costo": 4000
+        },
+        {
+          "nombre": "Quilpué",
+          "costo": 4500
+        },
+        {
+          "nombre": "Villa Alemana",
+          "costo": 4500
+        }
+      ]
+    }
+  },
+  "pago": "Pago por transferencia. Te enviamos los datos bancarios por WhatsApp al confirmar el pedido.",
+  "mensaje": {
+    "saludo": "Hola Tostaduría Cerro Alegre, quiero hacer este pedido:"
+  },
+  "categorias": [
+    {
+      "id": "cafe",
+      "nombre": "Café"
+    },
+    {
+      "id": "packs",
+      "nombre": "Packs y regalos"
+    },
+    {
+      "id": "accesorios",
+      "nombre": "Accesorios"
+    }
+  ],
+  "productos": [
+    {
+      "id": "colombia",
+      "nombre": "Colombia Huila 250 g",
+      "categoria": "cafe",
+      "precio": 8990,
+      "etiqueta": "Más vendido",
+      "descripcion": "Notas a panela, naranja y cacao. Tueste medio.",
+      "opciones": [
+        "En grano",
+        "Molido para prensa",
+        "Molido para filtro",
+        "Molido para espresso"
+      ],
+      "tituloOpciones": "Molienda",
+      "imagenes": [
+        {
+          "arte": "bolsa",
+          "color": "#c2492e",
+          "acento": "#f2e6d0",
+          "fondo": "#efe3d3"
+        }
+      ]
+    },
+    {
+      "id": "brasil",
+      "nombre": "Brasil Cerrado 250 g",
+      "categoria": "cafe",
+      "precio": 7990,
+      "descripcion": "Chocolate y maní tostado, cuerpo alto. Ideal con leche.",
+      "opciones": [
+        "En grano",
+        "Molido para prensa",
+        "Molido para filtro",
+        "Molido para espresso"
+      ],
+      "tituloOpciones": "Molienda",
+      "imagenes": [
+        {
+          "arte": "bolsa",
+          "color": "#2f7a55",
+          "acento": "#f2e6d0",
+          "fondo": "#e7e3d6"
+        }
+      ]
+    },
+    {
+      "id": "etiopia",
+      "nombre": "Etiopía Yirgacheffe 250 g",
+      "categoria": "cafe",
+      "precio": 10990,
+      "etiqueta": "Nuevo",
+      "descripcion": "Floral, jazmín y limón. Tueste claro para filtro.",
+      "opciones": [
+        "En grano",
+        "Molido para filtro"
+      ],
+      "tituloOpciones": "Molienda",
+      "imagenes": [
+        {
+          "arte": "bolsa",
+          "color": "#3a5ba8",
+          "acento": "#f2e6d0",
+          "fondo": "#e4e3e3"
+        }
+      ]
+    },
+    {
+      "id": "peru",
+      "nombre": "Perú Orgánico 250 g",
+      "categoria": "cafe",
+      "precio": 8490,
+      "descripcion": "Caramelo y nuez, acidez suave.",
+      "opciones": [
+        "En grano",
+        "Molido para prensa",
+        "Molido para filtro",
+        "Molido para espresso"
+      ],
+      "tituloOpciones": "Molienda",
+      "imagenes": [
+        {
+          "arte": "bolsa",
+          "color": "#8a5a2b",
+          "acento": "#f2e6d0",
+          "fondo": "#efe3d3"
+        }
+      ]
+    },
+    {
+      "id": "descafeinado",
+      "nombre": "Descafeinado 250 g",
+      "categoria": "cafe",
+      "precio": 9490,
+      "disponible": false,
+      "descripcion": "Proceso de agua suiza.",
+      "imagenes": [
+        {
+          "arte": "bolsa",
+          "color": "#6b6f7a",
+          "acento": "#f2e6d0",
+          "fondo": "#e6e2dc"
+        }
+      ]
+    },
+    {
+      "id": "pack",
+      "nombre": "Pack degustación 3 orígenes",
+      "categoria": "packs",
+      "precio": 12990,
+      "descripcion": "Colombia, Brasil y Etiopía en bolsas de 100 g.",
+      "imagenes": [
+        {
+          "arte": "caja",
+          "color": "#c9a46a",
+          "acento": "#8b5a3c",
+          "fondo": "#efe3d3"
+        }
+      ]
+    },
+    {
+      "id": "taza",
+      "nombre": "Taza enlozada 350 ml",
+      "categoria": "accesorios",
+      "precio": 6990,
+      "descripcion": "Con el logo de la tostaduría.",
+      "opciones": [
+        "Crema",
+        "Verde"
+      ],
+      "tituloOpciones": "Color",
+      "imagenes": [
+        {
+          "arte": "taza",
+          "color": "#efe7dc",
+          "acento": "#6b4226",
+          "fondo": "#e6dbcd"
+        }
+      ]
+    }
+  ]
+}

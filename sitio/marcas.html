@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nombres y logos</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root { --bg: #f3efe6; --surface: #fffcf5; --ink: #14302a; --muted: #5b6b63; --line: #ddd5c4; --oro: #a8713a; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: Manrope, system-ui, sans-serif; line-height: 1.5; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 40px 16px 80px; }
+h1 { font-family: Outfit, sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 44px); margin: 0 0 8px; letter-spacing: -.02em; }
+.lead { color: var(--muted); max-width: 66ch; margin: 0 0 30px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+.card.reco { box-shadow: 0 0 0 2px var(--oro); border-color: var(--oro); }
+.muestras { display: grid; grid-template-columns: 1fr 1fr; }
+.muestra { aspect-ratio: 16 / 10; display: grid; place-items: center; }
+.muestra.osc { background: #0c2620; }
+.muestra.cla { background: #f3efe6; }
+.muestra svg { width: 84%; height: auto; }
+.info { padding: 18px 20px 20px; display: grid; gap: 8px; }
+.info h2 { margin: 0; font-size: 22px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-family: Outfit, sans-serif; }
+.tag { font-family: Manrope, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--oro); color: #fffaf0; padding: 3px 9px; border-radius: 999px; }
+.info p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.info p b { color: var(--ink); }
+.apps { display: flex; gap: 10px; align-items: center; }
+.apps svg { width: 52px; height: 52px; border-radius: 13px; }
+.nota { margin-top: 28px; font-size: 13.5px; color: var(--muted); max-width: 72ch; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Nombres y logos, versión 2</h1>
+  <p class="lead">Cuatro nombres que dicen lo que hace el sistema: catálogo, carrito, pedido y chat. Cada logo junta una bolsa, carrito, vitrina o catálogo con una burbuja de conversación. Recomiendo <b>PedidoListo</b>: es la promesa del producto en dos palabras, la misma frase de la landing.</p>
+  <div class="grid" id="grid"></div>
+  <p class="nota">No revisé si los dominios .cl ni las marcas están disponibles: conviene buscarlos en nic.cl y en INAPI antes de decidir. Evité usar "WhatsApp" o "Wa" dentro del nombre y del logo, porque son marcas de Meta; el verde y la burbuja ya cuentan que el pedido llega por chat.</p>
+</div>
+<script>
+// t = tinta, a = acento, f = color del fondo (para recortes)
+var M = [
+  {
+    id: 'pedidolisto', nombre: 'PedidoListo', reco: true,
+    texto: 'La bolsa de compras con un check y la cola de una burbuja de chat: <b>el pedido llega listo al chat</b>. Directo, fácil de recordar y de decir por teléfono. Dominio a revisar: pedidolisto.cl.',
+    iso: function (t, a, f) {
+      return '<path d="M14 22h40l-3 34a5 5 0 0 1-5 4.6H20L10 66l3-9.6z" fill="' + a + '"/>' +
+        '<path d="M24 24v-5a10 10 0 0 1 20 0v5" fill="none" stroke="' + t + '" stroke-width="4" stroke-linecap="round"/>' +
+        '<path d="M23 41l8 8 15-16" fill="none" stroke="' + f + '" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    },
+    marca: function (t, a) { return '<tspan fill="' + t + '">pedido</tspan><tspan fill="' + a + '">listo</tspan>'; }
+  },
+  {
+    id: 'encargalo', nombre: 'Encárgalo',
+    texto: 'En Chile "hacer un encargo" es como se pide a las tiendas de Instagram. Logo: un carrito dentro de un globo de conversación. Cercano y muy chileno.',
+    iso: function (t, a, f) {
+      return '<path d="M14 8h42a8 8 0 0 1 8 8v30a8 8 0 0 1-8 8H48l-6 9-6-9H14a8 8 0 0 1-8-8V16a8 8 0 0 1 8-8z" fill="' + a + '"/>' +
+        '<path d="M18 22h5l5 20h17l4-14H25" fill="none" stroke="' + f + '" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '<circle cx="30" cy="48" r="3" fill="' + f + '"/><circle cx="43" cy="48" r="3" fill="' + f + '"/>';
+    },
+    marca: function (t, a) { return '<tspan fill="' + t + '">encárga</tspan><tspan fill="' + a + '">lo</tspan>'; }
+  },
+  {
+    id: 'vitrinachat', nombre: 'VitrinaChat',
+    texto: 'Una vitrina (el toldo de una tienda) sobre una burbuja: <b>tu tienda dentro del chat</b>. Se entiende al tiro que es para mostrar productos y conversar.',
+    iso: function (t, a, f) {
+      return '<path d="M10 26h48v24a6 6 0 0 1-6 6H24L12 63l3-7a6 6 0 0 1-5-6z" fill="' + a + '"/>' +
+        '<path d="M8 14h52l-2 12H10z" fill="' + t + '"/>' +
+        '<path d="M10 26a6.5 6.5 0 0 0 13 0a5.5 5.5 0 0 0 11 0a5.5 5.5 0 0 0 11 0a6.5 6.5 0 0 0 13 0" fill="' + t + '"/>' +
+        '<circle cx="24" cy="44" r="3" fill="' + f + '"/><circle cx="34" cy="44" r="3" fill="' + f + '"/><circle cx="44" cy="44" r="3" fill="' + f + '"/>';
+    },
+    marca: function (t, a) { return '<tspan fill="' + t + '">vitrina</tspan><tspan fill="' + a + '">chat</tspan>'; }
+  },
+  {
+    id: 'catalogochat', nombre: 'Catálogo.chat',
+    texto: 'El nombre es la dirección web: un catálogo (grilla de productos) que termina en el chat. Muy claro, pero usa el dominio .chat, que es más caro que un .cl.',
+    iso: function (t, a, f) {
+      return '<path d="M12 8h44a6 6 0 0 1 6 6v32a6 6 0 0 1-6 6H26L12 63v-11a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z" fill="' + a + '"/>' +
+        '<rect x="15" y="16" width="16" height="13" rx="3" fill="' + f + '"/><rect x="37" y="16" width="16" height="13" rx="3" fill="' + f + '"/>' +
+        '<rect x="15" y="33" width="16" height="11" rx="3" fill="' + f + '"/><rect x="37" y="33" width="16" height="11" rx="3" fill="' + t + '"/>';
+    },
+    marca: function (t, a) { return '<tspan fill="' + t + '">catálogo</tspan><tspan fill="' + a + '">.chat</tspan>'; }
+  }
+];
+var VERDE_O = '#3ccf7a', VERDE_C = '#1f8f4e';
+function logo(m, t, a, f) {
+  return '<svg viewBox="0 0 330 80" xmlns="http://www.w3.org/2000/svg"><g transform="translate(2 6)">' + m.iso(t, a, f) + '</g>' +
+    '<text x="82" y="54" font-family="Outfit, Arial, sans-serif" font-weight="700" font-size="40" letter-spacing="-1.2">' + m.marca(t, a) + '</text></svg>';
+}
+function icono(m, bg, t, a, f) { return '<svg viewBox="0 0 68 68"><rect width="68" height="68" fill="' + bg + '"/>' + '<g transform="translate(6 4) scale(.84)">' + m.iso(t, a, f) + '</g></svg>'; }
+document.getElementById('grid').innerHTML = M.map(function (m) {
+  return '<article class="card' + (m.reco ? ' reco' : '') + '"><div class="muestras">' +
+    '<div class="muestra osc">' + logo(m, '#f1eadb', VERDE_O, '#0c2620') + '</div>' +
+    '<div class="muestra cla">' + logo(m, '#14302a', VERDE_C, '#f3efe6') + '</div></div>' +
+    '<div class="info"><h2>' + m.nombre + (m.reco ? ' <span class="tag">Recomendado</span>' : '') + '</h2><p>' + m.texto + '</p>' +
+    '<div class="apps">' + icono(m, '#0c2620', '#f1eadb', VERDE_O, '#0c2620') + icono(m, VERDE_C, '#0c2620', '#ffffff', VERDE_C) + icono(m, '#ffffff', '#14302a', VERDE_C, '#ffffff') +
+    '<span style="font-size:13px;color:var(--muted)">Ícono de app</span></div></div></article>';
+}).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "Vivero Raíz",
+  "short_name": "Vivero Raíz",
+  "description": "Plantas de interior cultivadas en Santiago, listas para tu casa.",
+  "id": "/vivero-raiz",
+  "start_url": "/vivero-raiz",
+  "scope": "/vivero-raiz",
+  "display": "standalone",
+  "lang": "es-CL",
+  "background_color": "#0c2620",
+  "theme_color": "#0c2620",
+  "icons": [
+    {
+      "src": "/tiendas/vivero-raiz/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/tiendas/vivero-raiz/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/tiendas/vivero-raiz/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

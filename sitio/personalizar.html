@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personalizador PedidoListo</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root { --bg: #0c2620; --surface: #12332b; --surface-2: #173d34; --ink: #f1eadb; --muted: #a9b8ae; --line: #24493f; --oro: #d2a46a; --oro-ink: #10241e; color-scheme: dark; }
+@media (prefers-color-scheme: light) { :root { --bg: #f3efe6; --surface: #fffcf5; --surface-2: #f5efe2; --ink: #14302a; --muted: #5b6b63; --line: #ddd5c4; --oro: #a8713a; --oro-ink: #fffaf0; color-scheme: light; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: Manrope, system-ui, sans-serif; font-size: 14px; }
+.app { display: grid; grid-template-columns: 340px 1fr; height: 100vh; height: 100dvh; }
+aside { border-right: 1px solid var(--line); overflow-y: auto; padding: 18px 18px 30px; background: var(--surface); }
+aside header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
+aside h1 { font-family: Fraunces, serif; font-size: 22px; margin: 0; font-weight: 600; }
+aside header a { color: var(--muted); font-size: 13px; }
+.grupo { border-top: 1px solid var(--line); padding: 14px 0; display: grid; gap: 10px; }
+.grupo h2 { margin: 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--oro); }
+label.f { display: grid; gap: 5px; font-weight: 600; font-size: 13px; }
+select, input[type=range] { width: 100%; }
+select { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; font: inherit; color: inherit; }
+.colores { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.color { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 6px 8px; font-size: 12.5px; font-weight: 600; }
+.color input { width: 30px; height: 30px; border: 0; padding: 0; background: none; border-radius: 8px; cursor: pointer; flex: none; }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 3px; gap: 3px; }
+.seg button { border: 0; background: none; color: var(--muted); font: inherit; font-weight: 600; padding: 8px 4px; border-radius: 9px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--oro); color: var(--oro-ink); }
+.paletas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.paletas button { aspect-ratio: 1; border-radius: 12px; border: 2px solid var(--line); cursor: pointer; padding: 0; overflow: hidden; display: grid; grid-template-rows: 2fr 1fr; }
+.paletas button span { display: block; }
+.paletas button:hover { border-color: var(--oro); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 44px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; }
+.btn.oro { background: var(--oro); color: var(--oro-ink); border-color: transparent; }
+.ayuda { color: var(--muted); font-size: 12.5px; margin: 0; }
+main { display: grid; grid-template-rows: auto 1fr; min-width: 0; background: var(--bg); }
+.barra { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.barra .seg { width: 220px; }
+.lienzo { display: grid; place-items: center; padding: 18px; min-height: 0; overflow: auto; }
+.marco { width: 100%; height: 100%; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: #000; transition: width .3s ease; box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.marco.movil { width: 390px; max-width: 100%; height: min(820px, 100%); border-radius: 34px; border: 10px solid #0a0f0d; }
+.marco iframe { width: 100%; height: 100%; border: 0; display: block; }
+@media (max-width: 860px) {
+  .app { grid-template-columns: 1fr; height: auto; }
+  aside { border-right: 0; border-bottom: 1px solid var(--line); }
+  main { height: 92vh; }
+  .barra .seg { width: 180px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <header><h1>Personalizador</h1><a href="/">← Volver</a></header>
+    <div class="grupo">
+      <label class="f">Tienda de ejemplo
+        <select id="tienda"><option value="vivero-raiz">Vivero Raíz</option><option value="carbon">Carbón</option><option value="cerro-alegre">Tostaduría Cerro Alegre</option></select>
+      </label>
+    </div>
+    <div class="grupo">
+      <h2>Paletas rápidas</h2>
+      <div class="paletas" id="paletas"></div>
+    </div>
+    <div class="grupo">
+      <h2>Colores del modo <span id="modo-txt">oscuro</span></h2>
+      <div class="seg" id="modo"><button data-v="claro">Claro</button><button data-v="oscuro">Oscuro</button></div>
+      <div class="colores" id="colores"></div>
+      <p class="ayuda">Cada tienda tiene su paleta para modo claro y otra para modo oscuro.</p>
+    </div>
+    <div class="grupo">
+      <h2>Tipografía</h2>
+      <label class="f">Títulos <select id="ft"></select></label>
+      <label class="f">Textos <select id="fb"></select></label>
+      <label class="f">Bordes redondeados: <span id="radio-v"></span><input type="range" id="radio" min="0" max="28" step="1"></label>
+    </div>
+    <div class="grupo">
+      <h2>Estructura</h2>
+      <span style="font-weight:600;font-size:13px">Portada</span>
+      <div class="seg" id="portada"><button data-v="dividido">Dividida</button><button data-v="centrado">Centrada</button><button data-v="simple">Simple</button></div>
+      <span style="font-weight:600;font-size:13px">Tarjetas</span>
+      <div class="seg" id="tarjetas"><button data-v="tarjeta">Tarjeta</button><button data-v="minimal">Mínima</button><button data-v="lista">Lista</button></div>
+      <span style="font-weight:600;font-size:13px">Columnas en computador</span>
+      <div class="seg" id="cols"><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button></div>
+    </div>
+    <div class="grupo">
+      <button class="btn oro" id="exportar">Descargar configuración</button>
+      <button class="btn" id="reset">Volver al diseño original</button>
+      <p class="ayuda">La configuración se guarda en el archivo de la tienda (tienda.json). Por ahora el panel para que cada cliente lo haga solo está en desarrollo.</p>
+    </div>
+  </aside>
+  <main>
+    <div class="barra"><b id="titulo">Vista previa</b><div class="seg" id="vista"><button data-v="movil">Celular</button><button data-v="escritorio">Computador</button></div></div>
+    <div class="lienzo"><div class="marco movil" id="marco"><iframe id="frame" title="Vista previa de la tienda"></iframe></div></div>
+  </main>
+</div>
+<script>
+(function () {
+  var FUENTES = ['Cormorant Garamond', 'Fraunces', 'Playfair Display', 'DM Serif Display', 'Outfit', 'Manrope', 'Inter', 'Poppins', 'Nunito', 'Space Grotesk'];
+  var NOMBRES = { bg: 'Fondo', surface: 'Tarjetas', ink: 'Texto', accent: 'Acento', muted: 'Texto suave', line: 'Bordes' };
+  // Paletas inspiradas en las referencias: bosque y oro, grafito y naranjo, tierra, arcilla rosada, salvia.
+  var PALETAS = [
+    { n: 'Bosque y oro', claro: { bg: '#f3efe6', surface: '#fffcf5', 'surface-2': '#e7e1d3', ink: '#14302a', muted: '#5b6b63', line: '#d9d1c0', accent: '#a8713a', 'accent-ink': '#fffaf0' }, oscuro: { bg: '#0c2620', surface: '#12332b', 'surface-2': '#0f2c25', ink: '#f1eadb', muted: '#a9b8ae', line: '#24493f', accent: '#d2a46a', 'accent-ink': '#10241e' } },
+    { n: 'Grafito y naranjo', claro: { bg: '#eceef1', surface: '#ffffff', 'surface-2': '#e2e5ea', ink: '#1b1e24', muted: '#5f6672', line: '#d5d9e0', accent: '#ff6a2b', 'accent-ink': '#ffffff' }, oscuro: { bg: '#1f2228', surface: '#272b33', 'surface-2': '#2b2f37', ink: '#f1ede6', muted: '#9aa1ad', line: '#363b45', accent: '#ff6a2b', 'accent-ink': '#160b05' } },
+    { n: 'Tierra', claro: { bg: '#f1e9df', surface: '#fbf6ef', 'surface-2': '#e6dbcd', ink: '#2f2219', muted: '#75645a', line: '#dccfbf', accent: '#8b5a3c', 'accent-ink': '#fff8f0' }, oscuro: { bg: '#1e1714', surface: '#2a201b', 'surface-2': '#241b17', ink: '#f3e8dc', muted: '#b9a796', line: '#3a2e27', accent: '#d29a6c', 'accent-ink': '#22160f' } },
+    { n: 'Arcilla rosada', claro: { bg: '#f4ece8', surface: '#fffaf7', 'surface-2': '#eadcd5', ink: '#3a2820', muted: '#7b665d', line: '#e2d2ca', accent: '#b9786a', 'accent-ink': '#fffaf7' }, oscuro: { bg: '#231a17', surface: '#2f2420', 'surface-2': '#2a201c', ink: '#f6e9e3', muted: '#bba79f', line: '#43332d', accent: '#e3a597', 'accent-ink': '#2a1813' } },
+    { n: 'Salvia', claro: { bg: '#eef1ec', surface: '#fbfcfa', 'surface-2': '#dfe6dd', ink: '#22322b', muted: '#5f6e66', line: '#d3ddd2', accent: '#4f8a6e', 'accent-ink': '#ffffff' }, oscuro: { bg: '#18221e', surface: '#203029', 'surface-2': '#1c2a24', ink: '#e8efe9', muted: '#a3b3aa', line: '#2f433a', accent: '#8cc3a5', 'accent-ink': '#0f1b16' } }
+  ];
+  var $ = function (id) { return document.getElementById(id); };
+  var frame = $('frame'), original = null, T = null, modo = 'oscuro';
+
+  FUENTES.forEach(function (f) { $('ft').add(new Option(f, f)); $('fb').add(new Option(f, f)); });
+  $('paletas').innerHTML = PALETAS.map(function (p, i) {
+    return '<button data-i="' + i + '" title="' + p.n + '" aria-label="Paleta ' + p.n + '"><span style="background:' + p.oscuro.bg + '"></span><span style="background:' + p.oscuro.accent + '"></span></button>';
+  }).join('');
+
+  function seg(id, valor, alCambiar) {
+    var el = $(id);
+    el.querySelectorAll('button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.v === String(valor)));
+      b.onclick = function () { el.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); alCambiar(b.dataset.v); };
+    });
+  }
+
+  function enviar() {
+    try { frame.contentWindow.postMessage({ tipo: 'brota-tema', tema: T.tema, estructura: T.estructura, modo: modo }, location.origin); } catch (e) {}
+  }
+
+  function pintarControles() {
+    var pal = T.tema[modo];
+    $('modo-txt').textContent = modo;
+    $('colores').innerHTML = Object.keys(NOMBRES).map(function (k) {
+      return '<label class="color"><input type="color" data-k="' + k + '" value="' + pal[k] + '">' + NOMBRES[k] + '</label>';
+    }).join('');
+    $('colores').querySelectorAll('input').forEach(function (inp) {
+      inp.oninput = function () {
+        T.tema[modo][inp.dataset.k] = inp.value;
+        if (inp.dataset.k === 'surface') T.tema[modo]['surface-2'] = inp.value;
+        enviar();
+      };
+    });
+    $('ft').value = T.tema.fuenteTitulos; $('fb').value = T.tema.fuenteTexto;
+    $('radio').value = T.tema.radio; $('radio-v').textContent = T.tema.radio + ' px';
+    seg('modo', modo, function (v) { modo = v; pintarControles(); enviar(); });
+    seg('portada', T.estructura.portada, function (v) { T.estructura.portada = v; enviar(); });
+    seg('tarjetas', T.estructura.tarjetas, function (v) { T.estructura.tarjetas = v; enviar(); });
+    seg('cols', (T.estructura.columnas || {}).escritorio || 4, function (v) { T.estructura.columnas = Object.assign({}, T.estructura.columnas, { escritorio: +v }); enviar(); });
+  }
+
+  $('ft').onchange = function () { T.tema.fuenteTitulos = this.value; enviar(); };
+  $('fb').onchange = function () { T.tema.fuenteTexto = this.value; enviar(); };
+  $('radio').oninput = function () { T.tema.radio = +this.value; $('radio-v').textContent = this.value + ' px'; enviar(); };
+  $('paletas').querySelectorAll('button').forEach(function (b) {
+    b.onclick = function () {
+      var p = PALETAS[+b.dataset.i];
+      T.tema.claro = Object.assign({}, T.tema.claro, JSON.parse(JSON.stringify(p.claro)));
+      T.tema.oscuro = Object.assign({}, T.tema.oscuro, JSON.parse(JSON.stringify(p.oscuro)));
+      pintarControles(); enviar();
+    };
+  });
+
+  function cargar(slug) {
+    fetch('/tiendas/' + slug + '/tienda.json').then(function (r) { return r.json(); }).then(function (t) {
+      original = JSON.stringify(t); T = t;
+      modo = t.tema.modoInicial === 'claro' ? 'claro' : 'oscuro';
+      $('titulo').textContent = t.negocio.nombre;
+      frame.onload = function () { setTimeout(enviar, 300); };
+      frame.src = '/' + slug + '?preview=1';
+      pintarControles();
+    });
+  }
+  $('tienda').onchange = function () { cargar(this.value); };
+  $('reset').onclick = function () { T = JSON.parse(original); pintarControles(); enviar(); };
+  $('exportar').onclick = function () {
+    var datos = JSON.stringify({ tema: T.tema, estructura: T.estructura }, null, 2);
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([datos], { type: 'application/json' }));
+    a.download = 'diseno-' + T.slug + '.json'; a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  };
+  seg('vista', 'movil', function (v) { $('marco').className = 'marco' + (v === 'movil' ? ' movil' : ''); });
+  cargar('vivero-raiz');
+})();
+</script>
+</body>
+</html>

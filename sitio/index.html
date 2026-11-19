@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PedidoListo · Catálogo online con pedidos por WhatsApp</title>
+<meta name="description" content="Tu catálogo online con carrito: tus clientes eligen productos y el pedido te llega listo por WhatsApp. Sin comisiones. Desde $9.990 al mes. Un servicio de Brote Digital SpA.">
+<meta name="theme-color" content="#0c2620">
+<meta property="og:title" content="PedidoListo · Catálogo online con pedidos por WhatsApp">
+<meta property="og:description" content="Tus clientes eligen, el pedido te llega listo por WhatsApp. Sin comisiones por venta.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<script>try { var m = localStorage.getItem('modo:landing'); if (m) document.documentElement.dataset.modo = m; } catch (e) {}</script>
+<style>
+:root {
+  --bg: #0c2620; --bg-2: #0f2c25; --surface: #12332b; --surface-2: #173d34; --ink: #f1eadb; --muted: #a9b8ae; --line: #24493f;
+  --oro: #d2a46a; --oro-ink: #10241e; --verde: #3ccf7a; --oro-suave: rgba(210, 164, 106, .14); --wa: #25a35a;
+  --sombra: 0 24px 60px rgba(0, 0, 0, .35); color-scheme: dark;
+}
+:root[data-modo="claro"] {
+  --bg: #f3efe6; --bg-2: #ebe5d8; --surface: #fffcf5; --surface-2: #f5efe2; --ink: #14302a; --muted: #5b6b63; --line: #ddd5c4;
+  --oro: #a8713a; --oro-ink: #fffaf0; --verde: #1f8f4e; --oro-suave: rgba(168, 113, 58, .12); --wa: #1f8f4e;
+  --sombra: 0 24px 60px rgba(20, 48, 42, .14); color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-modo="oscuro"]) {
+    --bg: #f3efe6; --bg-2: #ebe5d8; --surface: #fffcf5; --surface-2: #f5efe2; --ink: #14302a; --muted: #5b6b63; --line: #ddd5c4;
+    --oro: #a8713a; --oro-ink: #fffaf0; --verde: #1f8f4e; --oro-suave: rgba(168, 113, 58, .12); --wa: #1f8f4e;
+    --sombra: 0 24px 60px rgba(20, 48, 42, .14); color-scheme: light;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: Manrope, system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+img, svg { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--oro); outline-offset: 3px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+h1, h2, h3 { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+.eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--oro); margin: 0 0 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 50px; padding: 0 24px; border-radius: 999px; font-weight: 700; font-size: 15.5px; text-decoration: none; border: 1px solid transparent; cursor: pointer; white-space: nowrap; }
+.btn svg { width: 19px; height: 19px; }
+.btn-oro { background: var(--oro); color: var(--oro-ink); }
+.btn-borde { border-color: var(--line); background: transparent; color: var(--ink); }
+.btn-borde:hover { border-color: var(--oro); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Nav */
+nav.top { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); padding-top: env(safe-area-inset-top); }
+nav.top .wrap { display: flex; align-items: center; gap: 18px; min-height: 68px; }
+.logo { display: flex; align-items: center; gap: 9px; text-decoration: none; margin-right: auto; }
+.logo svg { width: 38px; height: 38px; }
+.logo b { font-family: Manrope, sans-serif; font-size: 23px; font-weight: 800; letter-spacing: -.03em; }
+.enlaces { display: flex; gap: 22px; font-size: 14.5px; font-weight: 600; }
+.enlaces a { text-decoration: none; color: var(--muted); }
+.enlaces a:hover { color: var(--ink); }
+.modo { width: 42px; height: 42px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); display: grid; place-items: center; cursor: pointer; flex: none; }
+.modo svg { width: 19px; height: 19px; }
+nav .btn { min-height: 42px; padding: 0 18px; font-size: 14px; }
+@media (max-width: 860px) { .enlaces { display: none; } }
+@media (max-width: 420px) { nav .btn span { display: none; } nav .btn { padding: 0 13px; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; width: 760px; height: 760px; right: -220px; top: -180px; border-radius: 50%; border: 1px solid var(--oro); opacity: .25; pointer-events: none; }
+.hero::after { content: ""; position: absolute; width: 560px; height: 560px; right: -120px; top: -80px; border-radius: 50%; background: radial-gradient(circle, var(--oro-suave), transparent 70%); pointer-events: none; }
+.hero .wrap { display: grid; grid-template-columns: 1.08fr .92fr; gap: 40px; align-items: center; padding-block: 64px 72px; position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(40px, 6.4vw, 76px); line-height: 1.02; }
+.hero h1 em { font-style: italic; color: var(--oro); font-weight: 500; }
+.hero p.bajada { font-size: clamp(16px, 2vw, 19px); color: var(--muted); max-width: 52ch; margin: 22px 0 0; }
+.hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.sellos { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 30px 0 0; padding: 0; list-style: none; font-size: 14px; color: var(--muted); font-weight: 600; }
+.sellos li { display: flex; align-items: center; gap: 7px; }
+.sellos svg { width: 17px; height: 17px; color: var(--oro); }
+.escena { position: relative; display: grid; justify-items: center; }
+.telefono { width: 300px; aspect-ratio: 300 / 620; border-radius: 44px; padding: 11px; background: #0a0f0d; box-shadow: var(--sombra), 0 0 0 1px rgba(255,255,255,.06) inset; position: relative; }
+.telefono::before { content: ""; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 84px; height: 22px; border-radius: 999px; background: #0a0f0d; z-index: 2; }
+.pantalla { width: 100%; height: 100%; border-radius: 34px; overflow: hidden; background: #0c2620; position: relative; }
+.pantalla iframe { position: absolute; top: 0; left: 0; width: 390px; height: 820px; border: 0; transform: scale(.716); transform-origin: 0 0; }
+.burbuja { position: absolute; left: -36px; bottom: 54px; width: 238px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px 18px 18px 4px; padding: 14px 16px; box-shadow: var(--sombra); font-size: 12.5px; line-height: 1.5; z-index: 3; animation: flota 6s ease-in-out infinite; }
+.burbuja b { display: block; font-size: 13px; margin-bottom: 4px; }
+.burbuja .hora { display: block; text-align: right; color: var(--muted); font-size: 11px; margin-top: 6px; }
+.burbuja .chat { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 12px; color: var(--wa); }
+.burbuja .chat svg { width: 16px; height: 16px; }
+.ficha-flota { position: absolute; right: -24px; top: 70px; z-index: 3; background: var(--oro); color: var(--oro-ink); border-radius: 16px; padding: 12px 14px; font-weight: 700; font-size: 13px; box-shadow: var(--sombra); animation: flota 7s ease-in-out infinite reverse; }
+.ficha-flota span { display: block; font-size: 22px; font-family: Fraunces, serif; }
+@keyframes flota { 50% { transform: translateY(-10px); } }
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 40px 56px; }
+  .escena { margin-top: 10px; }
+  .burbuja { left: 0; bottom: 30px; width: 210px; }
+  .ficha-flota { right: 0; }
+}
+@media (max-width: 400px) { .telefono { width: 260px; } .pantalla iframe { transform: scale(.61); height: 960px; } .burbuja { left: -6px; width: 190px; } .ficha-flota { right: -6px; } }
+
+/* Secciones */
+section { padding-block: 84px; }
+.cabeza { max-width: 680px; margin-bottom: 40px; }
+.cabeza h2 { font-size: clamp(30px, 4.4vw, 48px); line-height: 1.06; }
+.cabeza p { color: var(--muted); margin: 14px 0 0; font-size: 17px; }
+.franja { background: var(--bg-2); border-block: 1px solid var(--line); }
+
+/* Pasos */
+.pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: paso; }
+.paso { background: var(--surface); border: 1px solid var(--line); border-radius: 26px; padding: 26px; position: relative; }
+.paso .tile { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(145deg, color-mix(in srgb, var(--oro) 85%, white), var(--oro)); color: var(--oro-ink); box-shadow: 0 10px 22px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.35); margin-bottom: 20px; }
+.paso .tile svg { width: 28px; height: 28px; }
+.paso h3 { font-size: 23px; margin-bottom: 8px; }
+.paso p { margin: 0; color: var(--muted); }
+.paso::after { counter-increment: paso; content: "0" counter(paso); position: absolute; top: 22px; right: 26px; font-family: Fraunces, serif; font-size: 40px; color: var(--line); font-weight: 600; }
+@media (max-width: 820px) { .pasos { grid-template-columns: 1fr; } }
+
+/* Funciones */
+.funciones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.fn { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 20px; }
+.fn .ic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--surface-2); color: var(--oro); margin-bottom: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.14); }
+.fn .ic svg { width: 22px; height: 22px; }
+.fn h3 { font-family: Manrope, sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0; margin-bottom: 4px; }
+.fn p { margin: 0; color: var(--muted); font-size: 14px; }
+.fn.ancho { grid-column: span 2; background: linear-gradient(135deg, var(--surface), var(--surface-2)); }
+@media (max-width: 980px) { .funciones { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .funciones { grid-template-columns: 1fr; } .fn.ancho { grid-column: auto; } }
+
+/* Diseños */
+.disenos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.diseno { border-radius: 26px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); text-decoration: none; display: flex; flex-direction: column; transition: transform .25s ease, box-shadow .25s ease; }
+.diseno:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
+.diseno .vista { aspect-ratio: 4 / 3; position: relative; overflow: hidden; }
+.diseno .vista iframe { position: absolute; top: 0; left: 0; width: 1200px; height: 900px; border: 0; transform: scale(.3); transform-origin: 0 0; pointer-events: none; }
+.diseno .txt { padding: 18px 20px 20px; display: grid; gap: 6px; }
+.diseno h3 { font-size: 22px; }
+.diseno p { margin: 0; color: var(--muted); font-size: 14px; }
+.paleta { display: flex; gap: 6px; margin-top: 6px; }
+.paleta i { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); }
+.diseno .ir { margin-top: 8px; font-weight: 700; font-size: 14px; color: var(--oro); }
+.probar { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; padding: 22px 24px; border-radius: 22px; border: 1px dashed var(--oro); background: var(--oro-suave); }
+.probar p { margin: 0; flex: 1 1 320px; }
+@media (max-width: 900px) { .disenos { grid-template-columns: 1fr; max-width: 520px; } }
+
+/* Precios */
+.planes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 28px 26px; display: flex; flex-direction: column; gap: 14px; position: relative; }
+.plan.destacado { border-color: var(--oro); box-shadow: 0 0 0 1px var(--oro), var(--sombra); }
+.plan .cinta { position: absolute; top: -13px; left: 26px; background: var(--oro); color: var(--oro-ink); font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+.plan h3 { font-size: 26px; }
+.plan .para { color: var(--muted); font-size: 14.5px; margin: -6px 0 0; }
+.plan .precio { font-family: Fraunces, serif; font-size: 46px; font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+.plan .precio small { font-family: Manrope, sans-serif; font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: 0; margin-left: 4px; }
+.plan .iva { font-size: 13px; color: var(--muted); margin-top: -6px; }
+.plan ul { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 9px; font-size: 14.5px; }
+.plan li { display: flex; gap: 10px; align-items: flex-start; }
+.plan li svg { width: 18px; height: 18px; flex: none; margin-top: 2px; color: var(--oro); }
+.plan li.no { color: var(--muted); }
+.plan li.no svg { color: var(--muted); opacity: .6; }
+.plan .btn { margin-top: auto; }
+.plan .url { font-size: 13px; color: var(--muted); background: var(--surface-2); border-radius: 10px; padding: 7px 10px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+@media (max-width: 960px) { .planes { grid-template-columns: 1fr; max-width: 520px; } }
+.comparar { margin-top: 26px; color: var(--muted); font-size: 14.5px; max-width: 760px; }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 820px; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 0 22px; }
+summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; font-size: 16.5px; display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 24px; font-weight: 400; color: var(--oro); line-height: 1; }
+details[open] summary::after { content: "−"; }
+details p { margin: 0 0 18px; color: var(--muted); }
+
+/* CTA final */
+.final { text-align: center; }
+.final .caja { border-radius: 34px; padding: 64px 24px; background: radial-gradient(120% 140% at 50% 0%, var(--surface-2), var(--surface)); border: 1px solid var(--line); position: relative; overflow: hidden; }
+.final .caja::before { content: ""; position: absolute; inset: 16px; border: 1px solid var(--oro); opacity: .35; border-radius: 24px; pointer-events: none; }
+.final h2 { font-size: clamp(32px, 5vw, 54px); max-width: 16ch; margin: 0 auto; }
+.final p { color: var(--muted); max-width: 52ch; margin: 16px auto 28px; font-size: 17px; }
+.final .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+footer { padding: 36px 0 calc(40px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; align-items: center; }
+footer a { color: var(--ink); }
+
+.aparece { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.aparece.visto { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .aparece { opacity: 1; transform: none; transition: none; } .burbuja, .ficha-flota { animation: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Principal">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="PedidoListo, inicio">
+      <svg viewBox="0 0 68 68" aria-hidden="true"><path d="M14 22h40l-3 34a5 5 0 0 1-5 4.6H20L10 66l3-9.6z" fill="var(--verde)"/><path d="M24 24v-5a10 10 0 0 1 20 0v5" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/><path d="M23 41l8 8 15-16" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <b>pedido<span style="color:var(--verde)">listo</span></b>
+    </a>
+    <div class="enlaces"><a href="#como">Cómo funciona</a><a href="#funciones">Funciones</a><a href="#disenos">Diseños</a><a href="#precios">Precios</a><a href="#preguntas">Preguntas</a></div>
+    <button class="modo" id="modo" aria-label="Cambiar modo claro u oscuro"></button>
+    <a class="btn btn-oro js-contacto" href="#precios"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2a9.7 9.7 0 0 0-8.3 14.8L2.4 21.7l4.8-1.3A9.7 9.7 0 1 0 12 2.2z"/></svg><span>Quiero mi catálogo</span></a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Catálogo online con pedidos por WhatsApp</p>
+      <h1>Tus clientes eligen. <em>El pedido te llega listo</em> por WhatsApp.</h1>
+      <p class="bajada">PedidoListo es tu catálogo con fotos, precios y carrito. Tu cliente arma su pedido, elige si retira o se lo envías, y te llega un mensaje con todo: productos, total, nombre y dirección. Sin comisiones por venta.</p>
+      <div class="ctas">
+        <a class="btn btn-oro" href="/vivero-raiz">Ver tienda de ejemplo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-borde" href="#precios">Ver planes</a>
+      </div>
+      <ul class="sellos">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>0% de comisión</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Se instala como app</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Modo claro y oscuro</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Hecho en Chile</li>
+      </ul>
+    </div>
+    <div class="escena" aria-label="Vista previa de una tienda en el celular">
+      <div class="telefono"><div class="pantalla"><iframe src="/vivero-raiz?preview=1" title="Tienda de ejemplo: Vivero Raíz" loading="lazy" tabindex="-1"></iframe></div></div>
+      <div class="ficha-flota" aria-hidden="true">Nuevo pedido<span class="num">$27.990</span></div>
+      <div class="burbuja" aria-hidden="true">
+        <div class="chat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2a9.7 9.7 0 0 0-8.3 14.8L2.4 21.7l4.8-1.3A9.7 9.7 0 1 0 12 2.2z"/></svg>Mensaje recibido</div>
+        <b>Pedido LJ87B</b>
+        1 × Monstera (macetero greda): $24.990<br>Envío Providencia: $3.000<br><b style="display:inline">Total: $27.990</b><br>Ana Pérez · Los Leones 123
+        <span class="hora">10:42</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="como" class="franja">
+  <div class="wrap">
+    <div class="cabeza aparece"><p class="eyebrow">Cómo funciona</p><h2>Vender por WhatsApp, pero sin escribir precios uno por uno</h2>
+      <p>Tus clientes ya te escriben por WhatsApp o Instagram. PedidoListo les da un lugar ordenado para elegir, y a ti un pedido claro que solo tienes que confirmar.</p></div>
+    <div class="pasos">
+      <article class="paso aparece"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></div>
+        <h3>Tu cliente elige</h3><p>Navega tu catálogo por categorías, busca, mira las fotos y suma productos al carrito.</p></article>
+      <article class="paso aparece"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></div>
+        <h3>Elige cómo recibir</h3><p>Ir a retirar o envío a domicilio. Si elige envío, ve el costo de su comuna y escribe su dirección.</p></article>
+      <article class="paso aparece"><div class="tile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2a9.7 9.7 0 0 0-8.3 14.8L2.4 21.7l4.8-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 19.9z"/></svg></div>
+        <h3>Te llega el pedido</h3><p>Se abre WhatsApp con el mensaje listo. Tú confirmas, envías los datos de transferencia y coordinas la entrega.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="funciones">
+  <div class="wrap">
+    <div class="cabeza aparece"><p class="eyebrow">Funciones</p><h2>Todo lo que necesita un negocio que vende por chat</h2></div>
+    <div class="funciones">
+      <article class="fn ancho aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M14 3.5a8 8 0 0 1 6.5 6.5"/><circle cx="8.5" cy="10" r="1.3"/><circle cx="12" cy="7.5" r="1.3"/><circle cx="15.5" cy="10" r="1.3"/></svg></div>
+        <h3>Diseño a tu medida</h3><p>Colores, tipografías, estructura de la portada y estilo de las tarjetas según tu marca. Tu catálogo no se parece al de nadie más.</p></article>
+      <article class="fn aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg></div><h3>Carrito con total</h3><p>Cantidades, variantes y total con envío calculado.</p></article>
+      <article class="fn aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><h3>Buscador y categorías</h3><p>Tus clientes encuentran rápido lo que buscan.</p></article>
+      <article class="fn aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg></div><h3>Página de cada producto</h3><p>Varias fotos, descripción, opciones y botón para compartir.</p></article>
+      <article class="fn aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.4C1.6 7.2 3.8 4 7.2 4c2 0 3.4 1.1 4.8 2.8C13.4 5.1 14.8 4 16.8 4c3.4 0 5.6 3.2 4.4 6.6C19.5 15.4 12 20 12 20z"/></svg></div><h3>Favoritos</h3><p>Tu cliente guarda lo que le gusta y puede compartir su lista.</p></article>
+      <article class="fn aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><h3>Horario y despacho</h3><p>Horario, costo por comuna y envío gratis desde el monto que definas.</p></article>
+      <article class="fn aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M10 12h5M10 15.5h5"/></svg></div><h3>Comprobante en PDF o imagen</h3><p>El mensaje trae un enlace al pedido con fotos, para descargar o reenviar.</p></article>
+      <article class="fn aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M12 7v7M9 11l3 3 3-3"/></svg></div><h3>Se instala como app</h3><p>En el celular o el computador, con tu logo, sin pasar por tiendas de apps.</p></article>
+      <article class="fn ancho aparece"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></div>
+        <h3>Modo claro y oscuro</h3><p>Se adapta a la preferencia del celular de tu cliente, o lo cambia con un toque. Cada modo con colores pensados para tu marca.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="disenos" class="franja">
+  <div class="wrap">
+    <div class="cabeza aparece"><p class="eyebrow">Diseños</p><h2>Tres tiendas de ejemplo, tres personalidades</h2><p>Es el mismo sistema con distintos colores, tipografías y estructuras. Entra, agrega productos y prueba el pedido.</p></div>
+    <div class="disenos">
+      <a class="diseno aparece" href="/vivero-raiz"><div class="vista"><iframe src="/vivero-raiz?preview=1" title="Vivero Raíz" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="txt"><h3>Vivero Raíz</h3><p>Verde bosque y oro, tipografía con serifa, portada dividida. Plan Pro.</p><div class="paleta"><i style="background:#0c2620"></i><i style="background:#12332b"></i><i style="background:#d2a46a"></i><i style="background:#f1eadb"></i></div><span class="ir">Abrir tienda →</span></div></a>
+      <a class="diseno aparece" href="/carbon"><div class="vista"><iframe src="/carbon?preview=1" title="Carbón" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="txt"><h3>Carbón</h3><p>Grafito con naranjo, tipografía geométrica, tarjetas minimalistas. Plan Pro.</p><div class="paleta"><i style="background:#1f2228"></i><i style="background:#272b33"></i><i style="background:#ff6a2b"></i><i style="background:#f1ede6"></i></div><span class="ir">Abrir tienda →</span></div></a>
+      <a class="diseno aparece" href="/cerro-alegre"><div class="vista"><iframe src="/cerro-alegre?preview=1" title="Tostaduría Cerro Alegre" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="txt"><h3>Tostaduría Cerro Alegre</h3><p>Tonos tierra, lista de productos con foto al lado. Plan Básico.</p><div class="paleta"><i style="background:#f1e9df"></i><i style="background:#8b5a3c"></i><i style="background:#2f2219"></i><i style="background:#d29a6c"></i></div><span class="ir">Abrir tienda →</span></div></a>
+    </div>
+    <div class="probar aparece"><p><b>Prueba tus colores.</b> En el personalizador cambias colores, tipografías, portada y tarjetas, y ves el resultado al instante.</p><a class="btn btn-oro" href="/personalizar.html">Abrir personalizador</a></div>
+  </div>
+</section>
+
+<section id="precios">
+  <div class="wrap">
+    <div class="cabeza aparece"><p class="eyebrow">Precios</p><h2>Elige mensual o paga una sola vez</h2><p>Sin comisiones por venta en ningún plan. Pagas por tu catálogo, no por lo que vendes.</p></div>
+    <div class="planes">
+      <article class="plan aparece">
+        <h3>Básico</h3><p class="para">Para partir hoy y cargar tus productos tú mismo.</p>
+        <div class="precio num">$9.990<small>/mes</small></div><div class="iva">IVA incluido</div>
+        <div class="url">pedidolisto.cl/tu-tienda</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Hasta 50 productos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Carrito y pedido por WhatsApp</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Retiro o envío a domicilio por comuna</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Buscador, categorías y página de producto</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Diseños base con tu logo y colores</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Instalable como app, modo claro y oscuro</li>
+          <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 12h10"/></svg>1 foto por producto</li>
+        </ul>
+        <a class="btn btn-borde js-contacto" data-plan="Básico" href="#">Empezar con Básico</a>
+      </article>
+      <article class="plan destacado aparece">
+        <span class="cinta">Más elegido</span>
+        <h3>Pro</h3><p class="para">Para tiendas que quieren verse y venderse mejor.</p>
+        <div class="precio num">$15.990<small>/mes</small></div><div class="iva">IVA incluido</div>
+        <div class="url">pedidolisto.cl/tu-tienda o tu dominio</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><b>Todo lo del Básico</b>, más:</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Hasta 500 productos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Hasta 5 fotos por producto</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Favoritos y lista para compartir</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Comprobante del pedido en PDF o imagen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Personalización completa: tipografías, portada y tarjetas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Conecta tu propio dominio</li>
+        </ul>
+        <a class="btn btn-oro js-contacto" data-plan="Pro" href="#">Empezar con Pro</a>
+      </article>
+      <article class="plan aparece">
+        <h3>Página propia</h3><p class="para">Tu catálogo a medida, con tu dominio, y nosotros cargamos los productos.</p>
+        <div class="precio num">$159.990<small>pago único</small></div><div class="iva">+ IVA</div>
+        <div class="url">tunegocio.cl</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><b>Todas las funciones del Pro</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Diseño a medida de tu marca</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Carga de tus productos incluida</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Dominio .cl y hosting el primer año</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Sin mensualidad</li>
+        </ul>
+        <a class="btn btn-borde js-contacto" data-plan="Página propia" href="#">Cotizar mi página</a>
+      </article>
+    </div>
+    <p class="comparar aparece">Ninguno incluye pago con tarjeta en línea, control de stock ni cuentas de clientes: el pago se coordina por transferencia en el mismo chat, como ya lo haces hoy.</p>
+  </div>
+</section>
+
+<section id="preguntas" class="franja">
+  <div class="wrap">
+    <div class="cabeza aparece"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que nos preguntan antes de partir</h2></div>
+    <div class="faq aparece">
+      <details><summary>¿Cobran comisión por cada venta?</summary><p>No. Pagas el plan mensual o el pago único, y todo lo que vendes es tuyo.</p></details>
+      <details><summary>¿Mis clientes pueden pagar con tarjeta en el sitio?</summary><p>No. PedidoListo está pensado para negocios que venden por WhatsApp: el pedido llega al chat y ahí coordinas el pago por transferencia y la entrega. Si necesitas pago en línea, te recomendamos una tienda con pasarela de pago.</p></details>
+      <details><summary>¿El pedido llega como PDF o imagen a WhatsApp?</summary><p>WhatsApp no permite que un sitio adjunte archivos al mensaje. Por eso, en el plan Pro el mensaje incluye un enlace al pedido con fotos, desde donde tú o tu cliente lo descargan en PDF o imagen, o lo reenvían.</p></details>
+      <details><summary>¿Quién carga los productos?</summary><p>En los planes Básico y Pro los cargas tú desde el panel. En la Página propia los cargamos nosotros por ti.</p></details>
+      <details><summary>¿Puedo ofrecer retiro y envío a domicilio?</summary><p>Sí. Tu cliente elige "Ir a retirar" o "Envío a domicilio". Defines el costo de envío por comuna y, si quieres, un monto desde el que el envío es gratis.</p></details>
+      <details><summary>¿Cómo se instala como app?</summary><p>Desde Chrome o Edge (celular o computador) aparece el botón "Instalar app" en tu catálogo. En iPhone se agrega desde Safari con "Agregar a pantalla de inicio". Queda con tu logo y abre sin barra del navegador.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div class="caja aparece">
+      <h2>Recibe tus pedidos listos por WhatsApp</h2>
+      <p>Cuéntanos qué vendes y te mostramos cómo se vería tu catálogo.</p>
+      <div class="ctas"><a class="btn btn-oro js-contacto" href="#">Quiero mi catálogo</a><a class="btn btn-borde" href="/vivero-raiz">Ver ejemplo</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>PedidoListo es un servicio de <b>Brote Digital SpA</b> · Chile</span>
+    <span><a href="#precios">Precios</a> · <a href="/personalizar.html">Personalizador</a></span>
+  </div>
+</footer>
+
+<script>
+// Número de WhatsApp de Brote Digital para los botones de contacto (formato 569XXXXXXXX). Pendiente.
+var WHATSAPP_BROTE = '';
+
+(function () {
+  var sol = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var luna = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
+  var b = document.getElementById('modo');
+  function actual() { var d = document.documentElement.dataset.modo; return d || (matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'oscuro'); }
+  function pintar() { b.innerHTML = actual() === 'oscuro' ? sol : luna; document.querySelector('meta[name="theme-color"]').content = actual() === 'oscuro' ? '#0c2620' : '#f3efe6'; }
+  b.onclick = function () { var n = actual() === 'oscuro' ? 'claro' : 'oscuro'; document.documentElement.dataset.modo = n; try { localStorage.setItem('modo:landing', n); } catch (e) {} pintar(); };
+  pintar();
+
+  document.querySelectorAll('.js-contacto').forEach(function (a) {
+    var txt = 'Hola Brote Digital, quiero mi catálogo con PedidoListo' + (a.dataset.plan ? ' (plan ' + a.dataset.plan + ')' : '') + '. Mi negocio es: ';
+    a.href = 'https://wa.me/' + WHATSAPP_BROTE + '?text=' + encodeURIComponent(txt);
+    a.target = '_blank'; a.rel = 'noopener';
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.aparece').forEach(function (n) { io.observe(n); });
+  } else document.querySelectorAll('.aparece').forEach(function (n) { n.classList.add('visto'); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+{
+  "slug": "carbon",
+  "plan": "pro",
+  "demo": true,
+  "negocio": {
+    "nombre": "Carbón",
+    "bajada": "Vasos y termos negros para todo el día.",
+    "whatsapp": "56912345678",
+    "instagram": "@carbon.store",
+    "horario": "Lun a vie, 9:00 a 18:00",
+    "logo": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"64\" height=\"64\" fill=\"#1f2228\"/><circle cx=\"38\" cy=\"26\" r=\"13\" fill=\"none\" stroke=\"#ff6a2b\" stroke-width=\"5\"/><path d=\"M20 22h18l-2 28H22z\" fill=\"#f1ede6\"/></svg>"
+  },
+  "tema": {
+    "fuenteTitulos": "Outfit",
+    "fuenteTexto": "Outfit",
+    "pesoTitulos": 700,
+    "trackingTitulos": "-0.03em",
+    "radio": 10,
+    "modoInicial": "oscuro",
+    "claro": {
+      "bg": "#eceef1",
+      "surface": "#ffffff",
+      "surface-2": "#e2e5ea",
+      "ink": "#1b1e24",
+      "muted": "#5f6672",
+      "line": "#d5d9e0",
+      "accent": "#ff6a2b",
+      "accent-ink": "#ffffff",
+      "wa": "#1f8f4e",
+      "wa-ink": "#ffffff"
+    },
+    "oscuro": {
+      "bg": "#1f2228",
+      "surface": "#272b33",
+      "surface-2": "#2b2f37",
+      "ink": "#f1ede6",
+      "muted": "#9aa1ad",
+      "line": "#363b45",
+      "accent": "#ff6a2b",
+      "accent-ink": "#160b05",
+      "wa": "#25a35a",
+      "wa-ink": "#ffffff"
+    }
+  },
+  "estructura": {
+    "portada": "centrado",
+    "tarjetas": "minimal",
+    "columnas": {
+      "movil": 2,
+      "escritorio": 3
+    },
+    "descripcion": true
+  },
+  "banner": {
+    "titulo": "Todo negro. Todo el día.",
+    "fantasma": "CARBÓN",
+    "texto": "Vasos y termos de acero que mantienen tu bebida fría 24 horas o caliente 12. Despacho en el Gran Concepción.",
+    "boton": "Ver productos"
+  },
+  "entrega": {
+    "retiro": {
+      "activo": true,
+      "lugar": "Concepción centro",
+      "direccion": "Barros Arana 820, oficina 304, Concepción",
+      "horario": "Lun a vie, 9:00 a 18:00"
+    },
+    "domicilio": {
+      "activo": true,
+      "gratisDesde": 45000,
+      "comunas": [
+        {
+          "nombre": "Concepción",
+          "costo": 2500
+        },
+        {
+          "nombre": "Talcahuano",
+          "costo": 3500
+        },
+        {
+          "nombre": "San Pedro de la Paz",
+          "costo": 3500
+        },
+        {
+          "nombre": "Chiguayante",
+          "costo": 3500
+        },
+        {
+          "nombre": "Hualpén",
+          "costo": 3500
+        }
+      ]
+    }
+  },
+  "pago": "Pago por transferencia. Te enviamos los datos al confirmar.",
+  "mensaje": {
+    "saludo": "Hola Carbón, quiero pedir:",
+    "despedida": "Gracias."
+  },
+  "categorias": [
+    {
+      "id": "vasos",
+      "nombre": "Vasos"
+    },
+    {
+      "id": "termos",
+      "nombre": "Termos"
+    },
+    {
+      "id": "accesorios",
+      "nombre": "Accesorios"
+    }
+  ],
+  "productos": [
+    {
+      "id": "vaso-600",
+      "nombre": "Vaso térmico 600 ml",
+      "categoria": "vasos",
+      "precio": 16990,
+      "etiqueta": "Más vendido",
+      "descripcion": "Acero doble pared, tapa y bombilla.",
+      "opciones": [
+        "Negro mate",
+        "Negro brillante"
+      ],
+      "tituloOpciones": "Terminación",
+      "imagenes": [
+        {
+          "arte": "vaso",
+          "color": "#1b1d22",
+          "acento": "#ff6a2b",
+          "fondo": "#30343c"
+        },
+        {
+          "arte": "vaso",
+          "color": "#1b1d22",
+          "acento": "#ff6a2b",
+          "fondo": "#262a31",
+          "anillo": false
+        },
+        {
+          "arte": "vaso",
+          "color": "#1b1d22",
+          "acento": "#ff6a2b",
+          "fondo": "#30343c",
+          "zoom": true
+        }
+      ]
+    },
+    {
+      "id": "vaso-900",
+      "nombre": "Vaso térmico 900 ml",
+      "categoria": "vasos",
+      "precio": 19990,
+      "descripcion": "Para el día completo. Cabe en el portavasos del auto.",
+      "imagenes": [
+        {
+          "arte": "vaso",
+          "color": "#24272d",
+          "acento": "#ff6a2b",
+          "fondo": "#2a2e35",
+          "anillo": false
+        },
+        {
+          "arte": "vaso",
+          "color": "#24272d",
+          "acento": "#ff6a2b",
+          "fondo": "#383d46",
+          "anillo": false
+        }
+      ]
+    },
+    {
+      "id": "vaso-naranjo",
+      "nombre": "Vaso edición naranja",
+      "categoria": "vasos",
+      "precio": 17990,
+      "etiqueta": "Nuevo",
+      "descripcion": "El mismo vaso, con tapa y bombilla naranja.",
+      "imagenes": [
+        {
+          "arte": "vaso",
+          "color": "#1b1d22",
+          "acento": "#ff6a2b",
+          "fondo": "#ff6a2b"
+        }
+      ]
+    },
+    {
+      "id": "termo-1l",
+      "nombre": "Termo 1 litro",
+      "categoria": "termos",
+      "precio": 24990,
+      "descripcion": "Con asa. Caliente 12 h, frío 24 h.",
+      "imagenes": [
+        {
+          "arte": "termo",
+          "color": "#2a2d33",
+          "acento": "#ff6a2b",
+          "fondo": "#30343c"
+        },
+        {
+          "arte": "termo",
+          "color": "#2a2d33",
+          "acento": "#ff6a2b",
+          "fondo": "#30343c",
+          "zoom": true
+        }
+      ]
+    },
+    {
+      "id": "termo-500",
+      "nombre": "Botella 500 ml",
+      "categoria": "termos",
+      "precio": 14990,
+      "descripcion": "Liviana, para el gimnasio o la oficina.",
+      "imagenes": [
+        {
+          "arte": "termo",
+          "color": "#1b1d22",
+          "acento": "#f1ede6",
+          "fondo": "#2a2e35"
+        }
+      ]
+    },
+    {
+      "id": "taza",
+      "nombre": "Taza enlozada negra",
+      "categoria": "accesorios",
+      "precio": 8990,
+      "descripcion": "Borde de acero, 350 ml.",
+      "imagenes": [
+        {
+          "arte": "taza",
+          "color": "#24272d",
+          "acento": "#3a2a20",
+          "fondo": "#30343c"
+        }
+      ]
+    },
+    {
+      "id": "kit",
+      "nombre": "Kit regalo Carbón",
+      "categoria": "accesorios",
+      "precio": 34990,
+      "precioAntes": 41980,
+      "etiqueta": "Ahorra 17%",
+      "descripcion": "Vaso 600 ml, botella 500 ml y caja.",
+      "imagenes": [
+        {
+          "arte": "caja",
+          "color": "#24272d",
+          "acento": "#ff6a2b",
+          "fondo": "#30343c"
+        }
+      ]
+    }
+  ]
+}

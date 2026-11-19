@@ -1,0 +1,30 @@
+{
+  "name": "Carbón",
+  "short_name": "Carbón",
+  "description": "Vasos y termos negros para todo el día.",
+  "id": "/carbon",
+  "start_url": "/carbon",
+  "scope": "/carbon",
+  "display": "standalone",
+  "lang": "es-CL",
+  "background_color": "#1f2228",
+  "theme_color": "#1f2228",
+  "icons": [
+    {
+      "src": "/tiendas/carbon/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/tiendas/carbon/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/tiendas/carbon/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

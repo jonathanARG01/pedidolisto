@@ -1,0 +1,3 @@
+# Cada tienda vive en /<slug> y la sirve la misma app.
+/:slug        /app.html  200
+/:slug/       /app.html  200

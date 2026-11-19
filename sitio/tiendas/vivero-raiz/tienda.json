@@ -1,0 +1,361 @@
+{
+  "slug": "vivero-raiz",
+  "plan": "pro",
+  "demo": true,
+  "negocio": {
+    "nombre": "Vivero Raíz",
+    "bajada": "Plantas de interior cultivadas en Santiago, listas para tu casa.",
+    "whatsapp": "56912345678",
+    "instagram": "@vivero.raiz",
+    "horario": "Lun a sáb, 10:00 a 19:00",
+    "logo": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"64\" height=\"64\" fill=\"#0c2620\"/><circle cx=\"32\" cy=\"32\" r=\"21\" fill=\"none\" stroke=\"#d2a46a\" stroke-width=\"2\"/><path d=\"M32 47c0-12 0-18 0-24\" stroke=\"#d2a46a\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M32 30c-8-1-12-6-12-12 7 0 12 5 12 12z M32 26c7-1 11-5 11-11-6 0-11 4-11 11z\" fill=\"#d2a46a\"/><path d=\"M22 44c6-4 14-4 20 0\" stroke=\"#d2a46a\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/></svg>"
+  },
+  "tema": {
+    "fuenteTitulos": "Cormorant Garamond",
+    "fuenteTexto": "Manrope",
+    "pesoTitulos": 600,
+    "radio": 18,
+    "modoInicial": "oscuro",
+    "claro": {
+      "bg": "#f3efe6",
+      "surface": "#fffcf5",
+      "surface-2": "#e7e1d3",
+      "ink": "#14302a",
+      "muted": "#5b6b63",
+      "line": "#d9d1c0",
+      "accent": "#a8713a",
+      "accent-ink": "#fffaf0",
+      "wa": "#1f8f4e",
+      "wa-ink": "#ffffff"
+    },
+    "oscuro": {
+      "bg": "#0c2620",
+      "surface": "#12332b",
+      "surface-2": "#0f2c25",
+      "ink": "#f1eadb",
+      "muted": "#a9b8ae",
+      "line": "#24493f",
+      "accent": "#d2a46a",
+      "accent-ink": "#10241e",
+      "wa": "#25a35a",
+      "wa-ink": "#ffffff"
+    }
+  },
+  "estructura": {
+    "portada": "dividido",
+    "tarjetas": "tarjeta",
+    "columnas": {
+      "movil": 2,
+      "escritorio": 4
+    },
+    "descripcion": true
+  },
+  "banner": {
+    "titulo": "Plantas que hacen hogar",
+    "texto": "Elige tus plantas, arma tu pedido y te lo confirmamos por WhatsApp. Despacho en Santiago o retiro en el vivero.",
+    "boton": "Ver plantas",
+    "imagen": {
+      "arte": "planta",
+      "variante": "monstera",
+      "hoja": "#3f7d4e",
+      "maceta": "#c08a5a",
+      "fondo": "#1d4a3d"
+    }
+  },
+  "entrega": {
+    "retiro": {
+      "activo": true,
+      "lugar": "el vivero, Providencia",
+      "direccion": "Av. Italia 1450, Providencia",
+      "horario": "Lun a sáb, 10:00 a 19:00"
+    },
+    "domicilio": {
+      "activo": true,
+      "gratisDesde": 60000,
+      "nota": "Despachamos de martes a sábado. Te avisamos el horario por WhatsApp.",
+      "comunas": [
+        {
+          "nombre": "Providencia",
+          "costo": 3000
+        },
+        {
+          "nombre": "Ñuñoa",
+          "costo": 3000
+        },
+        {
+          "nombre": "Santiago Centro",
+          "costo": 3500
+        },
+        {
+          "nombre": "Las Condes",
+          "costo": 3500
+        },
+        {
+          "nombre": "La Reina",
+          "costo": 4000
+        },
+        {
+          "nombre": "Vitacura",
+          "costo": 4000
+        },
+        {
+          "nombre": "Maipú",
+          "costo": 5000
+        }
+      ]
+    }
+  },
+  "pago": "Pago por transferencia al confirmar el pedido.",
+  "mensaje": {
+    "saludo": "Hola Vivero Raíz, quiero hacer este pedido:",
+    "despedida": "¡Gracias! Quedo atento a la confirmación."
+  },
+  "categorias": [
+    {
+      "id": "interior",
+      "nombre": "Plantas de interior"
+    },
+    {
+      "id": "suculentas",
+      "nombre": "Cactus y suculentas"
+    },
+    {
+      "id": "complementos",
+      "nombre": "Maceteros y cuidado"
+    }
+  ],
+  "productos": [
+    {
+      "id": "monstera",
+      "nombre": "Monstera deliciosa",
+      "categoria": "interior",
+      "precio": 24990,
+      "etiqueta": "Más vendida",
+      "descripcion": "Hojas grandes y abiertas. Luz indirecta, riego semanal.",
+      "detalle": "Planta de 60 a 70 cm en macetero de greda de 22 cm. Ideal para living con luz indirecta. Riego una vez por semana en verano y cada 10 días en invierno.",
+      "opciones": [
+        "Macetero greda",
+        "Macetero blanco",
+        "Macetero negro"
+      ],
+      "tituloOpciones": "Macetero",
+      "imagenes": [
+        {
+          "arte": "planta",
+          "variante": "monstera",
+          "hoja": "#3f7d4e",
+          "maceta": "#c08a5a",
+          "fondo": "#dfe8dc"
+        },
+        {
+          "arte": "planta",
+          "variante": "monstera",
+          "hoja": "#3f7d4e",
+          "maceta": "#c08a5a",
+          "fondo": "#1d4a3d"
+        },
+        {
+          "arte": "planta",
+          "variante": "monstera",
+          "hoja": "#3f7d4e",
+          "maceta": "#c08a5a",
+          "fondo": "#e9e2d2",
+          "zoom": true
+        }
+      ]
+    },
+    {
+      "id": "sansevieria",
+      "nombre": "Sansevieria",
+      "categoria": "interior",
+      "precio": 14990,
+      "descripcion": "Casi indestructible. Purifica el aire y tolera poca luz.",
+      "opciones": [
+        "Macetero greda",
+        "Macetero blanco"
+      ],
+      "tituloOpciones": "Macetero",
+      "imagenes": [
+        {
+          "arte": "planta",
+          "variante": "sansevieria",
+          "hoja": "#4c7a46",
+          "maceta": "#e8e2d6",
+          "fondo": "#e4e9df"
+        },
+        {
+          "arte": "planta",
+          "variante": "sansevieria",
+          "hoja": "#4c7a46",
+          "maceta": "#e8e2d6",
+          "fondo": "#24463b"
+        }
+      ]
+    },
+    {
+      "id": "helecho",
+      "nombre": "Helecho de Boston",
+      "categoria": "interior",
+      "precio": 12990,
+      "descripcion": "Frondoso y colgante. Le gusta la humedad.",
+      "imagenes": [
+        {
+          "arte": "planta",
+          "variante": "helecho",
+          "hoja": "#5b9a4f",
+          "maceta": "#a86b45",
+          "fondo": "#e3ebde"
+        },
+        {
+          "arte": "planta",
+          "variante": "helecho",
+          "hoja": "#5b9a4f",
+          "maceta": "#a86b45",
+          "fondo": "#e3ebde",
+          "zoom": true
+        }
+      ]
+    },
+    {
+      "id": "ficus",
+      "nombre": "Ficus lyrata",
+      "categoria": "interior",
+      "precio": 32990,
+      "precioAntes": 36990,
+      "etiqueta": "Oferta",
+      "descripcion": "Árbol de interior de hojas en forma de violín.",
+      "imagenes": [
+        {
+          "arte": "planta",
+          "variante": "ficus",
+          "hoja": "#2f6b45",
+          "maceta": "#7a5134",
+          "fondo": "#e7e3d8"
+        },
+        {
+          "arte": "planta",
+          "variante": "ficus",
+          "hoja": "#2f6b45",
+          "maceta": "#7a5134",
+          "fondo": "#1d4a3d"
+        }
+      ]
+    },
+    {
+      "id": "cactus",
+      "nombre": "Cactus con flor",
+      "categoria": "suculentas",
+      "precio": 7990,
+      "etiqueta": "Nuevo",
+      "descripcion": "Pequeño, florece en primavera. Riego cada 15 días.",
+      "imagenes": [
+        {
+          "arte": "planta",
+          "variante": "cactus",
+          "hoja": "#5f8f4e",
+          "maceta": "#d9b48a",
+          "fondo": "#efe6d6",
+          "flor": "#e98aa5"
+        },
+        {
+          "arte": "planta",
+          "variante": "cactus",
+          "hoja": "#5f8f4e",
+          "maceta": "#d9b48a",
+          "fondo": "#e4ddcf",
+          "flor": "#f2b35d"
+        }
+      ]
+    },
+    {
+      "id": "cactus-trio",
+      "nombre": "Trío de suculentas",
+      "categoria": "suculentas",
+      "precio": 15990,
+      "descripcion": "Tres suculentas en maceteros de cerámica a mano.",
+      "imagenes": [
+        {
+          "arte": "planta",
+          "variante": "cactus",
+          "hoja": "#7aa36a",
+          "maceta": "#e8e2d6",
+          "fondo": "#dfe6da",
+          "flor": "#f2b35d"
+        }
+      ]
+    },
+    {
+      "id": "macetero",
+      "nombre": "Macetero de greda 22 cm",
+      "categoria": "complementos",
+      "precio": 8990,
+      "descripcion": "Greda de Pomaire con plato.",
+      "opciones": [
+        "Natural",
+        "Pintado blanco",
+        "Pintado verde"
+      ],
+      "tituloOpciones": "Terminación",
+      "imagenes": [
+        {
+          "arte": "caja",
+          "color": "#c08a5a",
+          "acento": "#8a5a35",
+          "fondo": "#efe6d6"
+        }
+      ]
+    },
+    {
+      "id": "abono",
+      "nombre": "Fertilizante líquido 250 ml",
+      "categoria": "complementos",
+      "precio": 5990,
+      "descripcion": "Orgánico, para plantas de interior. Rinde 50 riegos.",
+      "imagenes": [
+        {
+          "arte": "gotero",
+          "color": "#2f5d46",
+          "acento": "#d8b77a",
+          "fondo": "#e6e9df"
+        }
+      ]
+    },
+    {
+      "id": "vela",
+      "nombre": "Vela de soya Bosque",
+      "categoria": "complementos",
+      "precio": 9990,
+      "descripcion": "Aroma a ciprés y tierra mojada. 40 horas.",
+      "imagenes": [
+        {
+          "arte": "vela",
+          "color": "#1f4d3f",
+          "acento": "#d2a46a",
+          "fondo": "#e9e3d6"
+        },
+        {
+          "arte": "vela",
+          "color": "#1f4d3f",
+          "acento": "#d2a46a",
+          "fondo": "#0f2c25"
+        }
+      ]
+    },
+    {
+      "id": "kit-regalo",
+      "nombre": "Caja regalo verde",
+      "categoria": "complementos",
+      "precio": 29990,
+      "disponible": false,
+      "descripcion": "Sansevieria, vela de soya y tarjeta escrita a mano.",
+      "imagenes": [
+        {
+          "arte": "caja",
+          "color": "#d2a46a",
+          "acento": "#1f4d3f",
+          "fondo": "#e4ebe0"
+        }
+      ]
+    }
+  ]
+}
