@@ -14,3 +14,13 @@
 ## Publicación
 Netlify publica la carpeta `sitio/` (ver `netlify.toml`). Sin paso de build.
 Probar en local: `node herramientas/servidor.js` y abrir http://localhost:4321
+
+## Alta de clientes nuevos
+1. El cliente completa el formulario en `/alta` (`sitio/alta.html`). Usa **Netlify Forms**: los envíos quedan en Netlify > Forms > `alta`.
+   Primera vez: en Netlify activar *Forms > Enable form detection* y volver a publicar; luego en *Forms > Form notifications* agregar un aviso por correo.
+   Límite de Netlify: 8 MB por envío (logo + planilla). Las fotos van por enlace (Drive, Google Fotos, Dropbox) o por WhatsApp.
+2. Si tiene muchos productos, descarga `/planilla-productos.xlsx`, la completa y la sube en el mismo formulario.
+3. Para crear la tienda: copiar el campo `tienda_json` del envío a un archivo `alta.json` y ejecutar
+   `node herramientas/nueva-tienda.js alta.json [planilla.xlsx] [--fotos carpeta-de-fotos]`
+   Luego `node herramientas/iconos.js`, revisar en `http://localhost:4321/<slug>` y ajustar `tienda.json` si hace falta.
+   El tema claro/oscuro se calcula desde el color principal del cliente; si el cliente subió logo, guardarlo en `tiendas/<slug>/` y poner su ruta en `negocio.logo` (si no, el script crea uno con sus iniciales).
