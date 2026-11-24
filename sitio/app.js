@@ -344,7 +344,9 @@
   function armPrecio(p, arm) {
     var t = p.precio;
     (p.armador.pasos || []).forEach(function (paso) {
-      (arm[paso.id] || []).forEach(function (id) { var o = opcionDe(paso, id); if (o && o.precio) t += o.precio; });
+      var sel = arm[paso.id] || [];
+      sel.forEach(function (id) { var o = opcionDe(paso, id); if (o && o.precio) t += o.precio; });
+      if (paso.precioExtra) t += Math.max(0, sel.length - (paso.incluidas || 0)) * paso.precioExtra;
     });
     return t;
   }
@@ -390,7 +392,7 @@
           var no = o.disponible === false;
           return '<button type="button" class="sel" data-paso="' + esc(paso.id) + '" data-op="' + esc(o.id) + '" aria-pressed="false"' + (no ? ' disabled' : '') + '>' +
             '<span class="muestra">' + window.Helado.muestra(tipoDibujo(paso), { id: idDibujo(o), color: o.color, dibujo: o.dibujo }) + '<span class="check">' + tick + '</span></span>' +
-            '<span class="nom">' + esc(o.nombre) + '</span>' + (no ? '<span class="extra">Agotado</span>' : o.precio ? '<span class="extra num">+' + plata(o.precio) + '</span>' : '') + '</button>';
+            '<span class="nom">' + esc(o.nombre) + '</span>' + (no ? '<span class="extra">Agotado</span>' : '<span class="extra num"></span>') + '</button>';
         }).join('') + '</div></section>';
     }).join('');
     var cont = abrirPanel('centro panel-armable', p.nombre,
@@ -409,7 +411,14 @@
     function pintar(anim) {
       var s = armDibujo(p, arm); s.animar = anim; s.pista = true; s.ajuste = 'meet'; s.viewBox = '40 26 320 330';
       cont.querySelector('#lienzo').innerHTML = window.Helado.svg(s);
-      cont.querySelectorAll('.sel').forEach(function (b) { b.setAttribute('aria-pressed', (arm[b.dataset.paso] || []).indexOf(b.dataset.op) >= 0); });
+      cont.querySelectorAll('.sel').forEach(function (b) {
+        var paso = pasos.filter(function (x) { return x.id === b.dataset.paso; })[0], sel = arm[paso.id] || [], i = sel.indexOf(b.dataset.op), o = opcionDe(paso, b.dataset.op);
+        b.setAttribute('aria-pressed', i >= 0);
+        var ex = b.querySelector('.extra'); if (!ex || o.disponible === false) return;
+        var cobra = paso.precioExtra ? (i >= 0 ? i >= (paso.incluidas || 0) : sel.length >= (paso.incluidas || 0) && !((paso.max || 1) === 1)) : false;
+        var monto = (o.precio || 0) + (cobra ? paso.precioExtra : 0);
+        ex.textContent = monto ? '+' + plata(monto) : (paso.precioExtra ? 'Incluido' : '');
+      });
       pasos.forEach(function (paso) {
         var sec = cont.querySelector('.paso[data-paso="' + paso.id + '"]'), n = (arm[paso.id] || []).length;
         sec.classList.toggle('listo', n > 0 && n >= (paso.min || 0));

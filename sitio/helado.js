@@ -332,7 +332,7 @@
     if (cono_) {
       out += cono();
       if (sab.length) {
-        var pilas = [{ cx: 200, by: 166, rx: 84, h: 96 }, { cx: 200, by: 106, rx: 70, h: 74 }, { cx: 200, by: 56, rx: 56, h: 56 }];
+        var pilas = [{ cx: 200, by: 166, rx: 84, h: 96 }, { cx: 200, by: 118, rx: 72, h: 68 }, { cx: 200, by: 76, rx: 60, h: 56 }];
         if (sab.length > 1) { pilas[0].h = 66; }
         var bolas = '';
         sab.forEach(function (x, i) { bolas += bola(pilas[i], x, 'c' + i); c = pilas[i]; });
@@ -378,6 +378,9 @@
         var an = A === 'agregado:' + x.id;
         out += '<g class="' + (an ? 'h-llueve' : '') + '">' + piezas(c, x, an) + '</g>';
       });
+      // si el helado queda muy alto (varias bolas, crema), se achica para que quepa entero
+      var cima = c.by - c.h - 14, esc = Math.min(1, (345 - 42) / (345 - cima));
+      if (esc < 0.999) out = '<g transform="translate(200 345) scale(' + Math.round(esc * 1000) / 1000 + ') translate(-200 -345)">' + out + '</g>';
     }
     return out;
   }

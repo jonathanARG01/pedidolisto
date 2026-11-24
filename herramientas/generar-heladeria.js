@@ -1,21 +1,23 @@
 // Genera la tienda de helados (tienda.json + manifest + icon.svg). Uso: node herramientas/generar-heladeria.js
 // Productos con "armador": la ficha muestra el vaso o cono vacío y se arma tocando sabores, salsas y agregados.
-// PRECIOS POR CONFIRMAR con el cliente: cono ($1.500) y agregados ($500 c/u). WhatsApp de prueba hasta confirmar.
+// Reglas confirmadas por el cliente (24-11-2026): hasta 3 sabores al mismo precio; 1 salsa incluida y la 2ª +$300;
+// 1 agregado incluido y cada adicional +$200. Frutillas con crema base $2.000 con las mismas reglas.
+// POR CONFIRMAR: precio del cono ($1.500). WhatsApp de prueba hasta confirmar.
 const fs = require('fs');
 const path = require('path');
 const SLUG = 'dulces-y-helados';
 const DIR = path.join(__dirname, '..', 'sitio', 'tiendas', SLUG);
 const WA_PRUEBA = '56941497083';   // Jonathan (Brote Digital). El del cliente es 56978953024: cambiar cuando confirme.
-const PRECIO_AGREGADO = 500;        // por confirmar
+const SALSA_EXTRA = 300, AGREGADO_EXTRA = 200;
 
 const logo = (bg, fg) => `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="${bg}"/><path d="M22 30 L32 56 L42 30 Z" fill="#f4c886"/><path d="M24 33 l14 6 M26 39 l10 4 M40 33 l-14 6 M38 39 l-10 4" stroke="#c98436" stroke-width="1.5"/><circle cx="32" cy="24" r="12" fill="${fg}"/><circle cx="25" cy="29" r="5" fill="${fg}"/><circle cx="39" cy="29" r="5" fill="${fg}"/><circle cx="32" cy="30" r="5" fill="${fg}"/><path d="M27 18 q3 -3 7 -2" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="32" cy="11" r="3.2" fill="#e2304d"/></svg>`;
 
 const sabores = {
-  id: 'sabor', titulo: 'Elige tu sabor', corto: 'Sabor', tipo: 'sabor', min: 1, max: 1,
+  id: 'sabor', titulo: 'Elige tu sabor', corto: 'Sabor', tipo: 'sabor', min: 1, max: 3, ayuda: 'Hasta 3, mismo precio',
   opciones: [{ id: 'chocolate', nombre: 'Chocolate' }, { id: 'vainilla', nombre: 'Vainilla' }, { id: 'frutilla', nombre: 'Frutilla' }]
 };
 const salsas = (inicial) => ({
-  id: 'salsa', titulo: 'Elige tu salsa', corto: 'Salsa', tipo: 'salsa', min: 0, max: 2, ayuda: 'Incluida: una, las dos o sin salsa',
+  id: 'salsa', titulo: 'Elige tu salsa', corto: 'Salsa', tipo: 'salsa', min: 0, max: 2, incluidas: 1, precioExtra: SALSA_EXTRA, ayuda: '1 incluida, la 2ª +$300',
   opciones: [{ id: 'manjar', nombre: 'Manjar' }, { id: 'chocolate', nombre: 'Chocolate' }], inicial: inicial || []
 });
 const agregados = (ids) => {
@@ -26,7 +28,7 @@ const agregados = (ids) => {
     chubis: { id: 'chubis', nombre: 'Chubis' },
     'chispas-colores': { id: 'chispas-colores', nombre: 'Chispas de colores' }
   };
-  return { id: 'agregados', titulo: 'Agregados', corto: 'Agregados', tipo: 'agregado', min: 0, max: ids.length, opciones: ids.map(i => Object.assign({ precio: PRECIO_AGREGADO }, todos[i])) };
+  return { id: 'agregados', titulo: 'Agregados', corto: 'Agregados', tipo: 'agregado', min: 0, max: ids.length, incluidas: 1, precioExtra: AGREGADO_EXTRA, ayuda: '1 incluido, cada extra +$200', opciones: ids.map(i => todos[i]) };
 };
 const AGREGADOS_HELADO = ['crema', 'chispas-chocolate', 'oreo', 'chubis', 'chispas-colores'];
 
@@ -43,7 +45,7 @@ const t = {
   },
   estructura: { portada: 'dividido', tarjetas: 'tarjeta', columnas: { movil: 2, escritorio: 4 }, descripcion: true },
   banner: {
-    titulo: 'Dulces, helados y más', texto: '¡Endulza tu día! Arma tu helado a tu gusto, elige salsa y agregados, y pídelo por WhatsApp para retirar o recibir en casa.',
+    titulo: 'Dulces, helados y más', texto: '¡Endulza tu día! Arma tu helado con hasta 3 sabores, salsa y agregados, y pídelo por WhatsApp para retirar o recibir en casa.',
     boton: 'Armar mi helado',
     imagen: { arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['oreo', 'chispas-colores', 'chispas-chocolate'], fondo: '#ffbfd3' }
   },
@@ -57,24 +59,24 @@ const t = {
   productos: [
     {
       id: 'helado-vaso', nombre: 'Helado en vaso', categoria: 'helados', precio: 2000, etiqueta: 'Arma el tuyo',
-      descripcion: 'Frutilla, vainilla o chocolate, con salsa de manjar o chocolate.',
-      detalle: 'Elige tu sabor, tu salsa y los agregados que quieras. Mira cómo queda tu helado antes de pedirlo.',
+      descripcion: 'Hasta 3 sabores, con salsa y un agregado incluidos.',
+      detalle: 'Elige hasta 3 sabores por el mismo precio. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.',
       imagenes: [{ arte: 'helado', base: 'vaso', sabores: ['frutilla'], salsas: ['chocolate'], fondo: '#ffc8d9' }],
-      armador: { base: 'vaso', pista: 'Toca un sabor para llenar tu vaso', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
+      armador: { base: 'vaso', pista: 'Toca uno, dos o tres sabores', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
     },
     {
       id: 'helado-cono', nombre: 'Helado en cono', categoria: 'helados', precio: 1500,
-      descripcion: 'Una bola en cono de galleta, con la salsa que quieras.',
-      detalle: 'Elige tu sabor, tu salsa y los agregados. Precio por confirmar.',
+      descripcion: 'Cono de galleta con salsa y un agregado incluidos.',
+      detalle: 'Elige hasta 3 sabores. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200. Precio por confirmar.',
       imagenes: [{ arte: 'helado', base: 'cono', sabores: ['chocolate'], salsas: ['manjar'], agregados: ['chubis'], fondo: '#cfe7ff' }],
       armador: { base: 'cono', pista: 'Toca un sabor para tu cono', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
     },
     {
       id: 'frutillas-crema', nombre: 'Frutillas con crema', categoria: 'frutillas', precio: 2000, etiqueta: 'Favorito',
-      descripcion: 'Frutillas frescas con crema y salsa de manjar y chocolate.',
-      detalle: 'Viene con salsa de manjar y chocolate: deja las dos o quita una. Súmale Chubis, Oreo o chispas de colores.',
+      descripcion: 'Frutillas frescas con crema, con salsa y un agregado incluidos.',
+      detalle: 'Base de frutillas con crema. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.',
       imagenes: [{ arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['chispas-colores'], fondo: '#ffd6c2' }],
-      armador: { base: 'vaso', relleno: 'frutillas', pasos: [salsas(['manjar', 'chocolate']), agregados(['chubis', 'oreo', 'chispas-colores'])] }
+      armador: { base: 'vaso', relleno: 'frutillas', pasos: [salsas(), agregados(['chubis', 'oreo', 'chispas-colores'])] }
     },
     { id: 'mani-chocolate', nombre: 'Maní con chocolate 100 g', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 gramos.', imagenes: [{ arte: 'bolsita', contenido: 'mani-chocolate', etiqueta: 'Maní con\nchocolate', fondo: '#ffe2c4' }] },
     { id: 'chubis-bolsa', nombre: 'Chubis 100 g', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 gramos.', imagenes: [{ arte: 'bolsita', contenido: 'chubis', etiqueta: 'Chubis', fondo: '#d9ecff' }] },

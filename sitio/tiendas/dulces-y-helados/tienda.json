@@ -51,7 +51,7 @@
   },
   "banner": {
     "titulo": "Dulces, helados y más",
-    "texto": "¡Endulza tu día! Arma tu helado a tu gusto, elige salsa y agregados, y pídelo por WhatsApp para retirar o recibir en casa.",
+    "texto": "¡Endulza tu día! Arma tu helado con hasta 3 sabores, salsa y agregados, y pídelo por WhatsApp para retirar o recibir en casa.",
     "boton": "Armar mi helado",
     "imagen": {
       "arte": "helado",
@@ -112,8 +112,8 @@
       "categoria": "helados",
       "precio": 2000,
       "etiqueta": "Arma el tuyo",
-      "descripcion": "Frutilla, vainilla o chocolate, con salsa de manjar o chocolate.",
-      "detalle": "Elige tu sabor, tu salsa y los agregados que quieras. Mira cómo queda tu helado antes de pedirlo.",
+      "descripcion": "Hasta 3 sabores, con salsa y un agregado incluidos.",
+      "detalle": "Elige hasta 3 sabores por el mismo precio. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.",
       "imagenes": [
         {
           "arte": "helado",
@@ -129,7 +129,7 @@
       ],
       "armador": {
         "base": "vaso",
-        "pista": "Toca un sabor para llenar tu vaso",
+        "pista": "Toca uno, dos o tres sabores",
         "pasos": [
           {
             "id": "sabor",
@@ -137,7 +137,8 @@
             "corto": "Sabor",
             "tipo": "sabor",
             "min": 1,
-            "max": 1,
+            "max": 3,
+            "ayuda": "Hasta 3, mismo precio",
             "opciones": [
               {
                 "id": "chocolate",
@@ -160,7 +161,9 @@
             "tipo": "salsa",
             "min": 0,
             "max": 2,
-            "ayuda": "Incluida: una, las dos o sin salsa",
+            "incluidas": 1,
+            "precioExtra": 300,
+            "ayuda": "1 incluida, la 2ª +$300",
             "opciones": [
               {
                 "id": "manjar",
@@ -180,29 +183,27 @@
             "tipo": "agregado",
             "min": 0,
             "max": 5,
+            "incluidas": 1,
+            "precioExtra": 200,
+            "ayuda": "1 incluido, cada extra +$200",
             "opciones": [
               {
-                "precio": 500,
                 "id": "crema",
                 "nombre": "Crema"
               },
               {
-                "precio": 500,
                 "id": "chispas-chocolate",
                 "nombre": "Trocitos de chocolate"
               },
               {
-                "precio": 500,
                 "id": "oreo",
                 "nombre": "Galleta Oreo"
               },
               {
-                "precio": 500,
                 "id": "chubis",
                 "nombre": "Chubis"
               },
               {
-                "precio": 500,
                 "id": "chispas-colores",
                 "nombre": "Chispas de colores"
               }
@@ -216,8 +217,8 @@
       "nombre": "Helado en cono",
       "categoria": "helados",
       "precio": 1500,
-      "descripcion": "Una bola en cono de galleta, con la salsa que quieras.",
-      "detalle": "Elige tu sabor, tu salsa y los agregados. Precio por confirmar.",
+      "descripcion": "Cono de galleta con salsa y un agregado incluidos.",
+      "detalle": "Elige hasta 3 sabores. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200. Precio por confirmar.",
       "imagenes": [
         {
           "arte": "helado",
@@ -244,7 +245,8 @@
             "corto": "Sabor",
             "tipo": "sabor",
             "min": 1,
-            "max": 1,
+            "max": 3,
+            "ayuda": "Hasta 3, mismo precio",
             "opciones": [
               {
                 "id": "chocolate",
@@ -267,7 +269,9 @@
             "tipo": "salsa",
             "min": 0,
             "max": 2,
-            "ayuda": "Incluida: una, las dos o sin salsa",
+            "incluidas": 1,
+            "precioExtra": 300,
+            "ayuda": "1 incluida, la 2ª +$300",
             "opciones": [
               {
                 "id": "manjar",
@@ -287,29 +291,27 @@
             "tipo": "agregado",
             "min": 0,
             "max": 5,
+            "incluidas": 1,
+            "precioExtra": 200,
+            "ayuda": "1 incluido, cada extra +$200",
             "opciones": [
               {
-                "precio": 500,
                 "id": "crema",
                 "nombre": "Crema"
               },
               {
-                "precio": 500,
                 "id": "chispas-chocolate",
                 "nombre": "Trocitos de chocolate"
               },
               {
-                "precio": 500,
                 "id": "oreo",
                 "nombre": "Galleta Oreo"
               },
               {
-                "precio": 500,
                 "id": "chubis",
                 "nombre": "Chubis"
               },
               {
-                "precio": 500,
                 "id": "chispas-colores",
                 "nombre": "Chispas de colores"
               }
@@ -324,8 +326,8 @@
       "categoria": "frutillas",
       "precio": 2000,
       "etiqueta": "Favorito",
-      "descripcion": "Frutillas frescas con crema y salsa de manjar y chocolate.",
-      "detalle": "Viene con salsa de manjar y chocolate: deja las dos o quita una. Súmale Chubis, Oreo o chispas de colores.",
+      "descripcion": "Frutillas frescas con crema, con salsa y un agregado incluidos.",
+      "detalle": "Base de frutillas con crema. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.",
       "imagenes": [
         {
           "arte": "helado",
@@ -352,7 +354,9 @@
             "tipo": "salsa",
             "min": 0,
             "max": 2,
-            "ayuda": "Incluida: una, las dos o sin salsa",
+            "incluidas": 1,
+            "precioExtra": 300,
+            "ayuda": "1 incluida, la 2ª +$300",
             "opciones": [
               {
                 "id": "manjar",
@@ -363,10 +367,7 @@
                 "nombre": "Chocolate"
               }
             ],
-            "inicial": [
-              "manjar",
-              "chocolate"
-            ]
+            "inicial": []
           },
           {
             "id": "agregados",
@@ -375,19 +376,19 @@
             "tipo": "agregado",
             "min": 0,
             "max": 3,
+            "incluidas": 1,
+            "precioExtra": 200,
+            "ayuda": "1 incluido, cada extra +$200",
             "opciones": [
               {
-                "precio": 500,
                 "id": "chubis",
                 "nombre": "Chubis"
               },
               {
-                "precio": 500,
                 "id": "oreo",
                 "nombre": "Galleta Oreo"
               },
               {
-                "precio": 500,
                 "id": "chispas-colores",
                 "nombre": "Chispas de colores"
               }
