@@ -2,7 +2,7 @@ const { chromium, devices } = require('playwright');
 (async () => {
   const b = await chromium.launch();
   const errs = [];
-  for (const slug of ['vivero-raiz', 'carbon', 'cerro-alegre']) {
+  for (const slug of ['vivero-raiz', 'carbon', 'cerro-alegre', 'dulces-y-helados']) {
     for (const [nom, ctxo] of [['desk', { viewport: { width: 1280, height: 860 } }], ['movil', devices['iPhone 13']]]) {
       const c = await b.newContext(ctxo); const p = await c.newPage();
       p.on('pageerror', e => errs.push(slug + ' ' + nom + ' ' + e.message));
@@ -11,7 +11,7 @@ const { chromium, devices } = require('playwright');
       await p.screenshot({ path: `/tmp/shots/${slug}-${nom}.png` });
       await p.locator('.mas').first().click();
       await p.waitForTimeout(300);
-      if (await p.locator('.panel').count()) { await p.screenshot({ path: `/tmp/shots/${slug}-${nom}-ficha.png` }); await p.click('#add-ficha'); await p.waitForTimeout(300); }
+      if (await p.locator('.panel').count()) { await p.screenshot({ path: `/tmp/shots/${slug}-${nom}-ficha.png` }); if (await p.locator('.sel[data-paso=sabor]').count()) await p.locator('.sel[data-paso=sabor]').first().click(); await p.click('#add-ficha'); await p.waitForTimeout(300); }
       await p.click('#b-carro'); await p.waitForTimeout(300);
       await p.click('input[value=domicilio] + .op').catch(()=>{});
       await p.fill('#f-nombre', 'Ana Pérez');

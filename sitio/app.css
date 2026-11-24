@@ -258,3 +258,73 @@ main.catalogo .wrap { padding-block: 10px 130px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 .panel .ficha { flex: 1; min-height: 0; }
 @media (max-width: 700px) { .galeria .principal { aspect-ratio: 4 / 3; } .ficha .info { padding: 18px 16px 24px; } }
+
+/* ---------- Armador de helados (productos con "armador") ---------- */
+.panel-armable { width: min(1000px, calc(100% - 40px)); }
+.ficha.armable { grid-template-columns: 1.05fr 1fr; align-items: start; }
+.ficha.armable .escenario {
+  position: sticky; top: 0; align-self: start; aspect-ratio: 1; overflow: hidden; z-index: 2;
+  background:
+    radial-gradient(circle, rgba(255,255,255,.55) 1.6px, transparent 1.8px) 0 0 / 26px 26px,
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--fondo) 45%, #fff) 0%, var(--fondo) 70%, color-mix(in srgb, var(--fondo) 88%, #000) 100%);
+}
+.ficha.armable .lienzo { position: absolute; inset: 0 0 34px; }
+.ficha.armable .lienzo > svg { width: 100%; height: 100%; }
+.escenario .leyenda {
+  position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); margin: 0; max-width: calc(100% - 28px);
+  background: color-mix(in srgb, #fff 82%, transparent); color: #4a1530; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  font-size: 12.5px; font-weight: 600; padding: 6px 14px; border-radius: 999px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  box-shadow: 0 6px 18px rgba(120, 30, 70, .14);
+}
+.ficha.armable .info { gap: 14px; padding-top: 60px; padding-bottom: 0; }
+.paso { border: 1.5px solid var(--line); background: var(--surface); border-radius: calc(var(--radio) * .9); padding: 12px 12px 14px; }
+.paso.listo { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.paso-cab { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.paso-cab h3 { margin: 0; font-family: var(--font-t); font-size: 17px; font-weight: 600; flex: 1; }
+.paso-cab small { color: var(--muted); font-size: 12px; text-align: right; }
+.paso-cab .n, .paso-cab .ok { width: 26px; height: 26px; border-radius: 999px; display: grid; place-items: center; font-size: 13px; font-weight: 700; flex: none; }
+.paso-cab .n { background: var(--surface-2); color: var(--ink); }
+.paso-cab .ok { display: none; background: var(--accent); color: var(--accent-ink); }
+.paso-cab .ok svg { width: 15px; height: 15px; }
+.paso.listo .n { display: none; } .paso.listo .ok { display: grid; }
+.selectores { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px 6px; }
+.sel { background: none; border: 0; padding: 2px; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; border-radius: 16px; -webkit-tap-highlight-color: transparent; }
+.sel .muestra { position: relative; width: 68px; height: 68px; border-radius: 999px; background: var(--surface-2); display: grid; place-items: center; transition: transform .18s ease, box-shadow .18s ease; box-shadow: inset 0 0 0 2px transparent; }
+.sel .muestra > svg { width: 62px; height: 62px; }
+.sel:hover .muestra { transform: translateY(-2px); }
+.sel:active .muestra { transform: scale(.94); }
+.sel[aria-pressed="true"] .muestra { box-shadow: inset 0 0 0 3px var(--accent), 0 8px 18px color-mix(in srgb, var(--accent) 30%, transparent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+.sel .check { position: absolute; top: -2px; right: -2px; width: 22px; height: 22px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; transform: scale(0); transition: transform .2s cubic-bezier(.3, 1.6, .5, 1); border: 2px solid var(--surface); }
+.sel .check svg { width: 12px; height: 12px; }
+.sel[aria-pressed="true"] .check { transform: scale(1); }
+.sel .nom { font-size: 13px; font-weight: 600; line-height: 1.2; }
+.sel .extra { font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.sel[aria-pressed="true"] .extra { color: var(--accent); }
+.sel[disabled] { opacity: .45; cursor: not-allowed; }
+.paso.sacude { animation: sacude .45s ease; border-color: var(--accent); }
+@keyframes sacude { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+.ficha.armable .fila-add { position: sticky; bottom: 0; z-index: 2; background: var(--bg); margin: 0 -22px; padding: 12px 22px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); }
+.ficha.armable .fila-add .btn { justify-content: space-between; padding: 0 18px; }
+.ficha.armable .fila-add .btn.pendiente { opacity: .8; }
+.precio-btn { font-weight: 800; background: color-mix(in srgb, var(--accent-ink) 18%, transparent); padding: 3px 10px; border-radius: 999px; }
+.ficha.armable .secundarias { padding-bottom: 18px; }
+@media (max-width: 700px) {
+  .ficha.armable { grid-template-columns: 1fr; }
+  .ficha.armable .escenario { aspect-ratio: auto; height: min(40vh, 320px); }
+  .ficha.armable .info { padding: 16px 14px 0; }
+  .ficha.armable .fila-add { margin: 0 -14px; padding-inline: 14px; }
+  .selectores { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
+  .sel .muestra { width: 62px; height: 62px; } .sel .muestra > svg { width: 56px; height: 56px; }
+}
+
+/* Animaciones del helado: el vaso se llena, la bola cae, la salsa chorrea, los agregados llueven */
+.h-cae { animation: hCae .6s cubic-bezier(.25, 1.5, .5, 1) both; transform-box: view-box; transform-origin: 50% 60%; }
+@keyframes hCae { 0% { transform: translateY(-120px) scale(.92); opacity: 0; } 55% { opacity: 1; } 100% { transform: none; } }
+.h-llena { animation: hLlena .45s ease-out both; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes hLlena { from { transform: scaleY(0); } }
+.h-chorrea { animation: hChorrea .8s ease-out both; }
+@keyframes hChorrea { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+.h-llueve .h-pieza { animation: hPieza .5s cubic-bezier(.3, 1.4, .6, 1) both; }
+@keyframes hPieza { from { transform: translateY(-90px); opacity: 0; } 40% { opacity: 1; } }
+.h-pista { animation: hPista 1.6s ease-in-out infinite; }
+@keyframes hPista { 50% { opacity: .45; } }

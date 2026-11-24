@@ -139,6 +139,53 @@
         '<rect x="128" y="180" width="144" height="8" fill="#000" opacity=".08"/>';
     },
 
+    // Bolsita de celofán con cinta (maní, chubis, gomitas, dulces). contenido: mani-chocolate | chubis | gomitas | dulces
+    bolsita: function (s) {
+      var id = 'b' + (++uid), tipo = s.contenido || 'chubis', cinta = s.cinta || '#e3243b', semilla = 11;
+      var r = function () { semilla = (semilla * 16807) % 2147483647; return (semilla - 1) / 2147483646; };
+      var BOLSA = 'M136 150 L264 150 L278 330 Q200 346 122 330 Z';
+      var out = '<defs><clipPath id="' + id + '"><path d="' + BOLSA + '"/></clipPath></defs>';
+      out += '<g clip-path="url(#' + id + ')"><rect x="110" y="140" width="180" height="210" fill="' + (s.relleno || '#f6e7da') + '"/>';
+      var colores = ['#e53935', '#fdd835', '#1e88e5', '#43a047', '#fb8c00', '#ec407a', '#8e24aa'];
+      for (var y = 336; y > 150; y -= 15) {
+        for (var x = 118 + (y % 2) * 8; x < 286; x += 17) {
+          var px = x + (r() - 0.5) * 7, py = y + (r() - 0.5) * 6, c = colores[Math.floor(r() * colores.length)];
+          if (tipo === 'mani-chocolate') {
+            out += '<circle cx="' + px + '" cy="' + py + '" r="10" fill="#5b2f1b"/><circle cx="' + (px - 3) + '" cy="' + (py - 3.5) + '" r="3.4" fill="#a1694a" opacity=".8"/>';
+          } else if (tipo === 'gomitas') {
+            out += '<circle cx="' + px + '" cy="' + py + '" r="9.5" fill="' + c + '" opacity=".92"/><circle cx="' + px + '" cy="' + py + '" r="3.6" fill="#fff" opacity=".55"/>' +
+              '<circle cx="' + (px - 4) + '" cy="' + (py - 4) + '" r="1.3" fill="#fff"/><circle cx="' + (px + 3) + '" cy="' + (py - 5) + '" r="1" fill="#fff"/>';
+          } else if (tipo === 'dulces') {
+            var rot = Math.round(r() * 80 - 40);
+            out += '<g transform="rotate(' + rot + ' ' + px + ' ' + py + ')"><path d="M' + (px - 11) + ' ' + py + ' l-7 -6 v12 z M' + (px + 11) + ' ' + py + ' l7 -6 v12 z" fill="' + mezcla(c, 0.25) + '"/>' +
+              '<ellipse cx="' + px + '" cy="' + py + '" rx="11" ry="7.5" fill="' + c + '"/><path d="M' + (px - 4) + ' ' + (py - 7) + ' v14 M' + (px + 4) + ' ' + (py - 7) + ' v14" stroke="#fff" stroke-width="2" opacity=".75"/></g>';
+          } else {
+            out += '<ellipse cx="' + px + '" cy="' + py + '" rx="9" ry="7" fill="' + c + '" stroke="' + mezcla(c, -0.25) + '"/><ellipse cx="' + (px - 3) + '" cy="' + (py - 2.5) + '" rx="3" ry="1.6" fill="#fff" opacity=".7"/>';
+          }
+        }
+      }
+      out += '</g>';
+      out += '<path d="' + BOLSA + '" fill="#fff" opacity=".14"/>' +
+        '<path d="' + BOLSA + '" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2.4" stroke-linejoin="round"/>' +
+        '<path d="M148 166 L138 318" stroke="#fff" stroke-width="7" opacity=".45" stroke-linecap="round"/><path d="M254 170 L262 300" stroke="#fff" stroke-width="3" opacity=".4" stroke-linecap="round"/>';
+      // parte de arriba fruncida
+      out += '<path d="M142 150 C146 120 140 96 126 62 L274 62 C260 96 254 120 258 150 Z" fill="#fff" fill-opacity=".28" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>' +
+        '<path d="M160 148 L150 70 M185 148 L182 64 M213 148 L218 64 M240 148 L250 70" stroke="#fff" stroke-width="2" opacity=".55"/>';
+      // cinta y rosa
+      out += '<rect x="136" y="140" width="128" height="14" rx="7" fill="' + cinta + '"/>' +
+        '<path d="M200 146 C176 116 146 122 160 146 C146 170 176 172 200 146 Z" fill="' + cinta + '"/><path d="M200 146 C224 116 254 122 240 146 C254 170 224 172 200 146 Z" fill="' + cinta + '"/>' +
+        '<path d="M196 150 L182 190 L192 186 L198 196 Z M204 150 L218 190 L208 186 L202 196 Z" fill="' + mezcla(cinta, -0.15) + '"/>' +
+        '<circle cx="200" cy="146" r="9" fill="' + mezcla(cinta, -0.12) + '"/>' +
+        '<path d="M166 134 q12 -6 22 6 M234 134 q-12 -6 -22 6" stroke="#fff" stroke-width="2.5" opacity=".45" fill="none" stroke-linecap="round"/>';
+      // etiqueta
+      if (s.etiqueta) {
+        var lineas = String(s.etiqueta).split('\n');
+        out += '<ellipse cx="200" cy="258" rx="58" ry="' + (lineas.length > 1 ? 34 : 26) + '" fill="#fff" stroke="' + cinta + '" stroke-width="2.5"/>' +
+          '<text x="200" y="' + (lineas.length > 1 ? 252 : 266) + '" text-anchor="middle" font-family="Fredoka, Nunito, system-ui, sans-serif" font-weight="600" font-size="22" fill="#4a1530">' +
+          lineas.map(function (l, i) { return '<tspan x="200" dy="' + (i ? 24 : 0) + '">' + l.replace(/[<&>]/g, '') + '</tspan>'; }).join('') + '</text>';
+      }
+      return out;
+    },
     vela: function (s) {
       var c = s.color || '#2f5d46', a = s.acento || '#d8b77a';
       return '<path d="M200 96 c 14 18, 10 34, 0 40 c -10 -6, -14 -22, 0 -40 z" fill="#ffb347"/>' +
@@ -153,6 +200,7 @@
 
   function svg(s) {
     s = s || {};
+    if (s.arte === 'helado' && window.Helado) return window.Helado.svg(s);
     var fondo = s.fondo || '#ece7de', id = 'g' + (++uid);
     var dib = (dibujos[s.arte] || dibujos.caja)(s);
     var zoom = s.zoom ? ' transform="translate(-130 -110) scale(1.65)"' : '';

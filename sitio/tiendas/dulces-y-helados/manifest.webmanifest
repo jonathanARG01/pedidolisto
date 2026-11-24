@@ -1,0 +1,30 @@
+{
+  "name": "Dulces, Helados y Más",
+  "short_name": "Helados",
+  "description": "Helados, frutillas con crema, maní y dulces. Pide por WhatsApp.",
+  "id": "/dulces-y-helados",
+  "start_url": "/dulces-y-helados",
+  "scope": "/dulces-y-helados",
+  "display": "standalone",
+  "lang": "es-CL",
+  "background_color": "#fff0f4",
+  "theme_color": "#fff0f4",
+  "icons": [
+    {
+      "src": "/tiendas/dulces-y-helados/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/tiendas/dulces-y-helados/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/tiendas/dulces-y-helados/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
