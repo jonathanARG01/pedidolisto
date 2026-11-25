@@ -7,8 +7,8 @@
   "scope": "/dulces-y-helados",
   "display": "standalone",
   "lang": "es-CL",
-  "background_color": "#fff0f4",
-  "theme_color": "#fff0f4",
+  "background_color": "#2a0f1d",
+  "theme_color": "#2a0f1d",
   "icons": [
     {
       "src": "/tiendas/dulces-y-helados/icon-192.png",

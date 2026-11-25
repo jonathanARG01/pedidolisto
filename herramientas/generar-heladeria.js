@@ -41,7 +41,7 @@ const t = {
     whatsapp: WA_PEDIDOS, horario: 'Todo el día, todos los días'
   },
   tema: {
-    fuenteTitulos: 'Fredoka', fuenteTexto: 'Nunito', pesoTitulos: 700, trackingTitulos: '-0.01em', radio: 22, modoInicial: 'claro',
+    fuenteTitulos: 'Fredoka', fuenteTexto: 'Nunito', pesoTitulos: 700, trackingTitulos: '-0.01em', radio: 22, modoInicial: 'oscuro',
     claro: { bg: '#fff0f4', surface: '#ffffff', 'surface-2': '#ffe2ea', ink: '#4a1530', muted: '#8b5a70', line: '#f6cdd9', accent: '#e4307a', 'accent-ink': '#ffffff', wa: '#1f8f4e', 'wa-ink': '#ffffff' },
     oscuro: { bg: '#2a0f1d', surface: '#3a1729', 'surface-2': '#331324', ink: '#ffe9f1', muted: '#dcaec2', line: '#5a2843', accent: '#ff6fa5', 'accent-ink': '#2a0f1d', wa: '#25a35a', 'wa-ink': '#ffffff' }
   },
@@ -105,7 +105,7 @@ fs.writeFileSync(path.join(DIR, 'icon.svg'), logo('#e4307a', '#ffd1e1'));
 fs.writeFileSync(path.join(DIR, 'manifest.webmanifest'), JSON.stringify({
   name: t.negocio.nombre, short_name: 'Helados', description: t.negocio.bajada,
   id: '/' + SLUG, start_url: '/' + SLUG, scope: '/' + SLUG, display: 'standalone', lang: 'es-CL',
-  background_color: t.tema.claro.bg, theme_color: t.tema.claro.bg,
+  background_color: t.tema.oscuro.bg, theme_color: t.tema.oscuro.bg,
   icons: [
     { src: '/tiendas/' + SLUG + '/icon-192.png', sizes: '192x192', type: 'image/png' },
     { src: '/tiendas/' + SLUG + '/icon-512.png', sizes: '512x512', type: 'image/png' },

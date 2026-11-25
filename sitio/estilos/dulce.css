@@ -142,7 +142,8 @@
 [data-estilo="dulce"] .mas { width: 42px; height: 42px; background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #ff8a3d)); box-shadow: 0 8px 16px color-mix(in srgb, var(--accent) 35%, transparent); transition: transform .3s var(--rebote); }
 [data-estilo="dulce"] .mas:hover { transform: rotate(90deg) scale(1.08); }
 [data-estilo="dulce"] .mas:active { transform: scale(.88); }
-[data-estilo="dulce"] .etiqueta { background: #ffd23f; color: #4a1530; box-shadow: 0 4px 10px rgba(0, 0, 0, .1); top: 14px; left: 14px; animation: late 2.4s ease-in-out infinite; }
+[data-estilo="dulce"] .etiqueta { background: #ffd23f; color: #4a1530; box-shadow: 0 4px 10px rgba(0, 0, 0, .1); top: 14px; left: 14px; animation: etiq 2.4s ease-in-out infinite; }
+@keyframes etiq { 50% { transform: rotate(-3deg) scale(1.05); } }
 [data-estilo="dulce"] .corazon { top: 12px; right: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, .08); transition: transform .3s var(--rebote); }
 [data-estilo="dulce"] .corazon:active { transform: scale(.8); }
 [data-estilo="dulce"] .corazon[aria-pressed="true"] svg { animation: latido .5s var(--rebote); }

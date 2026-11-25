@@ -15,7 +15,7 @@
     "pesoTitulos": 700,
     "trackingTitulos": "-0.01em",
     "radio": 22,
-    "modoInicial": "claro",
+    "modoInicial": "oscuro",
     "claro": {
       "bg": "#fff0f4",
       "surface": "#ffffff",
