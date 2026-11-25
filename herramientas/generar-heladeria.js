@@ -78,10 +78,15 @@ const t = {
       imagenes: [{ arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['chispas-colores'], fondo: '#ffd6c2' }],
       armador: { base: 'vaso', relleno: 'frutillas', pasos: [salsas(), agregados(['chubis', 'oreo', 'chispas-colores'])] }
     },
-    { id: 'mani-chocolate', nombre: 'Maní con chocolate 100 g', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 gramos.', imagenes: [{ arte: 'bolsita', contenido: 'mani-chocolate', etiqueta: 'Maní con\nchocolate', fondo: '#ffe2c4' }] },
-    { id: 'chubis-bolsa', nombre: 'Chubis 100 g', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 gramos.', imagenes: [{ arte: 'bolsita', contenido: 'chubis', etiqueta: 'Chubis', fondo: '#d9ecff' }] },
-    { id: 'gomitas', nombre: 'Gomitas surtidas 100 g', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 gramos.', imagenes: [{ arte: 'bolsita', contenido: 'gomitas', etiqueta: 'Gomitas\nsurtidas', fondo: '#ffd9ea' }] },
-    { id: 'dulces-surtidos', nombre: 'Dulces surtidos 100 g', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 gramos.', imagenes: [{ arte: 'bolsita', contenido: 'dulces', etiqueta: 'Dulces\nsurtidos', fondo: '#e8e0ff' }] }
+    { id: 'mani-chocolate', nombre: 'Maní con chocolate', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-chocolate.webp', '/tiendas/' + SLUG + '/fotos/mani-chocolate-2.webp'] },
+    { id: 'mani-caramelizado', nombre: 'Maní caramelizado', categoria: 'dulces', precio: 1000, descripcion: 'Maní garrapiñado con caramelo. Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-caramelizado.webp'] },
+    { id: 'mani-confitado', nombre: 'Maní confitado', categoria: 'dulces', precio: 1000, descripcion: 'Maní tostado con cobertura de azúcar. Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-confitado.webp'] },
+    { id: 'mani-colores', nombre: 'Maní confitado de colores', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-colores.webp'] },
+    { id: 'mani-frambuesa', nombre: 'Maní confitado frambuesa', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-frambuesa.webp'] },
+    { id: 'mani-pasas', nombre: 'Maní con pasas', categoria: 'dulces', precio: 1000, descripcion: 'Maní tostado con pasas. Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-pasas.webp'] },
+    { id: 'chubis-bolsa', nombre: 'Chubis', categoria: 'dulces', precio: 1000, descripcion: 'Confites de chocolate de colores. Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/chubis.webp'] },
+    { id: 'gomitas', nombre: 'Gomitas ácidas', categoria: 'dulces', precio: 1000, descripcion: 'Gusanitos ácidos surtidos. Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/gomitas-acidas.webp'] },
+    { id: 'dulces-surtidos', nombre: 'Dulces surtidos', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 g.', imagenes: [{ arte: 'bolsita', contenido: 'dulces', etiqueta: 'Dulces\nsurtidos', fondo: '#e8e0ff' }] }
   ]
 };
 

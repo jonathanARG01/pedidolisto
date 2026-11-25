@@ -399,55 +399,91 @@
     },
     {
       "id": "mani-chocolate",
-      "nombre": "Maní con chocolate 100 g",
+      "nombre": "Maní con chocolate",
       "categoria": "dulces",
       "precio": 1000,
-      "descripcion": "Bolsita de 100 gramos.",
+      "descripcion": "Bolsita de 100 g.",
       "imagenes": [
-        {
-          "arte": "bolsita",
-          "contenido": "mani-chocolate",
-          "etiqueta": "Maní con\nchocolate",
-          "fondo": "#ffe2c4"
-        }
+        "/tiendas/dulces-y-helados/fotos/mani-chocolate.webp",
+        "/tiendas/dulces-y-helados/fotos/mani-chocolate-2.webp"
+      ]
+    },
+    {
+      "id": "mani-caramelizado",
+      "nombre": "Maní caramelizado",
+      "categoria": "dulces",
+      "precio": 1000,
+      "descripcion": "Maní garrapiñado con caramelo. Bolsita de 100 g.",
+      "imagenes": [
+        "/tiendas/dulces-y-helados/fotos/mani-caramelizado.webp"
+      ]
+    },
+    {
+      "id": "mani-confitado",
+      "nombre": "Maní confitado",
+      "categoria": "dulces",
+      "precio": 1000,
+      "descripcion": "Maní tostado con cobertura de azúcar. Bolsita de 100 g.",
+      "imagenes": [
+        "/tiendas/dulces-y-helados/fotos/mani-confitado.webp"
+      ]
+    },
+    {
+      "id": "mani-colores",
+      "nombre": "Maní confitado de colores",
+      "categoria": "dulces",
+      "precio": 1000,
+      "descripcion": "Bolsita de 100 g.",
+      "imagenes": [
+        "/tiendas/dulces-y-helados/fotos/mani-colores.webp"
+      ]
+    },
+    {
+      "id": "mani-frambuesa",
+      "nombre": "Maní confitado frambuesa",
+      "categoria": "dulces",
+      "precio": 1000,
+      "descripcion": "Bolsita de 100 g.",
+      "imagenes": [
+        "/tiendas/dulces-y-helados/fotos/mani-frambuesa.webp"
+      ]
+    },
+    {
+      "id": "mani-pasas",
+      "nombre": "Maní con pasas",
+      "categoria": "dulces",
+      "precio": 1000,
+      "descripcion": "Maní tostado con pasas. Bolsita de 100 g.",
+      "imagenes": [
+        "/tiendas/dulces-y-helados/fotos/mani-pasas.webp"
       ]
     },
     {
       "id": "chubis-bolsa",
-      "nombre": "Chubis 100 g",
+      "nombre": "Chubis",
       "categoria": "dulces",
       "precio": 1000,
-      "descripcion": "Bolsita de 100 gramos.",
+      "descripcion": "Confites de chocolate de colores. Bolsita de 100 g.",
       "imagenes": [
-        {
-          "arte": "bolsita",
-          "contenido": "chubis",
-          "etiqueta": "Chubis",
-          "fondo": "#d9ecff"
-        }
+        "/tiendas/dulces-y-helados/fotos/chubis.webp"
       ]
     },
     {
       "id": "gomitas",
-      "nombre": "Gomitas surtidas 100 g",
+      "nombre": "Gomitas ácidas",
       "categoria": "dulces",
       "precio": 1000,
-      "descripcion": "Bolsita de 100 gramos.",
+      "descripcion": "Gusanitos ácidos surtidos. Bolsita de 100 g.",
       "imagenes": [
-        {
-          "arte": "bolsita",
-          "contenido": "gomitas",
-          "etiqueta": "Gomitas\nsurtidas",
-          "fondo": "#ffd9ea"
-        }
+        "/tiendas/dulces-y-helados/fotos/gomitas-acidas.webp"
       ]
     },
     {
       "id": "dulces-surtidos",
-      "nombre": "Dulces surtidos 100 g",
+      "nombre": "Dulces surtidos",
       "categoria": "dulces",
       "precio": 1000,
-      "descripcion": "Bolsita de 100 gramos.",
+      "descripcion": "Bolsita de 100 g.",
       "imagenes": [
         {
           "arte": "bolsita",
