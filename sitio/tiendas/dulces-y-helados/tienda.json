@@ -495,21 +495,6 @@
       "imagenes": [
         "/tiendas/dulces-y-helados/fotos/gomitas-acidas.webp"
       ]
-    },
-    {
-      "id": "dulces-surtidos",
-      "nombre": "Dulces surtidos",
-      "categoria": "dulces",
-      "precio": 1000,
-      "descripcion": "Bolsita de 100 g.",
-      "imagenes": [
-        {
-          "arte": "bolsita",
-          "contenido": "dulces",
-          "etiqueta": "Dulces\nsurtidos",
-          "fondo": "#e8e0ff"
-        }
-      ]
     }
   ]
 }
