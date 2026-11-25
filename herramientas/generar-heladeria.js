@@ -57,9 +57,9 @@ const t = {
   entrega: {
     retiro: { activo: true, lugar: 'El Vergel 1950', direccion: 'El Vergel 1950, Cerro La Cruz', direccionMapa: 'El Vergel 1950, Cerro La Cruz, Chile', horario: 'Todo el día, todos los días' },
     domicilio: {
-      activo: true, etiquetaZona: 'Sector', resumen: '$500, del paradero 9 a la Media Luna',
+      activo: true, etiquetaZona: 'Sector', resumen: '$1.000, del paradero 9 a la Media Luna',
       nota: 'Despachamos desde el paradero 9 hasta la Media Luna.',
-      comunas: [{ nombre: 'Del paradero 9 a la Media Luna', costo: 500 }]
+      comunas: [{ nombre: 'Del paradero 9 a la Media Luna', costo: 1000 }]
     }
   },
   pago: 'Pago por transferencia. Envía el comprobante por WhatsApp.',

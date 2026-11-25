@@ -90,12 +90,12 @@
     "domicilio": {
       "activo": true,
       "etiquetaZona": "Sector",
-      "resumen": "$500, del paradero 9 a la Media Luna",
+      "resumen": "$1.000, del paradero 9 a la Media Luna",
       "nota": "Despachamos desde el paradero 9 hasta la Media Luna.",
       "comunas": [
         {
           "nombre": "Del paradero 9 a la Media Luna",
-          "costo": 500
+          "costo": 1000
         }
       ]
     }
