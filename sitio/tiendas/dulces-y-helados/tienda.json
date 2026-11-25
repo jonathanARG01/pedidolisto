@@ -84,6 +84,7 @@
       "activo": true,
       "lugar": "El Vergel 1950",
       "direccion": "El Vergel 1950, Cerro La Cruz",
+      "direccionMapa": "El Vergel 1950, Cerro La Cruz, Chile",
       "horario": "Todo el día, todos los días"
     },
     "domicilio": {

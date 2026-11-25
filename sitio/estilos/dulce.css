@@ -209,3 +209,4 @@
 [data-estilo="dulce"] .pie-pro .pie-dev .btn-wa { box-shadow: 0 10px 22px color-mix(in srgb, var(--wa) 35%, transparent); }
 [data-estilo="dulce"] .pie-pro .pie-final { border-top-color: color-mix(in srgb, var(--accent) 25%, transparent); }
 [data-estilo="dulce"] .pie-pro .pie-negocio .marca b { font-size: 20px; }
+@media (max-width: 720px) { [data-estilo="dulce"] .info-card:not(.ancha) .ver-mapa { grid-column: 2; margin-top: 6px; } }

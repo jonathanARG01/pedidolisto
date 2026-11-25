@@ -385,3 +385,14 @@ main.catalogo .wrap { padding-block: 10px 130px; }
 .pie-dev .btn { margin-top: 6px; min-height: 44px; }
 .pie-final { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; }
 @media (max-width: 720px) { .pie-grid { grid-template-columns: 1fr; gap: 20px; } }
+
+/* Enlaces al mapa */
+.datos li.con-mapa { padding: 0; }
+.datos li.con-mapa a { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; text-decoration: none; color: inherit; border-radius: 999px; }
+.datos li.con-mapa a span { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent); text-underline-offset: 3px; }
+.datos svg.ext, .ver-mapa svg.ext { width: 13px; height: 13px; opacity: .7; }
+.ver-mapa { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; color: var(--accent); font-weight: 700; font-size: 14px; text-decoration: none; }
+.ver-mapa svg { width: 16px; height: 16px; }
+.ver-mapa:hover { text-decoration: underline; }
+.nota .ver-mapa { margin-top: 6px; font-size: 13px; }
+.comprobante dd .ver-mapa { margin: 0 0 0 6px; font-size: 13px; vertical-align: middle; }

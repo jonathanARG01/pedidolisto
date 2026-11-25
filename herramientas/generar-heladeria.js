@@ -55,7 +55,7 @@ const t = {
     burbujas: ['Desde $2.000', 'Hasta 3 sabores']
   },
   entrega: {
-    retiro: { activo: true, lugar: 'El Vergel 1950', direccion: 'El Vergel 1950, Cerro La Cruz', horario: 'Todo el día, todos los días' },
+    retiro: { activo: true, lugar: 'El Vergel 1950', direccion: 'El Vergel 1950, Cerro La Cruz', direccionMapa: 'El Vergel 1950, Cerro La Cruz, Chile', horario: 'Todo el día, todos los días' },
     domicilio: {
       activo: true, etiquetaZona: 'Sector', resumen: '$500, del paradero 9 a la Media Luna',
       nota: 'Despachamos desde el paradero 9 hasta la Media Luna.',

@@ -36,6 +36,7 @@
   }
 
   var I = {
+    externo: '<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5h5v5M19 5l-8 8M18 14v4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18V7.5A1.5 1.5 0 0 1 5.5 6H10"/></svg>',
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>',
     banco: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3.5 20.5h17"/></svg>',
     copiar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></svg>',
@@ -207,7 +208,11 @@
   function pintarInfo() {
     var s = document.getElementById('info'); if (!s) return;
     var n = T.negocio, e = T.entrega, r = e.retiro || {}, d = e.domicilio || {}, cards = [];
-    if (r.activo) cards.push('<article class="info-card"><span class="ico">' + I.pin + '</span><h3>Retiro</h3><p>' + esc(r.direccion || r.lugar || '') + '</p></article>');
+    if (r.activo) {
+      var mapa = urlMapa(r);
+      cards.push('<article class="info-card"><span class="ico">' + I.pin + '</span><h3>Retiro</h3><p>' + esc(r.direccion || r.lugar || '') + '</p>' +
+        (mapa ? '<a class="ver-mapa" href="' + esc(mapa) + '" target="_blank" rel="noopener">' + I.pin + 'Cómo llegar' + I.externo + '</a>' : '') + '</article>');
+    }
     if (n.horario || r.horario) cards.push('<article class="info-card"><span class="ico">' + I.reloj + '</span><h3>Horario</h3><p>' + esc(n.horario || r.horario) + '</p></article>');
     if (d.activo) {
       var min = Math.min.apply(null, d.comunas.map(function (c) { return c.costo; }));
@@ -262,6 +267,14 @@
     var bi = b.querySelector('#b-instalar'); if (bi) bi.onclick = instalar;
   }
 
+  // Enlace a Google Maps para la dirección de retiro (retiro.mapa o la dirección escrita).
+  function urlMapa(r) {
+    if (!r) return '';
+    if (r.mapa) return r.mapa;
+    var q = r.direccionMapa || r.direccion; if (!q) return '';
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+  }
+
   function datosNegocio() {
     var n = T.negocio, e = T.entrega, items = [];
     if (n.horario) items.push('<li>' + I.reloj + '<span>' + esc(n.horario) + '</span></li>');
@@ -269,7 +282,11 @@
       var min = Math.min.apply(null, e.domicilio.comunas.map(function (c) { return c.costo; }));
       items.push('<li>' + I.camion + '<span>Envío a domicilio desde <b>' + plata(min) + '</b>' + (e.domicilio.gratisDesde ? ', gratis sobre ' + plata(e.domicilio.gratisDesde) : '') + '</span></li>');
     }
-    if (e.retiro && e.retiro.activo) items.push('<li>' + I.tienda + '<span>Retiro en ' + esc(e.retiro.lugar || 'tienda') + '</span></li>');
+    if (e.retiro && e.retiro.activo) {
+      var m = urlMapa(e.retiro);
+      items.push(m ? '<li class="con-mapa"><a href="' + esc(m) + '" target="_blank" rel="noopener" aria-label="Abrir ' + esc(e.retiro.direccion || e.retiro.lugar) + ' en el mapa">' + I.pin + '<span>Retiro en ' + esc(e.retiro.lugar || 'tienda') + '</span>' + I.externo + '</a></li>'
+        : '<li>' + I.tienda + '<span>Retiro en ' + esc(e.retiro.lugar || 'tienda') + '</span></li>');
+    }
     if (n.instagram) items.push('<li>' + I.insta + '<a href="https://instagram.com/' + esc(n.instagram.replace('@', '')) + '" target="_blank" rel="noopener">' + esc(n.instagram) + '</a></li>');
     return '<ul class="datos">' + items.join('') + '</ul>';
   }
@@ -687,7 +704,9 @@
     var det = function () {
       var box = p.querySelector('#detalle-entrega');
       if (datos.entrega === 'retiro') {
-        box.innerHTML = '<p class="nota"><b>Retiro:</b> ' + esc(r.direccion || '') + (r.horario ? '<br><b>Horario:</b> ' + esc(r.horario) : '') + '</p>';
+        var mp = urlMapa(r);
+        box.innerHTML = '<p class="nota"><b>Retiro:</b> ' + esc(r.direccion || '') + (r.horario ? '<br><b>Horario:</b> ' + esc(r.horario) : '') +
+          (mp ? '<br><a class="ver-mapa" href="' + esc(mp) + '" target="_blank" rel="noopener">' + I.pin + 'Abrir en el mapa' + I.externo + '</a>' : '') + '</p>';
       } else {
         box.innerHTML = '<div class="campos" style="margin-top:0"><div class="campo"><label for="f-comuna">' + esc(d.etiquetaZona || 'Comuna') + '</label><select id="f-comuna"><option value="">Elige tu ' + esc((d.etiquetaZona || 'comuna').toLowerCase()) + '</option>' +
           d.comunas.map(function (c) { return '<option' + (c.nombre === datos.comuna ? ' selected' : '') + ' value="' + esc(c.nombre) + '">' + esc(c.nombre) + ' (' + plata(c.costo) + ')</option>'; }).join('') +
@@ -791,7 +810,8 @@
       '<div class="totales num" style="margin-top:12px"><div><span>Subtotal</span><span>' + plata(sub) + '</span></div>' +
       (o.e === 'd' ? '<div><span>Envío (' + esc(o.co) + ')</span><span>' + (o.env ? plata(o.env) : 'Gratis') + '</span></div>' : '') +
       '<div class="total"><span>Total</span><span>' + plata(total) + '</span></div></div>' +
-      '<dl><dt>Cliente</dt><dd>' + esc(o.c) + '</dd><dt>Entrega</dt><dd>' + (o.e === 'd' ? 'Envío a domicilio: ' + esc(o.d) + ', ' + esc(o.co) : 'Ir a retirar: ' + esc((T.entrega.retiro || {}).direccion || '')) + '</dd>' +
+      '<dl><dt>Cliente</dt><dd>' + esc(o.c) + '</dd><dt>Entrega</dt><dd>' + (o.e === 'd' ? 'Envío a domicilio: ' + esc(o.d) + ', ' + esc(o.co) : 'Ir a retirar: ' + esc((T.entrega.retiro || {}).direccion || '') +
+        (urlMapa(T.entrega.retiro) ? ' <a class="ver-mapa" href="' + esc(urlMapa(T.entrega.retiro)) + '" target="_blank" rel="noopener">' + I.pin + 'Mapa</a>' : '')) + '</dd>' +
       (o.m ? '<dt>Comentario</dt><dd>' + esc(o.m) + '</dd>' : '') + '</dl>' +
       (T.pago ? '<p class="nota" style="margin-top:16px">' + esc(T.pago) + '</p>' : '') + transferenciaHTML() + '</div></div>' +
       '<div class="comprobante-acciones"><button class="btn btn-acento" id="pdf">' + I.descargar + 'Descargar PDF</button>' +
