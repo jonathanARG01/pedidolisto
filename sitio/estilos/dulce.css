@@ -72,8 +72,8 @@
 .portada.dulce .heroe { position: relative; display: grid; place-items: center; aspect-ratio: 1; max-width: 520px; width: 100%; justify-self: center; }
 .portada.dulce .aro {
   position: absolute; inset: 6%; border-radius: 46% 54% 52% 48% / 52% 44% 56% 48%;
-  background: radial-gradient(circle at 35% 30%, #fff 0%, color-mix(in srgb, var(--accent) 30%, #fff) 45%, color-mix(in srgb, var(--accent) 55%, #ffb3cf) 100%);
-  box-shadow: 0 30px 60px color-mix(in srgb, var(--accent) 30%, transparent), inset 0 -20px 40px rgba(255, 255, 255, .35);
+  background: radial-gradient(circle at 35% 30%, #fffdf4 0%, #ffeab0 50%, #ffd77a 100%);
+  box-shadow: 0 30px 60px rgba(230, 160, 60, .32), inset 0 -20px 40px rgba(255, 255, 255, .45);
   animation: blob 9s ease-in-out infinite, aparecer .8s var(--rebote) both;
 }
 @keyframes blob {
@@ -90,6 +90,8 @@
   filter: drop-shadow(0 24px 28px rgba(90, 20, 50, .25));
   animation: flota 4.5s ease-in-out infinite, entraHeroe 1s .15s var(--rebote) both;
 }
+.portada.dulce div.flota { width: 82%; aspect-ratio: 1; }
+.portada.dulce div.flota > svg { width: 100%; height: 100%; }
 @keyframes flota { 50% { transform: translateY(-16px) rotate(-2deg); } }
 @keyframes entraHeroe { from { transform: translateY(60px) scale(.8) rotate(8deg); opacity: 0; } }
 @keyframes sombraFlota { 50% { transform: scaleX(.78); opacity: .6; } }
@@ -200,3 +202,10 @@
 @media (prefers-reduced-motion: reduce) {
   [data-estilo="dulce"] .revela { opacity: 1; transform: none; }
 }
+
+/* Pie */
+[data-estilo="dulce"] .pie-pro .pie-dev { border: 0; border-radius: 26px; box-shadow: var(--sombra-suave); transition: transform .35s var(--rebote); }
+[data-estilo="dulce"] .pie-pro .pie-dev:hover { transform: translateY(-4px); }
+[data-estilo="dulce"] .pie-pro .pie-dev .btn-wa { box-shadow: 0 10px 22px color-mix(in srgb, var(--wa) 35%, transparent); }
+[data-estilo="dulce"] .pie-pro .pie-final { border-top-color: color-mix(in srgb, var(--accent) 25%, transparent); }
+[data-estilo="dulce"] .pie-pro .pie-negocio .marca b { font-size: 20px; }

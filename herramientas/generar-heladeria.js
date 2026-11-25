@@ -51,7 +51,7 @@ const t = {
     titulo: 'Dulces, helados', resaltado: 'y más',
     texto: 'Arma tu helado con hasta 3 sabores, salsa y agregados. Pídelo por WhatsApp y retíralo o te lo llevamos.',
     boton: 'Armar mi helado', botonProducto: 'helado-vaso', boton2: 'Ver todo',
-    imagen: FOTOS + 'heroe-helado.webp',
+    imagen: { arte: 'helado', base: 'vaso', sabores: ['chocolate'], salsas: ['manjar'], agregados: ['chispas-pastel', 'perlitas'] },
     burbujas: ['Desde $2.000', 'Hasta 3 sabores']
   },
   entrega: {
@@ -63,9 +63,15 @@ const t = {
     }
   },
   pago: 'Pago por transferencia. Envía el comprobante por WhatsApp.',
+  desarrollador: {
+    nombre: 'Jonathan Rojas', marca: 'Brote Digital', whatsapp: '56941497083',
+    logoClaro: '/img/brote-oscuro.webp', logoOscuro: '/img/brote-claro.webp',
+    texto: 'Desarrollo web para negocios: catálogos, tiendas y páginas que venden. ¿Quieres una así? Hablemos.',
+    mensaje: 'Hola Jonathan, vi la página de Dulces, Helados y Más y quiero una para mi negocio.'
+  },
   transferencia: { titular: 'Elizabeth Cordero', banco: 'BancoEstado', tipo: 'Cuenta RUT', rut: '18.153.880-5', numero: '18153880' },
   mensaje: { saludo: 'Hola Dulces, Helados y Más, quiero hacer este pedido:', despedida: '¡Gracias!' },
-  categorias: [{ id: 'helados', nombre: 'Helados' }, { id: 'frutillas', nombre: 'Frutillas con crema' }, { id: 'dulces', nombre: 'Maní y dulces' }],
+  categorias: [{ id: 'helados', nombre: 'Helados' }, { id: 'dulces', nombre: 'Maní y dulces' }],
   productos: [
     {
       id: 'helado-vaso', nombre: 'Helado en vaso', categoria: 'helados', precio: 2000, etiqueta: 'Arma el tuyo',
@@ -75,7 +81,7 @@ const t = {
       armador: { base: 'vaso', fondo: '#ffc8d9', pista: 'Toca uno, dos o tres sabores', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
     },
     {
-      id: 'frutillas-crema', nombre: 'Frutillas con crema', categoria: 'frutillas', precio: 2000, etiqueta: 'Favorito',
+      id: 'frutillas-crema', nombre: 'Frutillas con crema', categoria: 'helados', precio: 2000, etiqueta: 'Favorito',
       descripcion: 'Frutillas frescas con crema, con salsa y un agregado incluidos.',
       detalle: 'Base de frutillas con crema. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.',
       imagenes: [FOTOS + 'frutillas-crema.webp'],

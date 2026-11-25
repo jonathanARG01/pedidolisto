@@ -60,7 +60,20 @@
     "boton": "Armar mi helado",
     "botonProducto": "helado-vaso",
     "boton2": "Ver todo",
-    "imagen": "/tiendas/dulces-y-helados/fotos/heroe-helado.webp",
+    "imagen": {
+      "arte": "helado",
+      "base": "vaso",
+      "sabores": [
+        "chocolate"
+      ],
+      "salsas": [
+        "manjar"
+      ],
+      "agregados": [
+        "chispas-pastel",
+        "perlitas"
+      ]
+    },
     "burbujas": [
       "Desde $2.000",
       "Hasta 3 sabores"
@@ -87,6 +100,15 @@
     }
   },
   "pago": "Pago por transferencia. Envía el comprobante por WhatsApp.",
+  "desarrollador": {
+    "nombre": "Jonathan Rojas",
+    "marca": "Brote Digital",
+    "whatsapp": "56941497083",
+    "logoClaro": "/img/brote-oscuro.webp",
+    "logoOscuro": "/img/brote-claro.webp",
+    "texto": "Desarrollo web para negocios: catálogos, tiendas y páginas que venden. ¿Quieres una así? Hablemos.",
+    "mensaje": "Hola Jonathan, vi la página de Dulces, Helados y Más y quiero una para mi negocio."
+  },
   "transferencia": {
     "titular": "Elizabeth Cordero",
     "banco": "BancoEstado",
@@ -102,10 +124,6 @@
     {
       "id": "helados",
       "nombre": "Helados"
-    },
-    {
-      "id": "frutillas",
-      "nombre": "Frutillas con crema"
     },
     {
       "id": "dulces",
@@ -223,7 +241,7 @@
     {
       "id": "frutillas-crema",
       "nombre": "Frutillas con crema",
-      "categoria": "frutillas",
+      "categoria": "helados",
       "precio": 2000,
       "etiqueta": "Favorito",
       "descripcion": "Frutillas frescas con crema, con salsa y un agregado incluidos.",

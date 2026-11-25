@@ -182,8 +182,7 @@
       '<div class="filtros" id="filtros"></div>' +
       '<main class="catalogo" id="catalogo"><div class="wrap" id="grid"></div></main>' +
       (est.info ? '<section class="info-tienda" id="info"></section>' : '') +
-      '<footer class="pie-tienda"><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + esc(T.negocio.nombre) + '. ' + esc(T.pago || '') + '</span>' +
-      '<span>Catálogo hecho con <a href="/">PedidoListo</a></span></div></footer>' +
+      pieHTML() +
       '<div class="flotante" id="flotante"></div>';
     pintarBarra(); pintarPortada(); pintarFiltros(); pintarGrid(); pintarFlotante(); pintarInfo();
   }
@@ -218,6 +217,25 @@
     s.innerHTML = '<div class="wrap"><h2>Cómo pedir</h2><ol class="como">' + pasos.map(function (x, i) { return '<li><span class="n num">' + (i + 1) + '</span>' + esc(x) + '</li>'; }).join('') + '</ol>' +
       '<div class="info-grid">' + cards.join('') + (T.transferencia ? '<article class="info-card ancha">' + transferenciaHTML('Paga por transferencia') + '</article>' : '') + '</div></div>';
     revelar(s);
+  }
+
+  // Pie de página. Con tienda.desarrollador muestra los créditos y el contacto del desarrollador en vez de "hecho con PedidoListo".
+  function telefono(n) { var s = String(n || '').replace(/\D/g, ''); return s.length === 11 && s.indexOf('569') === 0 ? '+56 9 ' + s.slice(3, 7) + ' ' + s.slice(7) : '+' + s; }
+  function pieHTML() {
+    var dev = T.desarrollador, anio = new Date().getFullYear(), n = T.negocio;
+    if (!dev) return '<footer class="pie-tienda"><div class="wrap"><span>© ' + anio + ' ' + esc(n.nombre) + '. ' + esc(T.pago || '') + '</span>' +
+      '<span>Catálogo hecho con <a href="/">PedidoListo</a></span></div></footer>';
+    var wa = 'https://wa.me/' + esc(dev.whatsapp) + '?text=' + encodeURIComponent(dev.mensaje || 'Hola ' + dev.nombre + ', vi la página de ' + n.nombre + ' y quiero una para mi negocio.');
+    var logo = (dev.logoClaro ? '<img class="logo-dev claro" src="' + esc(dev.logoClaro) + '" alt="' + esc(dev.marca || dev.nombre) + '" loading="lazy">' : '') +
+      (dev.logoOscuro ? '<img class="logo-dev oscuro" src="' + esc(dev.logoOscuro) + '" alt="' + esc(dev.marca || dev.nombre) + '" loading="lazy">' : '');
+    return '<footer class="pie-tienda pie-pro"><div class="wrap pie-grid">' +
+      '<div class="pie-negocio"><a class="marca" href="#"><span class="logo">' + logoHTML() + '</span><b>' + esc(n.nombre) + '</b></a>' +
+      '<p>' + esc(n.bajada || '') + '</p>' + datosNegocio() + '</div>' +
+      '<div class="pie-dev"><a class="dev-logo" href="' + wa + '" target="_blank" rel="noopener">' + logo + '</a>' +
+      '<p class="dev-credito">Desarrollado por <b>' + esc(dev.nombre) + '</b>' + (dev.marca ? ' - ' + esc(dev.marca) : '') + '</p>' +
+      '<p class="dev-texto">' + esc(dev.texto || '¿Quieres una página así para tu negocio? Hablemos.') + '</p>' +
+      '<a class="btn btn-wa" href="' + wa + '" target="_blank" rel="noopener">' + I.wa + esc(telefono(dev.whatsapp)) + '</a></div></div>' +
+      '<div class="wrap pie-final"><span>© ' + anio + ' ' + esc(n.nombre) + '</span><span>Desarrollado por ' + esc(dev.nombre) + (dev.marca ? ' - ' + esc(dev.marca) : '') + '</span></div></footer>';
   }
 
   function logoHTML() {
