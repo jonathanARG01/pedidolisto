@@ -328,3 +328,6 @@ main.catalogo .wrap { padding-block: 10px 130px; }
 @keyframes hPieza { from { transform: translateY(-90px); opacity: 0; } 40% { opacity: 1; } }
 .h-pista { animation: hPista 1.6s ease-in-out infinite; }
 @keyframes hPista { 50% { opacity: .45; } }
+
+.sel .muestra.foto { overflow: visible; }
+.sel .muestra.foto > img { width: 100%; height: 100%; object-fit: cover; border-radius: 999px; }

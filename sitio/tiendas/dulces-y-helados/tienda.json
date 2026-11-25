@@ -63,8 +63,8 @@
       ],
       "agregados": [
         "oreo",
-        "chispas-colores",
-        "chispas-chocolate"
+        "chispas-pastel",
+        "perlitas"
       ],
       "fondo": "#ffbfd3"
     }
@@ -182,30 +182,40 @@
             "corto": "Agregados",
             "tipo": "agregado",
             "min": 0,
-            "max": 5,
+            "max": 6,
             "incluidas": 1,
             "precioExtra": 200,
             "ayuda": "1 incluido, cada extra +$200",
             "opciones": [
               {
-                "id": "crema",
-                "nombre": "Crema"
+                "id": "perlitas",
+                "nombre": "Perlitas de chocolate",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-perlitas.webp"
               },
               {
-                "id": "chispas-chocolate",
-                "nombre": "Trocitos de chocolate"
-              },
-              {
-                "id": "oreo",
-                "nombre": "Galleta Oreo"
+                "id": "virutas",
+                "nombre": "Escamas de chocolate",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
               },
               {
                 "id": "chubis",
-                "nombre": "Chubis"
+                "nombre": "Mini Chubis",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-chubis.webp"
               },
               {
-                "id": "chispas-colores",
-                "nombre": "Chispas de colores"
+                "id": "oreo",
+                "nombre": "Galleta Oreo molida",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-oreo.webp"
+              },
+              {
+                "id": "chispas-pastel",
+                "nombre": "Chispas de pastel",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-chispas-pastel.webp"
+              },
+              {
+                "id": "granulado",
+                "nombre": "Chocolate Costa Rama",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
               }
             ]
           }
@@ -290,30 +300,40 @@
             "corto": "Agregados",
             "tipo": "agregado",
             "min": 0,
-            "max": 5,
+            "max": 6,
             "incluidas": 1,
             "precioExtra": 200,
             "ayuda": "1 incluido, cada extra +$200",
             "opciones": [
               {
-                "id": "crema",
-                "nombre": "Crema"
+                "id": "perlitas",
+                "nombre": "Perlitas de chocolate",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-perlitas.webp"
               },
               {
-                "id": "chispas-chocolate",
-                "nombre": "Trocitos de chocolate"
-              },
-              {
-                "id": "oreo",
-                "nombre": "Galleta Oreo"
+                "id": "virutas",
+                "nombre": "Escamas de chocolate",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
               },
               {
                 "id": "chubis",
-                "nombre": "Chubis"
+                "nombre": "Mini Chubis",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-chubis.webp"
               },
               {
-                "id": "chispas-colores",
-                "nombre": "Chispas de colores"
+                "id": "oreo",
+                "nombre": "Galleta Oreo molida",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-oreo.webp"
+              },
+              {
+                "id": "chispas-pastel",
+                "nombre": "Chispas de pastel",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-chispas-pastel.webp"
+              },
+              {
+                "id": "granulado",
+                "nombre": "Chocolate Costa Rama",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
               }
             ]
           }
@@ -338,7 +358,7 @@
             "chocolate"
           ],
           "agregados": [
-            "chispas-colores"
+            "chispas-pastel"
           ],
           "fondo": "#ffd6c2"
         }
@@ -375,22 +395,40 @@
             "corto": "Agregados",
             "tipo": "agregado",
             "min": 0,
-            "max": 3,
+            "max": 6,
             "incluidas": 1,
             "precioExtra": 200,
             "ayuda": "1 incluido, cada extra +$200",
             "opciones": [
               {
+                "id": "perlitas",
+                "nombre": "Perlitas de chocolate",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-perlitas.webp"
+              },
+              {
+                "id": "virutas",
+                "nombre": "Escamas de chocolate",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
+              },
+              {
                 "id": "chubis",
-                "nombre": "Chubis"
+                "nombre": "Mini Chubis",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-chubis.webp"
               },
               {
                 "id": "oreo",
-                "nombre": "Galleta Oreo"
+                "nombre": "Galleta Oreo molida",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-oreo.webp"
               },
               {
-                "id": "chispas-colores",
-                "nombre": "Chispas de colores"
+                "id": "chispas-pastel",
+                "nombre": "Chispas de pastel",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-chispas-pastel.webp"
+              },
+              {
+                "id": "granulado",
+                "nombre": "Chocolate Costa Rama",
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
               }
             ]
           }

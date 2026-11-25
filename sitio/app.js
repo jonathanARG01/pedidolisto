@@ -391,7 +391,7 @@
         '<div class="selectores ' + esc(tipoDibujo(paso)) + '" role="group" aria-label="' + esc(paso.titulo) + '">' + paso.opciones.map(function (o) {
           var no = o.disponible === false;
           return '<button type="button" class="sel" data-paso="' + esc(paso.id) + '" data-op="' + esc(o.id) + '" aria-pressed="false"' + (no ? ' disabled' : '') + '>' +
-            '<span class="muestra">' + window.Helado.muestra(tipoDibujo(paso), { id: idDibujo(o), color: o.color, dibujo: o.dibujo }) + '<span class="check">' + tick + '</span></span>' +
+            '<span class="muestra' + (o.foto ? ' foto' : '') + '">' + (o.foto ? '<img src="' + esc(o.foto) + '" alt="" loading="lazy">' : window.Helado.muestra(tipoDibujo(paso), { id: idDibujo(o), color: o.color, dibujo: o.dibujo })) + '<span class="check">' + tick + '</span></span>' +
             '<span class="nom">' + esc(o.nombre) + '</span>' + (no ? '<span class="extra">Agotado</span>' : '<span class="extra num"></span>') + '</button>';
         }).join('') + '</div></section>';
     }).join('');

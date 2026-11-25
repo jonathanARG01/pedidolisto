@@ -22,15 +22,17 @@ const salsas = (inicial) => ({
 });
 const agregados = (ids) => {
   const todos = {
-    crema: { id: 'crema', nombre: 'Crema' },
-    'chispas-chocolate': { id: 'chispas-chocolate', nombre: 'Trocitos de chocolate' },
-    oreo: { id: 'oreo', nombre: 'Galleta Oreo' },
-    chubis: { id: 'chubis', nombre: 'Chubis' },
-    'chispas-colores': { id: 'chispas-colores', nombre: 'Chispas de colores' }
+    perlitas: { id: 'perlitas', nombre: 'Perlitas de chocolate', foto: FOTOS + 'ag-perlitas.webp' },
+    virutas: { id: 'virutas', nombre: 'Escamas de chocolate', foto: FOTOS + 'ag-virutas.webp' },
+    'chispas-pastel': { id: 'chispas-pastel', nombre: 'Chispas de pastel', foto: FOTOS + 'ag-chispas-pastel.webp' },
+    oreo: { id: 'oreo', nombre: 'Galleta Oreo molida', foto: FOTOS + 'ag-oreo.webp' },
+    chubis: { id: 'chubis', nombre: 'Mini Chubis', foto: FOTOS + 'ag-chubis.webp' },
+    granulado: { id: 'granulado', nombre: 'Chocolate Costa Rama', foto: FOTOS + 'ag-granulado.webp' }
   };
   return { id: 'agregados', titulo: 'Agregados', corto: 'Agregados', tipo: 'agregado', min: 0, max: ids.length, incluidas: 1, precioExtra: AGREGADO_EXTRA, ayuda: '1 incluido, cada extra +$200', opciones: ids.map(i => todos[i]) };
 };
-const AGREGADOS_HELADO = ['crema', 'chispas-chocolate', 'oreo', 'chubis', 'chispas-colores'];
+const FOTOS = '/tiendas/' + SLUG + '/fotos/';
+const AGREGADOS_HELADO = ['perlitas', 'virutas', 'chubis', 'oreo', 'chispas-pastel', 'granulado'];
 
 const t = {
   slug: SLUG, plan: 'pro', demo: true,
@@ -47,7 +49,7 @@ const t = {
   banner: {
     titulo: 'Dulces, helados y más', texto: '¡Endulza tu día! Arma tu helado con hasta 3 sabores, salsa y agregados, y pídelo por WhatsApp para retirar o recibir en casa.',
     boton: 'Armar mi helado',
-    imagen: { arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['oreo', 'chispas-colores', 'chispas-chocolate'], fondo: '#ffbfd3' }
+    imagen: { arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['oreo', 'chispas-pastel', 'perlitas'], fondo: '#ffbfd3' }
   },
   entrega: {
     retiro: { activo: true, lugar: 'nuestro local', direccion: 'Dirección por confirmar' },
@@ -75,8 +77,8 @@ const t = {
       id: 'frutillas-crema', nombre: 'Frutillas con crema', categoria: 'frutillas', precio: 2000, etiqueta: 'Favorito',
       descripcion: 'Frutillas frescas con crema, con salsa y un agregado incluidos.',
       detalle: 'Base de frutillas con crema. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.',
-      imagenes: [{ arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['chispas-colores'], fondo: '#ffd6c2' }],
-      armador: { base: 'vaso', relleno: 'frutillas', pasos: [salsas(), agregados(['chubis', 'oreo', 'chispas-colores'])] }
+      imagenes: [{ arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['chispas-pastel'], fondo: '#ffd6c2' }],
+      armador: { base: 'vaso', relleno: 'frutillas', pasos: [salsas(), agregados(AGREGADOS_HELADO)] }
     },
     { id: 'mani-chocolate', nombre: 'Maní con chocolate', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-chocolate.webp', '/tiendas/' + SLUG + '/fotos/mani-chocolate-2.webp'] },
     { id: 'mani-caramelizado', nombre: 'Maní caramelizado', categoria: 'dulces', precio: 1000, descripcion: 'Maní garrapiñado con caramelo. Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-caramelizado.webp'] },

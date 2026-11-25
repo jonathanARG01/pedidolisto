@@ -51,6 +51,10 @@
       oreo: { dibujo: 'oreo' },
       chubis: { dibujo: 'lentejas' },
       'chispas-colores': { dibujo: 'chispas' },
+      perlitas: { dibujo: 'perlas' },
+      virutas: { dibujo: 'virutas' },
+      'chispas-pastel': { dibujo: 'chispas-pastel' },
+      granulado: { dibujo: 'granulado', color: '#3a2014' },
       mani: { dibujo: 'mani', color: '#c98d4f' },
       frutillas: { dibujo: 'frutillas' }
     }
@@ -275,12 +279,12 @@
   function piezas(c, s, anim, total) {
     var r = rng('p' + s.id), k = Math.max(0.55, c.rx / 90), out = '', tipo = s.dibujo;
     var escala = total || 1;
-    var cuantas = { trozos: 16, oreo: 22, lentejas: 11, chispas: 30, mani: 10, frutillas: 3 }[tipo] || 12;
+    var cuantas = { trozos: 16, oreo: 34, lentejas: 11, chispas: 30, mani: 10, frutillas: 3, perlas: 26, virutas: 14, 'chispas-pastel': 30, granulado: 42 }[tipo] || 12;
     cuantas = Math.max(4, Math.round(cuantas * escala));
     var pieza = function (html, i) {
       return anim ? '<g class="h-pieza" style="animation-delay:' + Math.round(i * 28 + r() * 60) + 'ms">' + html + '</g>' : html;
     };
-    if (tipo === 'oreo') {
+    if (tipo === 'oreo' && s.galletas) {
       for (var o = 0; o < (escala < 1 ? 1 : 2); o++) {
         var po = puntoEn(c, r, 0.45), cx = po[0], cy = po[1] - 10 * k, rr = 13 * k, ang = (o ? 24 : -18) + r() * 10;
         out += pieza('<g transform="rotate(' + f(ang) + ' ' + f(cx) + ' ' + f(cy) + ')">' +
@@ -303,6 +307,20 @@
         var colr = COLORES_CHUBI[i % COLORES_CHUBI.length];
         h = '<g transform="rotate(' + f(r() * 60 - 30) + ' ' + f(x) + ' ' + f(y) + ')"><ellipse cx="' + f(x) + '" cy="' + f(y) + '" rx="' + f(6.6 * k) + '" ry="' + f(5 * k) + '" fill="' + colr + '" stroke="' + mezcla(colr, -0.25) + '" stroke-width="' + f(0.8 * k) + '"/>' +
           '<ellipse cx="' + f(x - 2 * k) + '" cy="' + f(y - 1.8 * k) + '" rx="' + f(2.2 * k) + '" ry="' + f(1.2 * k) + '" fill="#fff" opacity=".7"/></g>';
+      } else if (tipo === 'perlas') {
+        var blanca = i % 2, rp = (2.6 + r() * 0.8) * k;
+        h = '<circle cx="' + f(x) + '" cy="' + f(y) + '" r="' + f(rp) + '" fill="' + (blanca ? '#f1e6cf' : '#3b2216') + '"/><circle cx="' + f(x - rp * 0.35) + '" cy="' + f(y - rp * 0.35) + '" r="' + f(rp * 0.35) + '" fill="#fff" opacity="' + (blanca ? '.8' : '.35') + '"/>';
+      } else if (tipo === 'virutas') {
+        var cv = i % 3 === 2 ? '#f0e3c6' : '#8a5636', lv = (9 + r() * 6) * k, av = (2.6 + r() * 1.6) * k;
+        h = '<g transform="rotate(' + rot + ' ' + f(x) + ' ' + f(y) + ')"><rect x="' + f(x - lv / 2) + '" y="' + f(y - av / 2) + '" width="' + f(lv) + '" height="' + f(av) + '" rx="' + f(0.8 * k) + '" fill="' + cv + '"/>' +
+          '<path d="M' + f(x - lv / 2 + 1) + ' ' + f(y) + ' h' + f(lv - 2) + '" stroke="' + mezcla(cv, cv === '#8a5636' ? -0.3 : -0.12) + '" stroke-width="' + f(0.7 * k) + '"/></g>';
+      } else if (tipo === 'chispas-pastel') {
+        var cp = ['#f7b6cf', '#9fd3f0', '#ffffff', '#f2c6e0', '#b9e0f7', '#fbe3ec'][i % 6];
+        if (i % 5 === 0) h = '<circle cx="' + f(x) + '" cy="' + f(y) + '" r="' + f(3.4 * k) + '" fill="' + cp + '" stroke="#e7d7e2" stroke-width="' + f(0.6 * k) + '"/><circle cx="' + f(x - 1.1 * k) + '" cy="' + f(y - 1.1 * k) + '" r="' + f(1 * k) + '" fill="#fff"/>';
+        else { var Lp = 4.4 * k; h = '<path d="M' + f(x - Lp) + ' ' + f(y) + ' L' + f(x + Lp) + ' ' + f(y) + '" stroke="' + cp + '" stroke-width="' + f(2.8 * k) + '" stroke-linecap="round" transform="rotate(' + rot + ' ' + f(x) + ' ' + f(y) + ')"/>'; }
+      } else if (tipo === 'granulado') {
+        var rg = (1.4 + r() * 1.6) * k;
+        h = '<path d="M' + f(x - rg) + ' ' + f(y) + ' l' + f(rg * 0.7) + ' ' + f(-rg) + ' l' + f(rg * 1.3) + ' ' + f(rg * 0.4) + ' l' + f(-rg * 0.4) + ' ' + f(rg * 1.2) + 'z" fill="' + (i % 4 ? s.color : '#5a3322') + '"/>';
       } else if (tipo === 'chispas') {
         var colc = COLORES_CHISPA[i % COLORES_CHISPA.length], L = 4.6 * k;
         h = '<path d="M' + f(x - L) + ' ' + f(y) + ' L' + f(x + L) + ' ' + f(y) + '" stroke="' + colc + '" stroke-width="' + f(3.2 * k) + '" stroke-linecap="round" transform="rotate(' + rot + ' ' + f(x) + ' ' + f(y) + ')"/>';
