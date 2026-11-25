@@ -1,6 +1,8 @@
 # Páginas fijas (antes de la regla de tiendas).
 /alta         /alta.html          200
 /alta/gracias /alta-gracias.html  200
+/admin        /admin.html         200
+/admin/       /admin.html         200
 
 # Cada tienda vive en /<slug> y la sirve la misma app.
 /:slug        /app.html  200

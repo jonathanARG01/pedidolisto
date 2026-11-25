@@ -1,5 +1,7 @@
 [build]
   publish = "sitio"
+  # Sin TIENDA_UNICA no hace nada. En el proyecto de una sola tienda (ej. dulceshelados-cl) se define TIENDA_UNICA=<slug>.
+  command = "node herramientas/tienda-unica.js"
 
 [[headers]]
   for = "/sw.js"

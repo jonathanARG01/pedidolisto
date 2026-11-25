@@ -1,0 +1,80 @@
+rules_version = '2';
+// PedidoListo: reglas de seguridad de Firestore. Pégalas en Firebase > Firestore Database > Reglas.
+// Estructura:
+//   admins/{correo}                         -> existe = superadministrador (Brote Digital)
+//   tiendas/{slug}                          -> datos públicos de la tienda (sin productos)
+//   tiendas/{slug}/privado/acceso           -> { duenos: [correos] } (no público)
+//   tiendas/{slug}/productos/{sNNN}         -> un producto por "cupo" (s000, s001...): el plan limita los cupos
+//   tiendas/{slug}/imagenes/{sNNN-k}        -> foto comprimida (data URL); k < fotos por producto del plan
+service cloud.firestore {
+  match /databases/{db}/documents {
+
+    function logueado() { return request.auth != null && request.auth.token.email != null; }
+    function correo() { return request.auth.token.email.lower(); }
+    function esAdmin() { return logueado() && exists(/databases/$(db)/documents/admins/$(correo())); }
+    function acceso(slug) { return get(/databases/$(db)/documents/tiendas/$(slug)/privado/acceso).data; }
+    function esDueno(slug) {
+      return logueado() && exists(/databases/$(db)/documents/tiendas/$(slug)/privado/acceso) && correo() in acceso(slug).duenos;
+    }
+    function puede(slug) { return esAdmin() || esDueno(slug); }
+    function plan(slug) { return get(/databases/$(db)/documents/tiendas/$(slug)).data.plan; }
+    // Deben coincidir con sitio/planes.js
+    function lim(p) {
+      return p == 'pro' ? { 'productos': 200, 'fotos': 5, 'categorias': 20 }
+        : p == 'unico' ? { 'productos': 100, 'fotos': 3, 'categorias': 12 }
+        : { 'productos': 40, 'fotos': 1, 'categorias': 6 };
+    }
+    function cupoValido(slug, id) { return id.matches('s[0-9]{3}') && int(id[1:4]) < lim(plan(slug)).productos; }
+
+    match /admins/{email} {
+      allow read: if logueado() && correo() == email;
+      allow write: if false;
+    }
+
+    match /tiendas/{slug} {
+      allow read: if true;
+      allow create, delete: if esAdmin();
+      allow update: if esAdmin() || (
+        esDueno(slug)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['negocio', 'entrega', 'pago', 'transferencia', 'categorias', 'mensaje', 'banner', 'actualizado'])
+        && request.resource.data.categorias.size() <= lim(resource.data.plan).categorias
+      );
+
+      match /privado/{doc} {
+        allow read: if puede(slug);
+        allow write: if esAdmin();
+      }
+
+      match /productos/{id} {
+        allow read: if true;
+        allow delete: if puede(slug);
+        allow create, update: if puede(slug)
+          && cupoValido(slug, id)
+          && request.resource.data.nombre is string && request.resource.data.nombre.size() > 0 && request.resource.data.nombre.size() <= 120
+          && request.resource.data.precio is number && request.resource.data.precio >= 0
+          && (!('imagenes' in request.resource.data) || request.resource.data.imagenes.size() <= lim(plan(slug)).fotos)
+          // el armador (sabores, salsas, agregados) solo lo cambia Brote Digital
+          && (esAdmin() || (resource == null ? !('armador' in request.resource.data)
+                : request.resource.data.get('armador', null) == resource.data.get('armador', null)));
+      }
+
+      match /imagenes/{id} {
+        allow read: if true;
+        allow delete: if puede(slug);
+        allow create: if puede(slug)
+          && id.matches('s[0-9]{3}-[0-9]+')
+          && int(id.split('-')[0][1:4]) < lim(plan(slug)).productos
+          && int(id.split('-')[1]) < lim(plan(slug)).fotos
+          && request.resource.data.data is string
+          && request.resource.data.data.matches('data:image/(webp|jpeg|png);base64,.*')
+          && request.resource.data.data.size() <= 260000;
+        allow update: if false;
+      }
+    }
+
+    // Para que cada cliente encuentre sus tiendas al entrar (consulta collectionGroup "privado").
+    match /{ruta=**}/privado/{doc} {
+      allow read: if esAdmin() || (logueado() && correo() in resource.data.duenos);
+    }
+  }
+}
