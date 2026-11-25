@@ -23,16 +23,16 @@ const salsas = (inicial) => ({
 const agregados = (ids) => {
   const todos = {
     perlitas: { id: 'perlitas', nombre: 'Perlitas de chocolate', foto: FOTOS + 'ag-perlitas.webp' },
-    virutas: { id: 'virutas', nombre: 'Escamas de chocolate', foto: FOTOS + 'ag-virutas.webp' },
+    virutas: { id: 'virutas', nombre: 'Chocolate Costa Rama', foto: FOTOS + 'ag-virutas.webp' },
     'chispas-pastel': { id: 'chispas-pastel', nombre: 'Chispas de pastel', foto: FOTOS + 'ag-chispas-pastel.webp' },
     oreo: { id: 'oreo', nombre: 'Galleta Oreo molida', foto: FOTOS + 'ag-oreo.webp' },
     chubis: { id: 'chubis', nombre: 'Mini Chubis', foto: FOTOS + 'ag-chubis.webp' },
-    granulado: { id: 'granulado', nombre: 'Chocolate Costa Rama', foto: FOTOS + 'ag-granulado.webp' }
+    granulado: { id: 'granulado', nombre: 'Escamas de chocolate', foto: FOTOS + 'ag-granulado.webp' }
   };
   return { id: 'agregados', titulo: 'Agregados', corto: 'Agregados', tipo: 'agregado', min: 0, max: ids.length, incluidas: 1, precioExtra: AGREGADO_EXTRA, ayuda: '1 incluido, cada extra +$200', opciones: ids.map(i => todos[i]) };
 };
 const FOTOS = '/tiendas/' + SLUG + '/fotos/';
-const AGREGADOS_HELADO = ['perlitas', 'virutas', 'chubis', 'oreo', 'chispas-pastel', 'granulado'];
+const AGREGADOS_HELADO = ['perlitas', 'granulado', 'chubis', 'oreo', 'chispas-pastel', 'virutas'];
 
 const t = {
   slug: SLUG, plan: 'pro', demo: true,

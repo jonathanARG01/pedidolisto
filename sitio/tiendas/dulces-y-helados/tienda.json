@@ -193,9 +193,9 @@
                 "foto": "/tiendas/dulces-y-helados/fotos/ag-perlitas.webp"
               },
               {
-                "id": "virutas",
+                "id": "granulado",
                 "nombre": "Escamas de chocolate",
-                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
               },
               {
                 "id": "chubis",
@@ -213,9 +213,9 @@
                 "foto": "/tiendas/dulces-y-helados/fotos/ag-chispas-pastel.webp"
               },
               {
-                "id": "granulado",
+                "id": "virutas",
                 "nombre": "Chocolate Costa Rama",
-                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
               }
             ]
           }
@@ -311,9 +311,9 @@
                 "foto": "/tiendas/dulces-y-helados/fotos/ag-perlitas.webp"
               },
               {
-                "id": "virutas",
+                "id": "granulado",
                 "nombre": "Escamas de chocolate",
-                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
               },
               {
                 "id": "chubis",
@@ -331,9 +331,9 @@
                 "foto": "/tiendas/dulces-y-helados/fotos/ag-chispas-pastel.webp"
               },
               {
-                "id": "granulado",
+                "id": "virutas",
                 "nombre": "Chocolate Costa Rama",
-                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
               }
             ]
           }
@@ -406,9 +406,9 @@
                 "foto": "/tiendas/dulces-y-helados/fotos/ag-perlitas.webp"
               },
               {
-                "id": "virutas",
+                "id": "granulado",
                 "nombre": "Escamas de chocolate",
-                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
               },
               {
                 "id": "chubis",
@@ -426,9 +426,9 @@
                 "foto": "/tiendas/dulces-y-helados/fotos/ag-chispas-pastel.webp"
               },
               {
-                "id": "granulado",
+                "id": "virutas",
                 "nombre": "Chocolate Costa Rama",
-                "foto": "/tiendas/dulces-y-helados/fotos/ag-granulado.webp"
+                "foto": "/tiendas/dulces-y-helados/fotos/ag-virutas.webp"
               }
             ]
           }
