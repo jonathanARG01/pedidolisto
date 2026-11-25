@@ -1,11 +1,11 @@
 {
   "slug": "dulces-y-helados",
   "plan": "pro",
-  "demo": true,
+  "demo": false,
   "negocio": {
     "nombre": "Dulces, Helados y Más",
     "bajada": "Helados, frutillas con crema, maní y dulces. Pide por WhatsApp.",
-    "whatsapp": "56941497083",
+    "whatsapp": "56978953024",
     "horario": "Todo el día, todos los días",
     "logo": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"64\" height=\"64\" fill=\"#e4307a\"/><path d=\"M22 30 L32 56 L42 30 Z\" fill=\"#f4c886\"/><path d=\"M24 33 l14 6 M26 39 l10 4 M40 33 l-14 6 M38 39 l-10 4\" stroke=\"#c98436\" stroke-width=\"1.5\"/><circle cx=\"32\" cy=\"24\" r=\"12\" fill=\"#ffd1e1\"/><circle cx=\"25\" cy=\"29\" r=\"5\" fill=\"#ffd1e1\"/><circle cx=\"39\" cy=\"29\" r=\"5\" fill=\"#ffd1e1\"/><circle cx=\"32\" cy=\"30\" r=\"5\" fill=\"#ffd1e1\"/><path d=\"M27 18 q3 -3 7 -2\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"11\" r=\"3.2\" fill=\"#e2304d\"/></svg>"
   },
@@ -84,17 +84,25 @@
       "activo": true,
       "lugar": "El Vergel 1950",
       "direccion": "El Vergel 1950, Cerro La Cruz",
-      "direccionMapa": "El Vergel 1950, Cerro La Cruz, Chile",
+      "direccionMapa": "El Vergel 1950, Cerro La Cruz, Valparaíso, Chile",
       "horario": "Todo el día, todos los días"
     },
     "domicilio": {
       "activo": true,
       "etiquetaZona": "Sector",
-      "resumen": "$1.000, del paradero 9 a la Media Luna",
-      "nota": "Despachamos desde el paradero 9 hasta la Media Luna.",
+      "resumen": "$1.000 en Cerro La Cruz, El Litre y Las Cañas",
+      "nota": "Despachamos a Cerro La Cruz, Cerro El Litre y Cerro Las Cañas.",
       "comunas": [
         {
-          "nombre": "Del paradero 9 a la Media Luna",
+          "nombre": "Cerro La Cruz",
+          "costo": 1000
+        },
+        {
+          "nombre": "Cerro El Litre",
+          "costo": 1000
+        },
+        {
+          "nombre": "Cerro Las Cañas",
           "costo": 1000
         }
       ]
@@ -119,7 +127,8 @@
   },
   "mensaje": {
     "saludo": "Hola Dulces, Helados y Más, quiero hacer este pedido:",
-    "despedida": "¡Gracias!"
+    "despedida": "¡Gracias!",
+    "enlaceComprobante": false
   },
   "categorias": [
     {

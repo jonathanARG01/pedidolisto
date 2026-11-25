@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const SLUG = 'dulces-y-helados';
 const DIR = path.join(__dirname, '..', 'sitio', 'tiendas', SLUG);
-const WA_PRUEBA = '56941497083';   // Jonathan (Brote Digital). El del cliente es 56978953024: cambiar cuando confirme.
+const WA_PEDIDOS = '56978953024';  // WhatsApp de la clienta (confirmado por Jonathan el 25-11-2026).
 const SALSA_EXTRA = 300, AGREGADO_EXTRA = 200;
 
 const logo = (bg, fg) => `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="${bg}"/><path d="M22 30 L32 56 L42 30 Z" fill="#f4c886"/><path d="M24 33 l14 6 M26 39 l10 4 M40 33 l-14 6 M38 39 l-10 4" stroke="#c98436" stroke-width="1.5"/><circle cx="32" cy="24" r="12" fill="${fg}"/><circle cx="25" cy="29" r="5" fill="${fg}"/><circle cx="39" cy="29" r="5" fill="${fg}"/><circle cx="32" cy="30" r="5" fill="${fg}"/><path d="M27 18 q3 -3 7 -2" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="32" cy="11" r="3.2" fill="#e2304d"/></svg>`;
@@ -35,10 +35,10 @@ const FOTOS = '/tiendas/' + SLUG + '/fotos/';
 const AGREGADOS_HELADO = ['perlitas', 'granulado', 'chubis', 'oreo', 'chispas-pastel', 'virutas'];
 
 const t = {
-  slug: SLUG, plan: 'pro', demo: true,
+  slug: SLUG, plan: 'pro', demo: false,
   negocio: {
     nombre: 'Dulces, Helados y Más', bajada: 'Helados, frutillas con crema, maní y dulces. Pide por WhatsApp.',
-    whatsapp: WA_PRUEBA, horario: 'Todo el día, todos los días'
+    whatsapp: WA_PEDIDOS, horario: 'Todo el día, todos los días'
   },
   tema: {
     fuenteTitulos: 'Fredoka', fuenteTexto: 'Nunito', pesoTitulos: 700, trackingTitulos: '-0.01em', radio: 22, modoInicial: 'claro',
@@ -55,11 +55,11 @@ const t = {
     burbujas: ['Desde $2.000', 'Hasta 3 sabores']
   },
   entrega: {
-    retiro: { activo: true, lugar: 'El Vergel 1950', direccion: 'El Vergel 1950, Cerro La Cruz', direccionMapa: 'El Vergel 1950, Cerro La Cruz, Chile', horario: 'Todo el día, todos los días' },
+    retiro: { activo: true, lugar: 'El Vergel 1950', direccion: 'El Vergel 1950, Cerro La Cruz', direccionMapa: 'El Vergel 1950, Cerro La Cruz, Valparaíso, Chile', horario: 'Todo el día, todos los días' },
     domicilio: {
-      activo: true, etiquetaZona: 'Sector', resumen: '$1.000, del paradero 9 a la Media Luna',
-      nota: 'Despachamos desde el paradero 9 hasta la Media Luna.',
-      comunas: [{ nombre: 'Del paradero 9 a la Media Luna', costo: 1000 }]
+      activo: true, etiquetaZona: 'Sector', resumen: '$1.000 en Cerro La Cruz, El Litre y Las Cañas',
+      nota: 'Despachamos a Cerro La Cruz, Cerro El Litre y Cerro Las Cañas.',
+      comunas: [{ nombre: 'Cerro La Cruz', costo: 1000 }, { nombre: 'Cerro El Litre', costo: 1000 }, { nombre: 'Cerro Las Cañas', costo: 1000 }]
     }
   },
   pago: 'Pago por transferencia. Envía el comprobante por WhatsApp.',
@@ -70,7 +70,7 @@ const t = {
     mensaje: 'Hola Jonathan, vi la página de Dulces, Helados y Más y quiero una para mi negocio.'
   },
   transferencia: { titular: 'Elizabeth Cordero', banco: 'BancoEstado', tipo: 'Cuenta RUT', rut: '18.153.880-5', numero: '18153880' },
-  mensaje: { saludo: 'Hola Dulces, Helados y Más, quiero hacer este pedido:', despedida: '¡Gracias!' },
+  mensaje: { saludo: 'Hola Dulces, Helados y Más, quiero hacer este pedido:', despedida: '¡Gracias!', enlaceComprobante: false },
   categorias: [{ id: 'helados', nombre: 'Helados' }, { id: 'dulces', nombre: 'Maní y dulces' }],
   productos: [
     {

@@ -779,9 +779,9 @@
       (datos.entrega === 'domicilio' ? 'Envío (' + datos.comuna + '): ' + (env ? plata(env) : 'gratis') + '\n' : '') +
       '*Total: ' + plata(sub + env) + '*\n\n' +
       'Nombre: ' + datos.nombre.trim() + '\n' +
-      'Entrega: ' + (datos.entrega === 'domicilio' ? 'Envío a domicilio\nDirección: ' + datos.direccion.trim() + (T.entrega.domicilio.etiquetaZona ? '' : ', ' + datos.comuna) : 'Ir a retirar') + '\n' +
+      'Entrega: ' + (datos.entrega === 'domicilio' ? 'Envío a domicilio\nDirección: ' + datos.direccion.trim() + ', ' + datos.comuna : 'Ir a retirar') + '\n' +
       (datos.comentario.trim() ? 'Comentario: ' + datos.comentario.trim() + '\n' : '');
-    if (PRO) {
+    if (PRO && m.enlaceComprobante !== false) {
       var pack = { n: nro, f: Date.now(), c: datos.nombre.trim(), e: datos.entrega === 'domicilio' ? 'd' : 'r', co: datos.comuna, d: datos.direccion.trim(), m: datos.comentario.trim(), env: env,
         i: carrito.map(function (l) { return l.arm ? [l.id, l.qty, -1, precioLinea(l), l.arm] : [l.id, l.qty, l.opt == null ? -1 : l.opt, producto(l.id).precio]; }) };
       txt += '\nVer pedido con fotos (PDF o imagen): ' + urlBase() + '#pedido=' + b64url(JSON.stringify(pack)) + '\n';
