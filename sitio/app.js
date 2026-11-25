@@ -31,6 +31,7 @@
   function imagenes(p) { var im = p.imagenes && p.imagenes.length ? p.imagenes : [{}]; return PRO ? im : im.slice(0, 1); }
   function imagen(p, i, clase) {
     var im = imagenes(p)[i || 0];
+    if (typeof im === 'string' && im.indexOf('img:') === 0) return '<img src="' + FOTO_VACIA + '" data-fs="' + esc(im.slice(4)) + '" alt="' + esc(p.nombre) + '"' + (clase ? ' class="' + clase + '"' : '') + '>';
     if (typeof im === 'string') return '<img src="' + esc(im) + '" alt="' + esc(p.nombre) + '" loading="lazy"' + (clase ? ' class="' + clase + '"' : '') + '>';
     return window.Arte.svg(im);
   }
@@ -140,13 +141,78 @@
     });
   }
 
+  /* ---------- datos: Firebase (si está configurado) o /tiendas/<slug>/tienda.json ---------- */
+  // Lee Firestore por REST (sin SDK): las tiendas y productos son de lectura pública según firestore.rules.
+  var FS_BASE = (function () {
+    var c = window.FIREBASE_CONFIG;
+    if (!c || !c.projectId) return '';
+    return (c.firestoreRest || 'https://firestore.googleapis.com/v1') + '/projects/' + c.projectId + '/databases/(default)/documents';
+  })();
+  function fsValor(v) {
+    if (!v) return null;
+    if ('stringValue' in v) return v.stringValue;
+    if ('integerValue' in v) return Number(v.integerValue);
+    if ('doubleValue' in v) return v.doubleValue;
+    if ('booleanValue' in v) return v.booleanValue;
+    if ('nullValue' in v) return null;
+    if ('timestampValue' in v) return v.timestampValue;
+    if ('arrayValue' in v) return (v.arrayValue.values || []).map(fsValor);
+    if ('mapValue' in v) return fsObjeto(v.mapValue.fields || {});
+    return null;
+  }
+  function fsObjeto(f) { var o = {}; Object.keys(f || {}).forEach(function (k) { o[k] = fsValor(f[k]); }); return o; }
+  function cargarJSON() {
+    return fetch('/tiendas/' + SLUG + '/tienda.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); });
+  }
+  function cargarTienda() {
+    if (!FS_BASE) return cargarJSON();
+    var base = FS_BASE + '/tiendas/' + encodeURIComponent(SLUG);
+    var pedir = function (u) { return fetch(u, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }); };
+    return Promise.all([pedir(base), pedir(base + '/productos?pageSize=300')]).then(function (res) {
+      if (!res[0] || !res[0].fields) return cargarJSON();
+      var t = fsObjeto(res[0].fields);
+      t.productos = ((res[1] || {}).documents || []).map(function (d) { return fsObjeto(d.fields); })
+        .sort(function (a, b) { return (a.orden || 0) - (b.orden || 0); });
+      t.categorias = t.categorias || [];
+      return t;
+    }, cargarJSON);
+  }
+  // Fotos subidas desde el panel: se guardan en Firestore y se cargan al acercarse a la pantalla.
+  var fotosFS = {}, obsFotos = null;
+  function fotoFS(id) {
+    if (!fotosFS[id]) fotosFS[id] = fetch(FS_BASE + '/tiendas/' + encodeURIComponent(SLUG) + '/imagenes/' + encodeURIComponent(id))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { return d && d.fields && d.fields.data ? d.fields.data.stringValue : ''; })
+      .catch(function () { delete fotosFS[id]; return ''; });
+    return fotosFS[id];
+  }
+  function cargarFotoEl(img) {
+    if (img.dataset.cargada) return; img.dataset.cargada = '1';
+    fotoFS(img.dataset.fs).then(function (src) { if (src) { img.src = src; img.classList.add('lista'); } });
+  }
+  function vigilarFotos() {
+    if (!FS_BASE || !window.MutationObserver) return;
+    if ('IntersectionObserver' in window) obsFotos = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { obsFotos.unobserve(e.target); cargarFotoEl(e.target); } });
+    }, { rootMargin: '400px' });
+    var revisar = function (raiz) {
+      (raiz.querySelectorAll ? raiz.querySelectorAll('img[data-fs]:not([data-cargada])') : []).forEach(function (img) {
+        if (obsFotos) obsFotos.observe(img); else cargarFotoEl(img);
+      });
+    };
+    new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) revisar(n); }); }); })
+      .observe(document.body, { childList: true, subtree: true });
+    revisar(document.body);
+  }
+  var FOTO_VACIA = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="10" height="10" fill="#f4e6ec"/></svg>');
+
   /* ---------- carga ---------- */
   function iniciar() {
     if (!SLUG) { location.replace('/'); return; }
-    fetch('/tiendas/' + SLUG + '/tienda.json', { cache: 'no-cache' })
-      .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
+    cargarTienda()
       .then(function (t) {
-        T = t; PRO = T.plan === 'pro';
+        T = t; PRO = T.plan === 'pro' || T.plan === 'unico';
         document.title = T.negocio.nombre;
         carrito = leer('carrito', []).filter(function (l) { return producto(l.id); });
         favs = leer('favs', []);
@@ -891,5 +957,6 @@
     aplicarTema(); pintarCatalogo();
   });
 
+  vigilarFotos();
   iniciar();
 })();
