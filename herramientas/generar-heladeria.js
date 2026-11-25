@@ -2,7 +2,7 @@
 // Productos con "armador": la ficha muestra el vaso o cono vacío y se arma tocando sabores, salsas y agregados.
 // Reglas confirmadas por el cliente (24-11-2026): hasta 3 sabores al mismo precio; 1 salsa incluida y la 2ª +$300;
 // 1 agregado incluido y cada adicional +$200. Frutillas con crema base $2.000 con las mismas reglas.
-// POR CONFIRMAR: precio del cono ($1.500). WhatsApp de prueba hasta confirmar.
+// POR CONFIRMAR: WhatsApp de prueba hasta confirmar.
 const fs = require('fs');
 const path = require('path');
 const SLUG = 'dulces-y-helados';
@@ -65,13 +65,6 @@ const t = {
       detalle: 'Elige hasta 3 sabores por el mismo precio. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.',
       imagenes: [FOTOS + 'helado-vaso.webp'],
       armador: { base: 'vaso', fondo: '#ffc8d9', pista: 'Toca uno, dos o tres sabores', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
-    },
-    {
-      id: 'helado-cono', nombre: 'Helado en cono', categoria: 'helados', precio: 1500,
-      descripcion: 'Cono de galleta con salsa y un agregado incluidos.',
-      detalle: 'Elige hasta 3 sabores. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200. Precio por confirmar.',
-      imagenes: [{ arte: 'helado', base: 'cono', sabores: ['chocolate'], salsas: ['manjar'], agregados: ['chubis'], fondo: '#cfe7ff' }],
-      armador: { base: 'cono', pista: 'Toca un sabor para tu cono', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
     },
     {
       id: 'frutillas-crema', nombre: 'Frutillas con crema', categoria: 'frutillas', precio: 2000, etiqueta: 'Favorito',
