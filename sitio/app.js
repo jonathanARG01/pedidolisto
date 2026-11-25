@@ -374,14 +374,14 @@
   }
   function miniLinea(p, arm) {
     if (!arm || !p.armador || !window.Helado) return imagen(p, 0);
-    var s = armDibujo(p, arm); s.fondo = (imagenes(p)[0] || {}).fondo || '#ffe3ea';
+    var s = armDibujo(p, arm); s.fondo = p.armador.fondo || (imagenes(p)[0] || {}).fondo || '#ffe3ea';
     return window.Helado.svg(s);
   }
 
   function abrirArmador(p) {
     var a = p.armador, pasos = a.pasos || [], arm = {}, qty = 1, agotado = p.disponible === false, fav = favs.indexOf(p.id) >= 0;
     pasos.forEach(function (paso) { arm[paso.id] = (paso.inicial || []).slice(); });
-    var fondo = (imagenes(p)[0] || {}).fondo || '#ffe3ea';
+    var fondo = p.armador.fondo || (imagenes(p)[0] || {}).fondo || '#ffe3ea';
     var tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
     var htmlPasos = pasos.map(function (paso, n) {
       var max = paso.max || 1;

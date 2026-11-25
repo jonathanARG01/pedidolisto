@@ -63,8 +63,8 @@ const t = {
       id: 'helado-vaso', nombre: 'Helado en vaso', categoria: 'helados', precio: 2000, etiqueta: 'Arma el tuyo',
       descripcion: 'Hasta 3 sabores, con salsa y un agregado incluidos.',
       detalle: 'Elige hasta 3 sabores por el mismo precio. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.',
-      imagenes: [{ arte: 'helado', base: 'vaso', sabores: ['frutilla'], salsas: ['chocolate'], fondo: '#ffc8d9' }],
-      armador: { base: 'vaso', pista: 'Toca uno, dos o tres sabores', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
+      imagenes: [FOTOS + 'helado-vaso.webp'],
+      armador: { base: 'vaso', fondo: '#ffc8d9', pista: 'Toca uno, dos o tres sabores', pasos: [sabores, salsas(), agregados(AGREGADOS_HELADO)] }
     },
     {
       id: 'helado-cono', nombre: 'Helado en cono', categoria: 'helados', precio: 1500,
@@ -77,8 +77,8 @@ const t = {
       id: 'frutillas-crema', nombre: 'Frutillas con crema', categoria: 'frutillas', precio: 2000, etiqueta: 'Favorito',
       descripcion: 'Frutillas frescas con crema, con salsa y un agregado incluidos.',
       detalle: 'Base de frutillas con crema. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.',
-      imagenes: [{ arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['chispas-pastel'], fondo: '#ffd6c2' }],
-      armador: { base: 'vaso', relleno: 'frutillas', pasos: [salsas(), agregados(AGREGADOS_HELADO)] }
+      imagenes: [FOTOS + 'frutillas-crema.webp'],
+      armador: { base: 'vaso', relleno: 'frutillas', fondo: '#ffd6c2', pasos: [salsas(), agregados(AGREGADOS_HELADO)] }
     },
     { id: 'mani-chocolate', nombre: 'Maní con chocolate', categoria: 'dulces', precio: 1000, descripcion: 'Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-chocolate.webp', '/tiendas/' + SLUG + '/fotos/mani-chocolate-2.webp'] },
     { id: 'mani-caramelizado', nombre: 'Maní caramelizado', categoria: 'dulces', precio: 1000, descripcion: 'Maní garrapiñado con caramelo. Bolsita de 100 g.', imagenes: ['/tiendas/' + SLUG + '/fotos/mani-caramelizado.webp'] },

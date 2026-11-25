@@ -115,20 +115,11 @@
       "descripcion": "Hasta 3 sabores, con salsa y un agregado incluidos.",
       "detalle": "Elige hasta 3 sabores por el mismo precio. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.",
       "imagenes": [
-        {
-          "arte": "helado",
-          "base": "vaso",
-          "sabores": [
-            "frutilla"
-          ],
-          "salsas": [
-            "chocolate"
-          ],
-          "fondo": "#ffc8d9"
-        }
+        "/tiendas/dulces-y-helados/fotos/helado-vaso.webp"
       ],
       "armador": {
         "base": "vaso",
+        "fondo": "#ffc8d9",
         "pista": "Toca uno, dos o tres sabores",
         "pasos": [
           {
@@ -349,23 +340,12 @@
       "descripcion": "Frutillas frescas con crema, con salsa y un agregado incluidos.",
       "detalle": "Base de frutillas con crema. Incluye una salsa y un agregado; la segunda salsa suma $300 y cada agregado extra $200.",
       "imagenes": [
-        {
-          "arte": "helado",
-          "base": "vaso",
-          "relleno": "frutillas",
-          "salsas": [
-            "manjar",
-            "chocolate"
-          ],
-          "agregados": [
-            "chispas-pastel"
-          ],
-          "fondo": "#ffd6c2"
-        }
+        "/tiendas/dulces-y-helados/fotos/frutillas-crema.webp"
       ],
       "armador": {
         "base": "vaso",
         "relleno": "frutillas",
+        "fondo": "#ffd6c2",
         "pasos": [
           {
             "id": "salsa",
