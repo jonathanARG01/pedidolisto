@@ -331,3 +331,39 @@ main.catalogo .wrap { padding-block: 10px 130px; }
 
 .sel .muestra.foto { overflow: visible; }
 .sel .muestra.foto > img { width: 100%; height: 100%; object-fit: cover; border-radius: 999px; }
+
+/* ---------- Datos de transferencia ---------- */
+.transferencia { border: 1.5px dashed color-mix(in srgb, var(--accent) 45%, var(--line)); background: var(--surface); border-radius: 16px; padding: 14px; display: grid; gap: 10px; }
+.transferencia .tr-cab { display: flex; align-items: center; gap: 8px; }
+.transferencia .tr-cab svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
+.transferencia dl { margin: 0; display: grid; gap: 4px; font-size: 14px; }
+.transferencia dl div { display: flex; justify-content: space-between; gap: 12px; }
+.transferencia dt { color: var(--muted); }
+.transferencia dd { margin: 0; font-weight: 700; text-align: right; }
+.btn-copiar { min-height: 40px; font-size: 14px; }
+.btn-copiar.copiado { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.comprobante .transferencia { margin-top: 12px; }
+.comprobante .transferencia dl { grid-template-columns: 1fr; gap: 4px; margin: 0; }
+.comprobante .transferencia dd { font-weight: 700; }
+@media print { .btn-copiar { display: none; } }
+
+/* ---------- Sección de información (estructura.info) ---------- */
+.info-tienda { padding: 10px 0 30px; }
+.info-tienda h2 { font-family: var(--font-t); font-weight: var(--peso-t, 600); font-size: 24px; margin: 0 0 14px; }
+.como { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.como li { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radio); padding: 12px 14px; font-weight: 600; font-size: 14px; line-height: 1.3; }
+.como .n { width: 32px; height: 32px; flex: none; border-radius: 999px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 800; }
+.info-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.info-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radio); padding: 16px; }
+.info-card .ico { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: var(--surface-2); color: var(--accent); margin-bottom: 10px; }
+.info-card .ico svg { width: 22px; height: 22px; }
+.info-card h3 { margin: 0 0 4px; font-family: var(--font-t); font-size: 18px; font-weight: 600; }
+.info-card p { margin: 0; color: var(--muted); font-size: 14px; }
+.info-card.ancha { grid-column: 1 / -1; padding: 0; border: 0; background: none; }
+.info-card.ancha .transferencia { padding: 18px; }
+@media (min-width: 720px) { .info-card.ancha .transferencia { grid-template-columns: 1fr 1.4fr auto; align-items: center; gap: 18px; } .info-card.ancha .transferencia dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 22px; } }
+@media (max-width: 720px) { .como { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+
+.btn-suave { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.icono.salta { animation: salta .5s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes salta { 30% { transform: scale(1.25) rotate(-8deg); } 60% { transform: scale(.92); } }

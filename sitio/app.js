@@ -36,6 +36,10 @@
   }
 
   var I = {
+    pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>',
+    banco: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3.5 20.5h17"/></svg>',
+    copiar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></svg>',
+    flecha: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
     carro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>',
     mas: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
     lupa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
@@ -104,6 +108,37 @@
     aplicarTema(); pintarBarra();
   }
 
+  // Estilo decorativo opcional por tienda (estructura.estilo): agrega /estilos/<estilo>.css y data-estilo en <html>.
+  function cargarEstilo(listo) {
+    var est = (T.estructura || {}).estilo;
+    if (!est || !/^[a-z0-9-]+$/.test(est)) { listo(); return; }
+    document.documentElement.dataset.estilo = est;
+    var hecho = false, fin = function () { if (!hecho) { hecho = true; listo(); } };
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/estilos/' + est + '.css';
+    l.onload = fin; l.onerror = fin; document.head.appendChild(l);
+    setTimeout(fin, 1500);
+  }
+  var ESTILO = function () { return !!(T && (T.estructura || {}).estilo); };
+
+  // Aparición suave al hacer scroll (solo tiendas con estilo decorativo).
+  var observador = null;
+  function revelar(raiz) {
+    if (!ESTILO() || !raiz) return;
+    var els = raiz.querySelectorAll('.card, .seccion-titulo, .info-card, .como li, .info-tienda h2');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('visto'); }); return; }
+    if (!observador) observador = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visto'); observador.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+    var fila = 0, prev = null;
+    els.forEach(function (e) {
+      if (e.classList.contains('visto')) return;
+      e.classList.add('revela');
+      fila = e.parentNode === prev ? fila + 1 : 0; prev = e.parentNode;
+      e.style.setProperty('--retraso', Math.min(fila, 6) * 70 + 'ms');
+      observador.observe(e);
+    });
+  }
+
   /* ---------- carga ---------- */
   function iniciar() {
     if (!SLUG) { location.replace('/'); return; }
@@ -117,8 +152,7 @@
         datos = Object.assign(datos, leer('datos', {}));
         if (!datos.entrega) datos.entrega = T.entrega.retiro && T.entrega.retiro.activo ? 'retiro' : 'domicilio';
         aplicarTema();
-        ruta();
-        window.addEventListener('hashchange', ruta);
+        cargarEstilo(function () { ruta(); window.addEventListener('hashchange', ruta); });
       })
       .catch(function () {
         $app.innerHTML = '<div class="cargando"><div style="text-align:center;padding:24px"><b style="font-size:20px;display:block;margin-bottom:6px">No encontramos esta tienda</b>' +
@@ -147,10 +181,43 @@
       '<header class="portada ' + (est.portada || 'dividido') + '" id="portada"></header>' +
       '<div class="filtros" id="filtros"></div>' +
       '<main class="catalogo" id="catalogo"><div class="wrap" id="grid"></div></main>' +
+      (est.info ? '<section class="info-tienda" id="info"></section>' : '') +
       '<footer class="pie-tienda"><div class="wrap"><span>© ' + new Date().getFullYear() + ' ' + esc(T.negocio.nombre) + '. ' + esc(T.pago || '') + '</span>' +
       '<span>Catálogo hecho con <a href="/">PedidoListo</a></span></div></footer>' +
       '<div class="flotante" id="flotante"></div>';
-    pintarBarra(); pintarPortada(); pintarFiltros(); pintarGrid(); pintarFlotante();
+    pintarBarra(); pintarPortada(); pintarFiltros(); pintarGrid(); pintarFlotante(); pintarInfo();
+  }
+
+  // Datos de transferencia (tienda.transferencia) con botón para copiar.
+  function textoTransferencia() {
+    var tr = T.transferencia; if (!tr) return '';
+    return [tr.titular, tr.rut ? 'RUT ' + tr.rut : '', [tr.banco, tr.tipo].filter(Boolean).join(' · '), tr.numero ? 'N° de cuenta ' + tr.numero : '', tr.correo || ''].filter(Boolean).join('\n');
+  }
+  function transferenciaHTML(titulo) {
+    var tr = T.transferencia; if (!tr) return '';
+    var fila = function (k, v) { return v ? '<div><dt>' + k + '</dt><dd class="num">' + esc(v) + '</dd></div>' : ''; };
+    return '<div class="transferencia"><div class="tr-cab">' + I.banco + '<b>' + esc(titulo || 'Datos de transferencia') + '</b></div><dl>' +
+      fila('Nombre', tr.titular) + fila('RUT', tr.rut) + fila('Banco', tr.banco) + fila('Cuenta', tr.tipo) + fila('N° de cuenta', tr.numero) + fila('Correo', tr.correo) +
+      '</dl><button type="button" class="btn btn-borde btn-copiar" data-copiar-transferencia>' + I.copiar + 'Copiar datos</button></div>';
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-copiar-transferencia]');
+    if (b) { copiar(textoTransferencia(), 'Datos de transferencia copiados'); b.classList.add('copiado'); setTimeout(function () { b.classList.remove('copiado'); }, 1200); }
+  });
+
+  function pintarInfo() {
+    var s = document.getElementById('info'); if (!s) return;
+    var n = T.negocio, e = T.entrega, r = e.retiro || {}, d = e.domicilio || {}, cards = [];
+    if (r.activo) cards.push('<article class="info-card"><span class="ico">' + I.pin + '</span><h3>Retiro</h3><p>' + esc(r.direccion || r.lugar || '') + '</p></article>');
+    if (n.horario || r.horario) cards.push('<article class="info-card"><span class="ico">' + I.reloj + '</span><h3>Horario</h3><p>' + esc(n.horario || r.horario) + '</p></article>');
+    if (d.activo) {
+      var min = Math.min.apply(null, d.comunas.map(function (c) { return c.costo; }));
+      cards.push('<article class="info-card"><span class="ico">' + I.camion + '</span><h3>Despacho <span class="num">' + plata(min) + '</span></h3><p>' + esc(d.nota || d.comunas.map(function (c) { return c.nombre; }).join(', ')) + '</p></article>');
+    }
+    var pasos = ['Elige y arma lo que quieras', 'Envía tu pedido por WhatsApp', T.transferencia ? 'Paga por transferencia y listo' : 'Coordinamos el pago y la entrega'];
+    s.innerHTML = '<div class="wrap"><h2>Cómo pedir</h2><ol class="como">' + pasos.map(function (x, i) { return '<li><span class="n num">' + (i + 1) + '</span>' + esc(x) + '</li>'; }).join('') + '</ol>' +
+      '<div class="info-grid">' + cards.join('') + (T.transferencia ? '<article class="info-card ancha">' + transferenciaHTML('Paga por transferencia') + '</article>' : '') + '</div></div>';
+    revelar(s);
   }
 
   function logoHTML() {
@@ -162,6 +229,7 @@
   function pintarBarra() {
     var b = document.getElementById('barra'); if (!b) return;
     var cuenta = carrito.reduce(function (s, l) { return s + l.qty; }, 0);
+    var sube = pintarBarra.antes != null && cuenta > pintarBarra.antes; pintarBarra.antes = cuenta;
     var mostrarInstalar = (instalador || esIOS()) && !enModoApp();
     b.innerHTML = '<div class="wrap">' +
       '<a class="marca" href="#"><span class="logo">' + logoHTML() + '</span><b>' + esc(T.negocio.nombre) + '</b></a>' +
@@ -172,6 +240,7 @@
       '</div></div>';
     b.querySelector('#b-modo').onclick = cambiarModo;
     b.querySelector('#b-carro').onclick = abrirCarrito;
+    if (sube) b.querySelector('#b-carro').classList.add('salta');
     var bi = b.querySelector('#b-instalar'); if (bi) bi.onclick = instalar;
   }
 
@@ -191,6 +260,26 @@
     var h = document.getElementById('portada'), b = T.banner || {}, est = (T.estructura || {}).portada || 'dividido';
     h.className = 'portada ' + est;
     var cta = '<div class="cta"><a class="btn btn-acento" href="#catalogo">' + esc(b.boton || 'Ver productos') + '</a></div>';
+    if (est === 'dulce') {
+      var prod = b.botonProducto && producto(b.botonProducto);
+      var img = typeof b.imagen === 'string' ? '<img class="flota" src="' + esc(b.imagen) + '" alt="" fetchpriority="high">' : '<div class="flota">' + window.Arte.svg(b.imagen || {}) + '</div>';
+      var chispas = '', cols = ['#ff5c9a', '#ffd23f', '#4cc9a6', '#7aa8ff', '#b07cff', '#ff8a3d', '#ffffff'];
+      for (var i = 0; i < 18; i++) chispas += '<i style="--x:' + ((i * 37 + 11) % 100) + '%;--y:' + (18 + (i * 53) % 72) + '%;--r:' + ((i * 67) % 180) + 'deg;--c:' + cols[i % cols.length] + ';--t:' + (5 + (i % 5)) + 's;--d:-' + (i * 0.7).toFixed(1) + 's"></i>';
+      h.innerHTML = '<div class="goteo" aria-hidden="true">' + goteoSVG() + '</div><div class="chispas" aria-hidden="true">' + chispas + '</div>' +
+        '<div class="wrap"><div class="texto">' + (b.sello ? '<span class="sello">' + esc(b.sello) + '</span>' : '') +
+        '<h1>' + esc(b.titulo || T.negocio.nombre) + (b.resaltado ? ' <em>' + esc(b.resaltado) + '</em>' : '') + '</h1>' +
+        '<p class="bajada">' + esc(b.texto || T.negocio.bajada || '') + '</p>' +
+        '<div class="cta"><a class="btn btn-acento" href="' + (prod ? '#p=' + encodeURIComponent(prod.id) : '#catalogo') + '">' + esc(b.boton || 'Ver productos') + I.flecha + '</a>' +
+        (b.boton2 ? '<a class="btn btn-suave" href="#catalogo" data-ir="catalogo">' + esc(b.boton2) + '</a>' : '') + '</div>' + datosNegocio() + '</div>' +
+        '<div class="heroe"><div class="aro" aria-hidden="true"></div>' + img +
+        (b.burbujas || []).map(function (x, i) { return '<span class="burbuja-flota b' + i + '">' + esc(x) + '</span>'; }).join('') + '</div></div>' +
+        '<svg class="ola" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 240 70 480 0 720 26 C 960 52 1200 6 1440 30 V60 H0Z"/></svg>';
+      var ir = h.querySelector('[data-ir]');
+      if (ir) ir.onclick = function (ev) { ev.preventDefault(); var c = document.getElementById('filtros'); if (c) window.scrollTo({ top: c.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' }); };
+      var cta = h.querySelector('.cta .btn-acento');
+      if (!prod && cta) cta.onclick = function (ev) { ev.preventDefault(); ir && ir.onclick(ev); };
+      return;
+    }
     if (est === 'centrado') {
       h.innerHTML = '<div class="wrap"><div class="fantasma" aria-hidden="true">' + esc(b.fantasma || T.negocio.nombre) + '</div><div class="raya"></div>' +
         '<h1>' + esc(b.titulo || T.negocio.nombre) + '</h1><p class="bajada">' + esc(b.texto || T.negocio.bajada || '') + '</p>' + cta + datosNegocio() + '</div>';
@@ -201,6 +290,21 @@
       h.innerHTML = '<div class="wrap"><div><h1>' + esc(b.titulo || T.negocio.nombre) + '</h1><p class="bajada">' + esc(b.texto || T.negocio.bajada || '') + '</p>' + cta + datosNegocio() + '</div>' +
         '<div class="arte">' + arte + '</div></div>';
     }
+  }
+
+  // Banda de manjar que chorrea (portada "dulce").
+  function goteoSVG() {
+    var gotas = [[70, 70], [170, 44], [250, 92], [360, 56], [450, 80], [560, 40], [640, 98], [740, 60], [830, 84], [930, 46], [1020, 94], [1120, 58], [1210, 78], [1310, 42], [1390, 86]];
+    var d = 'M0 0H1440V24', r = 10;
+    gotas.slice().reverse().forEach(function (g) {
+      var x = g[0], L = g[1];
+      d += 'H' + (x + 22) + 'C' + (x + r) + ' 26 ' + (x + r) + ' 34 ' + (x + r) + ' ' + (L - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + (x - r) + ' ' + (L - r) + 'C' + (x - r) + ' 34 ' + (x - r) + ' 26 ' + (x - 22) + ' 24';
+    });
+    d += 'H0Z';
+    return '<svg viewBox="0 0 1440 110" preserveAspectRatio="xMidYMin slice"><defs><linearGradient id="gManjar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a95f27"/><stop offset=".55" stop-color="#cf8a4a"/><stop offset="1" stop-color="#e6ab6a"/></linearGradient></defs>' +
+      '<path d="' + d + '" fill="url(#gManjar)"/><path d="M0 9 C 300 16 600 3 900 11 S 1300 7 1440 11" stroke="rgba(255,255,255,.35)" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      gotas.map(function (g) { return '<ellipse cx="' + (g[0] - 3) + '" cy="' + (g[1] - 12) + '" rx="3" ry="6" fill="rgba(255,255,255,.4)"/>'; }).join('') +
+      gotas.filter(function (_, i) { return i % 3 === 1; }).map(function (g, i) { return '<circle class="gota" style="--d:' + i + '" cx="' + g[0] + '" cy="' + (g[1] + 2) + '" r="7" fill="#d99654"/>'; }).join('') + '</svg>';
   }
 
   function pintarFiltros() {
@@ -273,6 +377,7 @@
     });
     g.querySelectorAll('[data-fav]').forEach(function (b) { b.onclick = function () { alternarFav(b.dataset.fav); }; });
     var cf = document.getElementById('compartir-favs'); if (cf) cf.onclick = compartirFavs;
+    revelar(g);
   }
 
   function alternarFav(id) {
@@ -554,19 +659,19 @@
     var e = T.entrega, r = e.retiro || {}, d = e.domicilio || {};
     var html = '<div class="campos"><h3>¿Cómo quieres recibirlo?</h3><div class="entrega" role="radiogroup" aria-label="Forma de entrega">' +
       (r.activo ? '<label><input type="radio" name="entrega" value="retiro"' + (datos.entrega === 'retiro' ? ' checked' : '') + '><span class="op">' + I.tienda + '<b>Ir a retirar</b><small>' + esc(r.lugar || '') + '</small></span></label>' : '') +
-      (d.activo ? '<label><input type="radio" name="entrega" value="domicilio"' + (datos.entrega === 'domicilio' ? ' checked' : '') + '><span class="op">' + I.camion + '<b>Envío a domicilio</b><small>' + (d.gratisDesde ? 'Gratis sobre ' + plata(d.gratisDesde) : 'Según comuna') + '</small></span></label>' : '') +
+      (d.activo ? '<label><input type="radio" name="entrega" value="domicilio"' + (datos.entrega === 'domicilio' ? ' checked' : '') + '><span class="op">' + I.camion + '<b>Envío a domicilio</b><small>' + esc(d.resumen || (d.gratisDesde ? 'Gratis sobre ' + plata(d.gratisDesde) : 'Según comuna')) + '</small></span></label>' : '') +
       '</div>' +
       '<div id="detalle-entrega"></div>' +
       '<div class="campo"><label for="f-nombre">Tu nombre</label><input id="f-nombre" autocomplete="name" value="' + esc(datos.nombre) + '" placeholder="Nombre y apellido"></div>' +
       '<div class="campo"><label for="f-com">Comentario (opcional)</label><textarea id="f-com" placeholder="Ej: es para regalo, llamar antes de llegar">' + esc(datos.comentario) + '</textarea></div>' +
-      (T.pago ? '<p class="nota">' + esc(T.pago) + '</p>' : '') + '</div>';
+      (T.pago ? '<p class="nota">' + esc(T.pago) + '</p>' : '') + transferenciaHTML() + '</div>';
     p.querySelector('#form-datos').innerHTML = html;
     var det = function () {
       var box = p.querySelector('#detalle-entrega');
       if (datos.entrega === 'retiro') {
         box.innerHTML = '<p class="nota"><b>Retiro:</b> ' + esc(r.direccion || '') + (r.horario ? '<br><b>Horario:</b> ' + esc(r.horario) : '') + '</p>';
       } else {
-        box.innerHTML = '<div class="campos" style="margin-top:0"><div class="campo"><label for="f-comuna">Comuna</label><select id="f-comuna"><option value="">Elige tu comuna</option>' +
+        box.innerHTML = '<div class="campos" style="margin-top:0"><div class="campo"><label for="f-comuna">' + esc(d.etiquetaZona || 'Comuna') + '</label><select id="f-comuna"><option value="">Elige tu ' + esc((d.etiquetaZona || 'comuna').toLowerCase()) + '</option>' +
           d.comunas.map(function (c) { return '<option' + (c.nombre === datos.comuna ? ' selected' : '') + ' value="' + esc(c.nombre) + '">' + esc(c.nombre) + ' (' + plata(c.costo) + ')</option>'; }).join('') +
           '</select></div><div class="campo"><label for="f-dir">Dirección</label><input id="f-dir" autocomplete="street-address" value="' + esc(datos.direccion) + '" placeholder="Calle, número, depto."></div>' +
           (d.nota ? '<p class="nota">' + esc(d.nota) + '</p>' : '') + '</div>';
@@ -588,7 +693,7 @@
     var sub = subtotal(), env = costoEnvio(sub);
     var total = sub + (env || 0);
     pie.innerHTML = '<div class="totales num"><div><span>Subtotal</span><span>' + plata(sub) + '</span></div>' +
-      (datos.entrega === 'domicilio' ? '<div><span>Envío</span><span>' + (env === null ? 'Elige comuna' : env === 0 ? 'Gratis' : plata(env)) + '</span></div>' : '<div><span>Retiro</span><span>Sin costo</span></div>') +
+      (datos.entrega === 'domicilio' ? '<div><span>Envío</span><span>' + (env === null ? 'Elige ' + ((T.entrega.domicilio || {}).etiquetaZona || 'comuna').toLowerCase() : env === 0 ? 'Gratis' : plata(env)) + '</span></div>' : '<div><span>Retiro</span><span>Sin costo</span></div>') +
       '<div class="total"><span>Total</span><span>' + plata(total) + '</span></div></div>' +
       '<p class="error" id="err" hidden></p>' +
       '<div class="footer-btns"><button class="btn btn-wa" id="enviar">' + I.wa + 'Pedir por WhatsApp</button>' +
@@ -609,7 +714,7 @@
   function validar() {
     if (!datos.nombre.trim()) return 'Escribe tu nombre para enviar el pedido.';
     if (datos.entrega === 'domicilio') {
-      if (!datos.comuna) return 'Elige tu comuna para calcular el envío.';
+      if (!datos.comuna) return 'Elige tu ' + ((T.entrega.domicilio || {}).etiquetaZona || 'comuna').toLowerCase() + ' para calcular el envío.';
       if (!datos.direccion.trim()) return 'Escribe la dirección de entrega.';
     }
     return '';
@@ -637,7 +742,7 @@
       (datos.entrega === 'domicilio' ? 'Envío (' + datos.comuna + '): ' + (env ? plata(env) : 'gratis') + '\n' : '') +
       '*Total: ' + plata(sub + env) + '*\n\n' +
       'Nombre: ' + datos.nombre.trim() + '\n' +
-      'Entrega: ' + (datos.entrega === 'domicilio' ? 'Envío a domicilio\nDirección: ' + datos.direccion.trim() + ', ' + datos.comuna : 'Ir a retirar') + '\n' +
+      'Entrega: ' + (datos.entrega === 'domicilio' ? 'Envío a domicilio\nDirección: ' + datos.direccion.trim() + (T.entrega.domicilio.etiquetaZona ? '' : ', ' + datos.comuna) : 'Ir a retirar') + '\n' +
       (datos.comentario.trim() ? 'Comentario: ' + datos.comentario.trim() + '\n' : '');
     if (PRO) {
       var pack = { n: nro, f: Date.now(), c: datos.nombre.trim(), e: datos.entrega === 'domicilio' ? 'd' : 'r', co: datos.comuna, d: datos.direccion.trim(), m: datos.comentario.trim(), env: env,
@@ -670,7 +775,7 @@
       '<div class="total"><span>Total</span><span>' + plata(total) + '</span></div></div>' +
       '<dl><dt>Cliente</dt><dd>' + esc(o.c) + '</dd><dt>Entrega</dt><dd>' + (o.e === 'd' ? 'Envío a domicilio: ' + esc(o.d) + ', ' + esc(o.co) : 'Ir a retirar: ' + esc((T.entrega.retiro || {}).direccion || '')) + '</dd>' +
       (o.m ? '<dt>Comentario</dt><dd>' + esc(o.m) + '</dd>' : '') + '</dl>' +
-      (T.pago ? '<p class="nota" style="margin-top:16px">' + esc(T.pago) + '</p>' : '') + '</div></div>' +
+      (T.pago ? '<p class="nota" style="margin-top:16px">' + esc(T.pago) + '</p>' : '') + transferenciaHTML() + '</div></div>' +
       '<div class="comprobante-acciones"><button class="btn btn-acento" id="pdf">' + I.descargar + 'Descargar PDF</button>' +
       '<button class="btn btn-borde" id="img">' + I.imagen + 'Descargar imagen</button><a class="btn btn-borde" href="#">Volver al catálogo</a></div>';
     document.getElementById('pdf').onclick = function () { window.print(); };

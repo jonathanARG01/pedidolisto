@@ -1,0 +1,202 @@
+/* Estilo "dulce" (heladerías y pastelerías): portada con manjar que chorrea, helado que flota,
+   chispas de colores, tarjetas suaves y apariciones animadas. Se activa con estructura.estilo = "dulce". */
+:root[data-estilo="dulce"] {
+  --rosa-1: color-mix(in srgb, var(--accent) 22%, var(--bg));
+  --rosa-2: color-mix(in srgb, var(--accent) 10%, var(--bg));
+  --sombra-suave: 0 10px 30px color-mix(in srgb, var(--accent) 16%, transparent), 0 2px 6px color-mix(in srgb, var(--ink) 6%, transparent);
+  --rebote: cubic-bezier(.3, 1.45, .5, 1);
+}
+
+/* Barra */
+[data-estilo="dulce"] .barra { border-bottom: 0; box-shadow: 0 6px 24px color-mix(in srgb, var(--accent) 10%, transparent); }
+[data-estilo="dulce"] .marca .logo { border-radius: 14px; box-shadow: 0 6px 14px color-mix(in srgb, var(--accent) 35%, transparent); transition: transform .4s var(--rebote); }
+[data-estilo="dulce"] .marca:hover .logo { transform: rotate(-8deg) scale(1.06); }
+[data-estilo="dulce"] .marca b { font-weight: 700; }
+[data-estilo="dulce"] .icono { border: 0; background: var(--surface); box-shadow: var(--sombra-suave); transition: transform .2s ease; }
+[data-estilo="dulce"] .icono:hover { transform: translateY(-2px); }
+
+/* ---------- Portada ---------- */
+.portada.dulce {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: linear-gradient(160deg, var(--rosa-1) 0%, var(--rosa-2) 70%, var(--bg) 100%);
+}
+.portada.dulce .goteo { position: absolute; top: 0; left: 0; right: 0; height: clamp(60px, 9vw, 110px); z-index: 1; pointer-events: none; filter: drop-shadow(0 6px 8px rgba(120, 60, 20, .18)); }
+.portada.dulce .goteo svg { width: 100%; height: 100%; }
+.portada.dulce .goteo .gota { animation: gota 3.2s ease-in infinite; animation-delay: calc(var(--d) * .8s); transform-box: fill-box; transform-origin: center; }
+@keyframes gota { 0%, 55% { transform: translateY(0) scale(0); opacity: 0; } 62% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(140px) scale(.7); opacity: 0; } }
+
+.portada.dulce .chispas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.portada.dulce .chispas i {
+  position: absolute; left: var(--x); top: var(--y); width: 16px; height: 5px; border-radius: 4px; background: var(--c);
+  transform: rotate(var(--r)); opacity: .75; box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+  animation: chispa var(--t) ease-in-out infinite; animation-delay: var(--d);
+}
+.portada.dulce .chispas i:nth-child(3n) { width: 9px; height: 9px; border-radius: 50%; }
+@keyframes chispa { 50% { transform: translateY(-14px) rotate(calc(var(--r) + 40deg)); } }
+
+.portada.dulce .wrap { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 28px; align-items: center; padding-block: clamp(96px, 11vw, 140px) 70px; }
+.portada.dulce .sello {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--surface); color: var(--accent);
+  font-weight: 700; font-size: 13px; box-shadow: var(--sombra-suave); margin-bottom: 16px;
+}
+.portada.dulce .sello::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; animation: late 1.6s ease-in-out infinite; }
+@keyframes late { 50% { transform: scale(1.6); opacity: .5; } }
+.portada.dulce h1 { font-size: clamp(42px, 7.4vw, 84px); line-height: .98; letter-spacing: -0.02em; }
+.portada.dulce h1 em { font-style: normal; color: var(--accent); position: relative; white-space: nowrap; display: inline-block; }
+.portada.dulce h1 em::after {
+  content: ""; position: absolute; left: -2%; right: -2%; bottom: -.08em; height: .26em; z-index: -1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14 Q 50 2 100 11 T 197 8' stroke='%23ffd23f' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transform-origin: left; animation: subraya .9s .7s var(--rebote) both;
+}
+@keyframes subraya { from { transform: scaleX(0); } }
+.portada.dulce p.bajada { font-size: 17px; color: color-mix(in srgb, var(--ink) 72%, var(--bg)); }
+.portada.dulce .cta { margin-top: 24px; }
+.portada.dulce .cta .btn { min-height: 52px; padding: 0 24px; font-size: 16px; transition: transform .25s var(--rebote), box-shadow .25s ease; }
+.portada.dulce .cta .btn-acento { background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #ff8a3d)); box-shadow: 0 12px 26px color-mix(in srgb, var(--accent) 40%, transparent); }
+.portada.dulce .cta .btn-acento svg { transition: transform .25s ease; }
+.portada.dulce .cta .btn:hover { transform: translateY(-3px); }
+.portada.dulce .cta .btn-acento:hover svg { transform: translateX(4px); }
+.portada.dulce .cta .btn:active { transform: scale(.96); }
+.portada.dulce .cta .btn-suave { border: 0; box-shadow: var(--sombra-suave); }
+.portada.dulce .datos li { border: 0; box-shadow: var(--sombra-suave); color: var(--ink); }
+
+/* Entrada de la portada */
+.portada.dulce .texto > * { animation: entraArriba .7s var(--rebote) both; }
+.portada.dulce .texto > :nth-child(2) { animation-delay: .08s; }
+.portada.dulce .texto > :nth-child(3) { animation-delay: .16s; }
+.portada.dulce .texto > :nth-child(4) { animation-delay: .24s; }
+.portada.dulce .texto > :nth-child(5) { animation-delay: .32s; }
+@keyframes entraArriba { from { opacity: 0; transform: translateY(26px); } }
+
+/* Helado protagonista */
+.portada.dulce .heroe { position: relative; display: grid; place-items: center; aspect-ratio: 1; max-width: 520px; width: 100%; justify-self: center; }
+.portada.dulce .aro {
+  position: absolute; inset: 6%; border-radius: 46% 54% 52% 48% / 52% 44% 56% 48%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, color-mix(in srgb, var(--accent) 30%, #fff) 45%, color-mix(in srgb, var(--accent) 55%, #ffb3cf) 100%);
+  box-shadow: 0 30px 60px color-mix(in srgb, var(--accent) 30%, transparent), inset 0 -20px 40px rgba(255, 255, 255, .35);
+  animation: blob 9s ease-in-out infinite, aparecer .8s var(--rebote) both;
+}
+@keyframes blob {
+  33% { border-radius: 58% 42% 46% 54% / 44% 58% 42% 56%; transform: rotate(6deg); }
+  66% { border-radius: 42% 58% 60% 40% / 56% 40% 60% 44%; transform: rotate(-4deg); }
+}
+@keyframes aparecer { from { transform: scale(.6); opacity: 0; } }
+.portada.dulce .heroe::after {
+  content: ""; position: absolute; bottom: 4%; left: 30%; right: 30%; height: 18px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(90, 20, 50, .28), transparent); animation: sombraFlota 4.5s ease-in-out infinite;
+}
+.portada.dulce .flota {
+  position: relative; z-index: 1; width: 74%; height: auto; max-height: 92%; object-fit: contain;
+  filter: drop-shadow(0 24px 28px rgba(90, 20, 50, .25));
+  animation: flota 4.5s ease-in-out infinite, entraHeroe 1s .15s var(--rebote) both;
+}
+@keyframes flota { 50% { transform: translateY(-16px) rotate(-2deg); } }
+@keyframes entraHeroe { from { transform: translateY(60px) scale(.8) rotate(8deg); opacity: 0; } }
+@keyframes sombraFlota { 50% { transform: scaleX(.78); opacity: .6; } }
+.portada.dulce .burbuja-flota {
+  position: absolute; z-index: 2; background: var(--surface); color: var(--ink); font-weight: 800; font-family: var(--font-t);
+  padding: 10px 16px; border-radius: 18px; box-shadow: var(--sombra-suave); font-size: 15px; white-space: nowrap;
+  animation: flota 5s ease-in-out infinite, aparecer .7s var(--rebote) both;
+}
+.portada.dulce .burbuja-flota.b0 { top: 14%; left: -2%; animation-delay: -1.2s, .5s; }
+.portada.dulce .burbuja-flota.b1 { bottom: 16%; right: -2%; animation-delay: -2.6s, .7s; background: var(--accent); color: var(--accent-ink); }
+.portada.dulce .ola { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 46px; z-index: 2; }
+.portada.dulce .ola path { fill: var(--bg); }
+
+@media (max-width: 760px) {
+  .portada.dulce .wrap { grid-template-columns: 1fr; padding-block: 78px 56px; gap: 8px; text-align: center; }
+  .portada.dulce .sello { margin-bottom: 12px; }
+  .portada.dulce p.bajada { margin-inline: auto; font-size: 16px; }
+  .portada.dulce .cta, .portada.dulce .datos { justify-content: center; }
+  .portada.dulce .heroe { max-width: 330px; order: -1; margin-bottom: 4px; }
+  .portada.dulce .burbuja-flota { font-size: 13px; padding: 8px 12px; }
+}
+
+/* ---------- Filtros ---------- */
+[data-estilo="dulce"] .filtros { background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 0; }
+[data-estilo="dulce"] .chip { border: 0; background: var(--surface); box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 10%, transparent); font-weight: 700; padding: 8px 16px; transition: background .25s ease, color .25s ease, transform .2s var(--rebote), box-shadow .25s ease; }
+[data-estilo="dulce"] .chip:hover { transform: translateY(-2px); }
+[data-estilo="dulce"] .chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 35%, transparent); }
+[data-estilo="dulce"] .buscar input { border: 0; box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 10%, transparent); transition: box-shadow .2s ease; }
+[data-estilo="dulce"] .buscar input:focus { outline: 0; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
+
+/* ---------- Secciones y tarjetas ---------- */
+[data-estilo="dulce"] .seccion-titulo { font-weight: 700; font-size: clamp(24px, 3.4vw, 30px); margin-top: 34px; align-items: center; }
+[data-estilo="dulce"] .seccion-titulo::before {
+  content: ""; width: 14px; height: 14px; border-radius: 50%; flex: none;
+  background: radial-gradient(circle at 35% 35%, #fff 0 18%, var(--accent) 22%); box-shadow: 18px 0 0 -3px #ffd23f;
+  margin-right: 14px;
+}
+[data-estilo="dulce"] .seccion-titulo span { background: var(--surface); padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: var(--sombra-suave); }
+[data-estilo="dulce"] .grid { gap: 14px; }
+@media (min-width: 720px) { [data-estilo="dulce"] .grid { gap: 22px; } }
+[data-estilo="dulce"] .card { border: 0; border-radius: 26px; box-shadow: var(--sombra-suave); transition: transform .35s var(--rebote), box-shadow .35s ease; }
+[data-estilo="dulce"] .card:hover { transform: translateY(-6px); box-shadow: 0 22px 44px color-mix(in srgb, var(--accent) 24%, transparent); }
+[data-estilo="dulce"] .card .foto { background: radial-gradient(circle at 50% 40%, #fff, var(--surface-2)); border-radius: 22px; margin: 6px 6px 0; width: auto; }
+[data-estilo="dulce"] .card:hover .foto > img, [data-estilo="dulce"] .card:hover .foto > svg { transform: scale(1.07) rotate(-1.5deg); }
+[data-estilo="dulce"] .card .foto > img, [data-estilo="dulce"] .card .foto > svg { transition: transform .6s var(--rebote); }
+[data-estilo="dulce"] .card h3 { font-family: var(--font-t); font-size: 16.5px; font-weight: 600; }
+[data-estilo="dulce"] .card .precio { font-family: var(--font-t); font-size: 18px; color: var(--accent); }
+[data-estilo="dulce"] .mas { width: 42px; height: 42px; background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #ff8a3d)); box-shadow: 0 8px 16px color-mix(in srgb, var(--accent) 35%, transparent); transition: transform .3s var(--rebote); }
+[data-estilo="dulce"] .mas:hover { transform: rotate(90deg) scale(1.08); }
+[data-estilo="dulce"] .mas:active { transform: scale(.88); }
+[data-estilo="dulce"] .etiqueta { background: #ffd23f; color: #4a1530; box-shadow: 0 4px 10px rgba(0, 0, 0, .1); top: 14px; left: 14px; animation: late 2.4s ease-in-out infinite; }
+[data-estilo="dulce"] .corazon { top: 12px; right: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, .08); transition: transform .3s var(--rebote); }
+[data-estilo="dulce"] .corazon:active { transform: scale(.8); }
+[data-estilo="dulce"] .corazon[aria-pressed="true"] svg { animation: latido .5s var(--rebote); }
+@keyframes latido { 40% { transform: scale(1.35); } }
+
+/* Aparición al hacer scroll */
+[data-estilo="dulce"] .revela { opacity: 0; transform: translateY(28px) scale(.97); }
+[data-estilo="dulce"] .revela.visto { opacity: 1; transform: none; transition: opacity .6s ease var(--retraso, 0ms), transform .7s var(--rebote) var(--retraso, 0ms); }
+[data-estilo="dulce"] .card.revela.visto:hover { transform: translateY(-6px); transition-delay: 0ms; }
+
+/* ---------- Cómo pedir / información ---------- */
+[data-estilo="dulce"] .info-tienda { position: relative; margin-top: 10px; padding: 70px 0 40px; background: linear-gradient(180deg, transparent, var(--rosa-1) 30%); }
+[data-estilo="dulce"] .info-tienda::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 46px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 46' preserveAspectRatio='none'%3E%3Cpath d='M0 20 C 240 -6 480 46 720 20 C 960 -6 1200 40 1440 18' stroke='%23e7ad6d' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  opacity: .8;
+}
+[data-estilo="dulce"] .info-tienda h2 { font-size: clamp(26px, 3.6vw, 34px); font-weight: 700; text-align: center; }
+[data-estilo="dulce"] .como li { border: 0; box-shadow: var(--sombra-suave); border-radius: 22px; padding: 16px; font-size: 15px; }
+[data-estilo="dulce"] .como .n { width: 38px; height: 38px; font-family: var(--font-t); font-size: 18px; background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #ff8a3d)); }
+[data-estilo="dulce"] .info-card { border: 0; border-radius: 24px; box-shadow: var(--sombra-suave); transition: transform .35s var(--rebote); }
+[data-estilo="dulce"] .info-card:not(.ancha):hover { transform: translateY(-4px) rotate(-.5deg); }
+[data-estilo="dulce"] .info-card .ico { border-radius: 16px; background: color-mix(in srgb, var(--accent) 14%, var(--surface)); }
+[data-estilo="dulce"] .info-card.ancha { box-shadow: none; }
+[data-estilo="dulce"] .info-card.ancha .transferencia { border: 2px dashed color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 24px; box-shadow: var(--sombra-suave); }
+@media (max-width: 720px) {
+  [data-estilo="dulce"] .info-card:not(.ancha) { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; padding: 14px; }
+  [data-estilo="dulce"] .info-card:not(.ancha) .ico { grid-row: span 2; margin: 0; }
+  [data-estilo="dulce"] .info-tienda { padding-top: 56px; }
+}
+[data-estilo="dulce"] .pie-tienda { border-top: 0; background: var(--rosa-1); }
+
+/* ---------- Paneles y transiciones ---------- */
+[data-estilo="dulce"] .fondo-panel { background: rgba(74, 21, 48, .42); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); animation: aparece .3s ease; }
+[data-estilo="dulce"] .panel.centro { animation: entraCentro .45s var(--rebote); border-radius: 30px; }
+@keyframes entraCentro { from { opacity: 0; transform: translate(-50%, -46%) scale(.94); } }
+[data-estilo="dulce"] .panel.lateral { animation: entraDer .4s var(--rebote); }
+@media (max-width: 700px) {
+  [data-estilo="dulce"] .panel.lateral, [data-estilo="dulce"] .panel.centro { animation: entraAbajo .45s var(--rebote); border-radius: 28px 28px 0 0; }
+  [data-estilo="dulce"] .panel.centro { transform: none; }
+}
+@keyframes entraAbajo { from { transform: translateY(100%); } }
+[data-estilo="dulce"] .linea { animation: entraArriba .4s var(--rebote) both; }
+[data-estilo="dulce"] .entrega .op { transition: border-color .2s ease, box-shadow .2s ease, transform .25s var(--rebote); }
+[data-estilo="dulce"] .entrega input:checked + .op { transform: translateY(-2px); }
+[data-estilo="dulce"] .btn { transition: transform .25s var(--rebote), filter .2s ease; }
+[data-estilo="dulce"] .btn:active { transform: scale(.96); }
+[data-estilo="dulce"] .flotante button {
+  background: linear-gradient(135deg, var(--ink), color-mix(in srgb, var(--ink) 75%, var(--accent)));
+  animation: subeRebote .55s var(--rebote);
+}
+[data-estilo="dulce"] .flotante .cuenta { animation: late 2s ease-in-out infinite; }
+@keyframes subeRebote { from { transform: translateY(90px); } }
+[data-estilo="dulce"] #toast { background: var(--accent); color: var(--accent-ink); font-weight: 700; animation: toast .45s var(--rebote); }
+@keyframes toast { from { transform: translate(-50%, -24px); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-estilo="dulce"] .revela { opacity: 1; transform: none; }
+}

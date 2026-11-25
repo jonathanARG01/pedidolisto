@@ -1,5 +1,5 @@
 // Service worker de Brota: deja el catálogo disponible sin conexión y permite instalarlo como app.
-var VERSION = 'brota-v3';
+var VERSION = 'brota-v4';
 var BASE = ['/app.html', '/app.css', '/app.js', '/arte.js', '/helado.js'];
 
 self.addEventListener('install', function (e) {

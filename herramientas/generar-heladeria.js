@@ -38,24 +38,32 @@ const t = {
   slug: SLUG, plan: 'pro', demo: true,
   negocio: {
     nombre: 'Dulces, Helados y Más', bajada: 'Helados, frutillas con crema, maní y dulces. Pide por WhatsApp.',
-    whatsapp: WA_PRUEBA
+    whatsapp: WA_PRUEBA, horario: 'Todo el día, todos los días'
   },
   tema: {
     fuenteTitulos: 'Fredoka', fuenteTexto: 'Nunito', pesoTitulos: 700, trackingTitulos: '-0.01em', radio: 22, modoInicial: 'claro',
     claro: { bg: '#fff0f4', surface: '#ffffff', 'surface-2': '#ffe2ea', ink: '#4a1530', muted: '#8b5a70', line: '#f6cdd9', accent: '#e4307a', 'accent-ink': '#ffffff', wa: '#1f8f4e', 'wa-ink': '#ffffff' },
     oscuro: { bg: '#2a0f1d', surface: '#3a1729', 'surface-2': '#331324', ink: '#ffe9f1', muted: '#dcaec2', line: '#5a2843', accent: '#ff6fa5', 'accent-ink': '#2a0f1d', wa: '#25a35a', 'wa-ink': '#ffffff' }
   },
-  estructura: { portada: 'dividido', tarjetas: 'tarjeta', columnas: { movil: 2, escritorio: 4 }, descripcion: true },
+  estructura: { portada: 'dulce', estilo: 'dulce', tarjetas: 'tarjeta', columnas: { movil: 2, escritorio: 4 }, descripcion: true, info: true },
   banner: {
-    titulo: 'Dulces, helados y más', texto: '¡Endulza tu día! Arma tu helado con hasta 3 sabores, salsa y agregados, y pídelo por WhatsApp para retirar o recibir en casa.',
-    boton: 'Armar mi helado',
-    imagen: { arte: 'helado', base: 'vaso', relleno: 'frutillas', salsas: ['manjar', 'chocolate'], agregados: ['oreo', 'chispas-pastel', 'perlitas'], fondo: '#ffbfd3' }
+    sello: 'Hecho al momento · Cerro La Cruz',
+    titulo: 'Dulces, helados', resaltado: 'y más',
+    texto: 'Arma tu helado con hasta 3 sabores, salsa y agregados. Pídelo por WhatsApp y retíralo o te lo llevamos.',
+    boton: 'Armar mi helado', botonProducto: 'helado-vaso', boton2: 'Ver todo',
+    imagen: FOTOS + 'heroe-helado.webp',
+    burbujas: ['Desde $2.000', 'Hasta 3 sabores']
   },
   entrega: {
-    retiro: { activo: true, lugar: 'nuestro local', direccion: 'Dirección por confirmar' },
-    domicilio: { activo: true, nota: 'Costo de envío por confirmar. Te lo confirmamos por WhatsApp.', comunas: [{ nombre: 'Mi comuna (por confirmar)', costo: 1000 }] }
+    retiro: { activo: true, lugar: 'El Vergel 1950', direccion: 'El Vergel 1950, Cerro La Cruz', horario: 'Todo el día, todos los días' },
+    domicilio: {
+      activo: true, etiquetaZona: 'Sector', resumen: '$500, del paradero 9 a la Media Luna',
+      nota: 'Despachamos desde el paradero 9 hasta la Media Luna.',
+      comunas: [{ nombre: 'Del paradero 9 a la Media Luna', costo: 500 }]
+    }
   },
-  pago: 'Pago por transferencia. Te enviamos los datos por WhatsApp al confirmar el pedido.',
+  pago: 'Pago por transferencia. Envía el comprobante por WhatsApp.',
+  transferencia: { titular: 'Elizabeth Cordero', banco: 'BancoEstado', tipo: 'Cuenta RUT', rut: '18.153.880-5', numero: '18153880' },
   mensaje: { saludo: 'Hola Dulces, Helados y Más, quiero hacer este pedido:', despedida: '¡Gracias!' },
   categorias: [{ id: 'helados', nombre: 'Helados' }, { id: 'frutillas', nombre: 'Frutillas con crema' }, { id: 'dulces', nombre: 'Maní y dulces' }],
   productos: [
